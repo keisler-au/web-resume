@@ -1,12 +1,13 @@
+import MenuIcon from "@mui/icons-material/Menu";
+import { Box } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { routesConfig } from "../routesConfig";
 
 const NavBar = () => {
   return (
@@ -21,21 +22,15 @@ const NavBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            MyApp
+          <div>Josh Keisler</div>
+          <div>Web Resume</div>
         </Typography>
         <Box>
-          <Button color="inherit" component={Link} to="/">
-            Home
-          </Button>
-          <Button color="inherit" component={Link} to="/weather">
-            Weather
-          </Button>
-          <Button color="inherit" component={Link} to="/infosys">
-            Infosys
-          </Button>
-          <Button color="inherit" component={Link} to="/rental">
-            Rental
-          </Button>
+          {routesConfig.map(({ path, label }) => (
+            <Button color="inherit" component={Link} to={path}>
+              {label}
+            </Button>
+          ))}
         </Box>
       </Toolbar>
     </AppBar>

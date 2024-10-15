@@ -1,9 +1,5 @@
-
-
-
-
 const RentalApp = () => {
-    return <div>moneymoneymoney</div>
-}
+  return <div>Rental App Page</div>;
+};
 
-export default RentalApp
+export default RentalApp;
