@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Set the working directory in the container
-WORKDIR /app/backend
+WORKDIR /backend-app
 
 # Copy the requirements.txt file into the container
 COPY requirements.txt .
@@ -17,4 +17,4 @@ COPY . .
 # EXPOSE 8000
 
 # Run the Django development server (this will automatically start when the container is run)
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

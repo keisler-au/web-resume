@@ -13,7 +13,9 @@ services:
       - db
 
   frontend:
-    build: ./frontend
+    build: 
+      context: ./frontend
+      target: development
     ports:
       - "3000:3000"  # Map the container's port to the host's port
     volumes:

@@ -1,19 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import NavBar from "./components/NavBar";
-import Home from "./components/Home";
-import WeatherApp from "./components/WeatherApp";
-import InfosysBHP from "./components/InfosysBHP";
-import RentalApp from "./components/RentalApp";
+import { routesConfig } from "./routesConfig";
+
+
 function App() {
   return (
     <div className="App">
       <Router>
         <NavBar />
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/weather" element={<WeatherApp />} />
-            <Route path="/infosys" element={<InfosysBHP />} />
-            <Route path="/rental" element={<RentalApp />} />
+            {
+              routesConfig.map(
+                ({path, element}) => <Route path="{path}" element={element} />
+              )
+            }
         </Routes>
       </Router>
 
