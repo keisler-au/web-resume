@@ -1,4 +1,3 @@
+const DisplayData = () => {};
 
-const DisplayData = () => {}
-
-export default DisplayData
+export default DisplayData;

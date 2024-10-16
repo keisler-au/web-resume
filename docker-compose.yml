@@ -6,20 +6,20 @@ services:
     ports:
       - "8000:8000"  # Map the container's port to the host's port
     volumes:
-      - ./backend:/app
+      - ./backend:/backend-app
     environment:
       - PYTHONUNBUFFERED=1  # Ensure Python outputs logs to console in real-time
     depends_on:
       - db
 
   frontend:
-    build: 
+    build:
       context: ./frontend
       target: development
     ports:
       - "3000:3000"  # Map the container's port to the host's port
     volumes:
-      - ./frontend:/app
+      - ./frontend:/frontend-app
     stdin_open: true
     tty: true
     depends_on:

@@ -1,10 +1,5 @@
-
-
-
-
-
 const WeatherApp = () => {
-    return <div>sunny always</div>
-}
+  return <div>Weather App page</div>;
+};
 
-export default WeatherApp
+export default WeatherApp;

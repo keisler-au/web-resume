@@ -1,10 +1,5 @@
-
-
-
-
-
 const Home = () => {
-    return <div>Yes!!</div>
-}
+  return <div>Home !</div>;
+};
 
-export default Home
+export default Home;

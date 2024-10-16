@@ -1,10 +1,5 @@
-
-
-
-
-
 const InfosysBHP = () => {
-    return <div>contracts for dayyys</div>
-}
+  return <div>Infosys page</div>;
+};
 
-export default InfosysBHP
+export default InfosysBHP;
