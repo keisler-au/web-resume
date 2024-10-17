@@ -34,13 +34,30 @@ repos:
         files: \.py$
         entry: bash -c "cd backend && poetry run pylint ."
 
+  # - repo: local
+  #   hooks:
+  #   -   id: unittest
+  #       name: unittest
+  #       language: system
+  #       files: '^.*\.py$'
+  #       entry: bash -c "cd backend && python manage.py test"
+
+  # - repo: local
+  #   hooks:
+  #   -   id: coverage-check
+  #       name: coverage
+  #       language: system
+  #       files: '^.*\.py$'
+  #       entry: bash -c "cd backend && poetry coverage run -m unittest && coverage report --fail-under=80"
+  #       ^^^ Verify that this command works
+
   - repo: local
     hooks:
       - id: prettier
         name: prettier
         language: system
         files: \.(j|t)sx?|css|html|md|json$
-        entry: bash -c "cd frontend && npx prettier . --write --loglevel warn"
+        entry: bash -c "cd frontend && npx prettier . --write --log-level warn"
 
   - repo: local
     hooks:
@@ -49,4 +66,21 @@ repos:
         language: system
         files: \.[jt]sx?$
         entry: bash -c "cd frontend && npx eslint . --fix"
+
+  # - repo: local
+  #   hooks:
+  #     - id: jest
+  #       name: jest
+  #       language: system
+  #       files: \.[jt]sx?$
+  #       entry: bash -c "cd frontend && npm test -- --watchAll=false --coverage"
+  #       ^^^ verify that this command works and actually gives me the coverage
+
+  # - repo: local
+  #   hooks:
+  #   -   id: safety
+  #       name: safety
+  #       language: system
+  #       entry: bash -c "safety check"
+
 fail_fast: true
