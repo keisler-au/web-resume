@@ -1,5 +1,8 @@
+import DescriptionList from "./Description";
+import { pageReferences } from "../constants";
+
 const InfosysBHP = () => {
-  return <div>Infosys page</div>;
+  return <DescriptionList pageReference={pageReferences.infosys} />;
 };
 
 export default InfosysBHP;

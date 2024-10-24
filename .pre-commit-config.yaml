@@ -4,7 +4,7 @@ exclude: 'node_modules/'
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -34,23 +34,6 @@ repos:
         files: \.py$
         entry: bash -c "cd backend && poetry run pylint ."
 
-  # - repo: local
-  #   hooks:
-  #   -   id: unittest
-  #       name: unittest
-  #       language: system
-  #       files: '^.*\.py$'
-  #       entry: bash -c "cd backend && python manage.py test"
-
-  # - repo: local
-  #   hooks:
-  #   -   id: coverage-check
-  #       name: coverage
-  #       language: system
-  #       files: '^.*\.py$'
-  #       entry: bash -c "cd backend && poetry coverage run -m unittest && coverage report --fail-under=80"
-  #       ^^^ Verify that this command works
-
   - repo: local
     hooks:
       - id: prettier
@@ -66,21 +49,5 @@ repos:
         language: system
         files: \.[jt]sx?$
         entry: bash -c "cd frontend && npx eslint . --fix"
-
-  # - repo: local
-  #   hooks:
-  #     - id: jest
-  #       name: jest
-  #       language: system
-  #       files: \.[jt]sx?$
-  #       entry: bash -c "cd frontend && npm test -- --watchAll=false --coverage"
-  #       ^^^ verify that this command works and actually gives me the coverage
-
-  # - repo: local
-  #   hooks:
-  #   -   id: safety
-  #       name: safety
-  #       language: system
-  #       entry: bash -c "safety check"
 
 fail_fast: true
