@@ -1,20 +1,24 @@
-# Use an official Python runtime as the base image
-FROM python:3.9-slim
+FROM python:3.12.0-slim as build
 
-# Set the working directory in the container
 WORKDIR /backend-app
-
-# Copy the requirements.txt file into the container
-COPY requirements.txt .
-
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the current directory contents into the container at /app
+COPY pyproject.toml .
+COPY poetry.lock .
+RUN pip install poetry
+RUN poetry install --no-root
 COPY . .
 
-# Expose port 8000 for the Django development server
-# EXPOSE 8000
 
-# Run the Django development server (this will automatically start when the container is run)
+FROM build AS development
+
+EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+FROM python:3.12.0-slim AS production
+
+WORKDIR /backend-app
+COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=build /usr/local/bin /usr/local/bin
+COPY --from=build /backend-app /backend-app
+EXPOSE 8000
+CMD ["uvicorn", "your_project_name.asgi:application", "--host", "0.0.0.0", "--port", "8000", "--workers", "3"]

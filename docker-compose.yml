@@ -1,14 +1,12 @@
-version: '3.8'
-
 services:
   backend:
     build: ./backend
     ports:
-      - "8000:8000"  # Map the container's port to the host's port
+      - "8000:8000"
     volumes:
       - ./backend:/backend-app
     environment:
-      - PYTHONUNBUFFERED=1  # Ensure Python outputs logs to console in real-time
+      - PYTHONUNBUFFERED=1
     depends_on:
       - db
 
@@ -17,7 +15,7 @@ services:
       context: ./frontend
       target: development
     ports:
-      - "3000:3000"  # Map the container's port to the host's port
+      - "3000:3000"
     volumes:
       - ./frontend:/frontend-app
     stdin_open: true
@@ -26,11 +24,11 @@ services:
       - backend
 
   db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+    image: postgres:15.4-alpine
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

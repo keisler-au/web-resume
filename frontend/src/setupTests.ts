@@ -1,5 +1,5 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
+// this file is run once before and then is applied for entire test suite
+// Mocking Third-Party Libraries: you can mock those here so they don't affect your test runs.
+// Any global variables or mocks required across multiple test files can be initialized here.
+// mock specific browser features like localStorage, fetch, or any other browser API
 import "@testing-library/jest-dom";

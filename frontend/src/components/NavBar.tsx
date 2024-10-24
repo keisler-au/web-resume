@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-import { routesConfig } from "../routesConfig";
+import { routesConfig } from "../constants";
 
 const NavBar = () => {
   return (
@@ -22,12 +22,12 @@ const NavBar = () => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          <div>Josh Keisler</div>
+          <div>Josh Kisler</div>
           <div>Web Resume</div>
         </Typography>
         <Box>
           {routesConfig.map(({ path, label }) => (
-            <Button color="inherit" component={Link} to={path}>
+            <Button key={path} color="inherit" component={Link} to={path}>
               {label}
             </Button>
           ))}

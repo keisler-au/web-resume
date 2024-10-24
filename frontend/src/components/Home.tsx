@@ -1,5 +1,8 @@
+import DescriptionList from "./Description";
+import { pageReferences } from "../constants";
+
 const Home = () => {
-  return <div>Home !</div>;
+  return <DescriptionList pageReference={pageReferences.home} />;
 };
 
 export default Home;

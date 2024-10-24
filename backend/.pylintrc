@@ -1,0 +1,10 @@
+[MASTER]
+load-plugins=pylint_django
+django-settings-module=app.settings
+ignore-patterns=admin.py,migrations/
+
+[*.admin.py]
+disable=C0114,C0115
+
+[*migrations/]
+disable=C0103
