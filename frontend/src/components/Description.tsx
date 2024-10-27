@@ -6,21 +6,24 @@ import {
   Alert,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
 
+interface PageReference {
+  pageReference: number;
+}
 interface Description {
   id: number;
   content: string;
   pageReference: number;
 }
 
-const DescriptionList: React.FC<{ [key: string]: number }> = ({
-  pageReference,
-}) => {
+const DescriptionList: React.FC<PageReference> = ({ pageReference }) => {
+  const { t } = useTranslation();
   const [descriptions, setDescriptions] = useState<Description[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // Loading state
-  const [error, setError] = useState<string | null>(null); // Error state
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +32,7 @@ const DescriptionList: React.FC<{ [key: string]: number }> = ({
           `${BASE_URL}/descriptions/${pageReference}/`,
         );
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error(t("failedFetch"));
         }
         const data = await response.json();
         setDescriptions(data);
@@ -42,7 +45,7 @@ const DescriptionList: React.FC<{ [key: string]: number }> = ({
     };
 
     fetchData();
-  }, [pageReference]);
+  }, [t, pageReference]);
 
   if (loading) {
     return <CircularProgress data-testid="loading-spinner" />;
@@ -57,18 +60,13 @@ const DescriptionList: React.FC<{ [key: string]: number }> = ({
   }
 
   return (
-    <div>
-      <Typography variant="h4" gutterBottom>
-        Descriptions
-      </Typography>
-      <List>
-        {descriptions.map((description) => (
-          <ListItem key={description.id}>
-            <Typography>{description.content}</Typography>
-          </ListItem>
-        ))}
-      </List>
-    </div>
+    <List>
+      {descriptions.map((description) => (
+        <ListItem key={description.id}>
+          <Typography>{description.content}</Typography>
+        </ListItem>
+      ))}
+    </List>
   );
 };
 

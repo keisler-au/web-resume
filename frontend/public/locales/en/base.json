@@ -1,0 +1,14 @@
+{
+  "joshKeisler": "Josh Keisler",
+  "webResume": "Web Resume",
+  "home": "Home",
+  "weatherApp": "Weather App",
+  "infosysBHP": "Infosys & BHP",
+  "rentalApp": "Rental App",
+  "descriptions": "Descriptions",
+  "error": "Something went wrong:",
+  "notFound": "Not Found",
+  "404": "404 - Page Not Found",
+  "doesNotExist": "The page you're looking for does not exist.",
+  "failedFetch": "Failed to fetch data"
+}
