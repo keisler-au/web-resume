@@ -4,7 +4,7 @@
 // mock specific browser features like localStorage, fetch, or any other browser API
 import "@testing-library/jest-dom";
 
-global.fetch = jest.fn();
+(global.fetch as jest.Mock) = jest.fn();
 
 jest.mock("react-i18next", () => ({
   useTranslation: () => ({

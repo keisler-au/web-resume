@@ -6,25 +6,28 @@ describe("DescriptionList", () => {
   const pageReference = 1;
 
   beforeEach(() => {
-    fetch.mockClear();
+    (fetch as jest.Mock).mockClear();
   });
 
   test("renders loading state initially", () => {
-    fetch.mockImplementationOnce(() => new Promise(() => {}));
+    (fetch as jest.Mock).mockImplementationOnce(() => new Promise(() => {}));
     render(<DescriptionList pageReference={pageReference} />);
 
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
-  test("renders error message when fetch fails", async () => {
-    fetch.mockImplementationOnce(() =>
-      Promise.reject(new Error("Failed to fetch")),
+  test("renders error message when fetch is unsuccessful", async () => {
+    (fetch as jest.Mock).mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: false,
+      }),
     );
+
     render(<DescriptionList pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
-        "Failed to fetch",
+        "failedFetch",
       );
     });
   });
@@ -35,7 +38,7 @@ describe("DescriptionList", () => {
       { id: 2, content: "Description 2", pageReference },
     ];
 
-    fetch.mockImplementationOnce(() =>
+    (fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve(mockDescriptions),
@@ -50,18 +53,15 @@ describe("DescriptionList", () => {
     });
   });
 
-  test("handles fetch errors correctly", async () => {
-    fetch.mockImplementationOnce(() =>
-      Promise.resolve({
-        ok: false,
-      }),
+  test("renders error message when fetch results in network error", async () => {
+    (fetch as jest.Mock).mockImplementationOnce(() =>
+      Promise.reject(new Error("Network Error")),
     );
-
     render(<DescriptionList pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
-        "failedFetch",
+        "Network Error",
       );
     });
   });
