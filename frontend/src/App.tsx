@@ -9,17 +9,47 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
+import Contact from "./components/Contact";
 import { ErrorFallback, NotFound } from "./components/Errors";
 import Home from "./components/Home";
 import InfosysBHP from "./components/InfosysBHP";
-import RentalApp from "./components/RentalApp";
 import WeatherApp from "./components/WeatherApp";
 
 interface RoutesConfig {
   label: string;
   path: string;
-  element: React.FC;
+  element: React.FC<any>;
+  props?: Record<string, any>;
 }
+
+// Internal helper function to create routes config
+const _createRoutesConfig = (t: (key: string) => string): RoutesConfig[] => [
+  {
+    label: t("home"),
+    path: "/",
+    element: Home,
+  },
+  {
+    label: t("weatherApp"),
+    path: "/weather",
+    element: WeatherApp,
+    props: {
+      src: "https://keisler-au.github.io/weather-project/",
+      title: "First Project",
+    },
+  },
+  {
+    label: t("infosysBHP"),
+    path: "/infosys",
+    element: InfosysBHP,
+  },
+  {
+    label: t("contact"),
+    path: "/contact",
+    element: Contact,
+  },
+];
+
 interface NavBarProp {
   routesConfig: RoutesConfig[];
 }
@@ -54,41 +84,16 @@ const NavBar: React.FC<NavBarProp> = ({ routesConfig }) => {
 
 function App() {
   const { t } = useTranslation();
-  const routesConfig: RoutesConfig[] = [
-    {
-      label: t("home"),
-      path: "/",
-      element: Home,
-    },
-    {
-      label: t("weatherApp"),
-      path: "/weather",
-      element: WeatherApp,
-    },
-    {
-      label: t("infosysBHP"),
-      path: "/infosys",
-      element: InfosysBHP,
-    },
-    {
-      label: t("rentalApp"),
-      path: "/rental",
-      element: RentalApp,
-    },
-    {
-      label: t("notFound"),
-      path: "*",
-      element: NotFound,
-    },
-  ];
+  const routesConfig = _createRoutesConfig(t);
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Router>
         <NavBar routesConfig={routesConfig} />
         <Routes>
-          {routesConfig.map(({ path, element: Element }) => (
-            <Route key={path} path={path} element={<Element />} />
+          {routesConfig.map(({ path, element: Element, props }) => (
+            <Route key={path} path={path} element={<Element {...props} />} />
           ))}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </ErrorBoundary>

@@ -6,18 +6,18 @@ describe("DescriptionList", () => {
   const pageReference = 1;
 
   beforeEach(() => {
-    fetch.mockClear();
+    (fetch as jest.Mock).mockClear();
   });
 
   test("renders loading state initially", () => {
-    fetch.mockImplementationOnce(() => new Promise(() => {}));
+    (fetch as jest.Mock).mockImplementationOnce(() => new Promise(() => {}));
     render(<DescriptionList pageReference={pageReference} />);
 
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
   test("renders error message when fetch fails", async () => {
-    fetch.mockImplementationOnce(() =>
+    (fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.reject(new Error("Failed to fetch")),
     );
     render(<DescriptionList pageReference={pageReference} />);
@@ -35,7 +35,7 @@ describe("DescriptionList", () => {
       { id: 2, content: "Description 2", pageReference },
     ];
 
-    fetch.mockImplementationOnce(() =>
+    (fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve(mockDescriptions),
@@ -51,7 +51,7 @@ describe("DescriptionList", () => {
   });
 
   test("handles fetch errors correctly", async () => {
-    fetch.mockImplementationOnce(() =>
+    (fetch as jest.Mock).mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       }),

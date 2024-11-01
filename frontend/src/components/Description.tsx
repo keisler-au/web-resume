@@ -10,16 +10,15 @@ import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
 
-interface PageReference {
-  pageReference: number;
-}
 interface Description {
   id: number;
   content: string;
   pageReference: number;
 }
 
-const DescriptionList: React.FC<PageReference> = ({ pageReference }) => {
+const DescriptionList: React.FC<Record<string, number>> = ({
+  pageReference,
+}) => {
   const { t } = useTranslation();
   const [descriptions, setDescriptions] = useState<Description[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
