@@ -16,15 +16,18 @@ describe("DescriptionList", () => {
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
-  test("renders error message when fetch fails", async () => {
+  test("renders error message when fetch is unsuccessful", async () => {
     (fetch as jest.Mock).mockImplementationOnce(() =>
-      Promise.reject(new Error("Failed to fetch")),
+      Promise.resolve({
+        ok: false,
+      }),
     );
+
     render(<DescriptionList pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
-        "Failed to fetch",
+        "failedFetch",
       );
     });
   });
@@ -50,18 +53,15 @@ describe("DescriptionList", () => {
     });
   });
 
-  test("handles fetch errors correctly", async () => {
+  test("renders error message when fetch results in network error", async () => {
     (fetch as jest.Mock).mockImplementationOnce(() =>
-      Promise.resolve({
-        ok: false,
-      }),
+      Promise.reject(new Error("Network Error")),
     );
-
     render(<DescriptionList pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
-        "failedFetch",
+        "Network Error",
       );
     });
   });

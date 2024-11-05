@@ -1,42 +1,37 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { act } from "react";
 
-import "@testing-library/jest-dom";
 import WeatherApp from "../components/WeatherApp";
 
 describe("WeatherApp", () => {
-  it("shows loading indicator initially", () => {
-    render(<WeatherApp src="https://example.com" />);
-    expect(screen.getByText(/loading content/i)).toBeInTheDocument();
+  let iframe: HTMLElement;
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+    render(<WeatherApp src="someSource" />);
+    iframe = screen.getByTitle("embeddedWeatherApp"); // Assign iframe here
+  });
+  afterEach(() => {
+    jest.clearAllTimers();
   });
 
-  it("displays error message if iframe fails to load", async () => {
-    render(<WeatherApp src="invalid-url" />);
+  it("displays loading indicator initially", () => {
+    expect(iframe).toHaveStyle("display: none");
+    expect(screen.getByText("loadingContent...")).toBeInTheDocument();
+  });
 
-    // Simulate an error event
-    const iframe = screen.getByTitle(/embedded content/i);
-    fireEvent.error(iframe);
-
+  it("displays error message on loading timeout", async () => {
+    act(() => {
+      jest.advanceTimersByTime(6000);
+    });
     await waitFor(() => {
-      expect(screen.getByText(/failed to load content/i)).toBeInTheDocument();
+      expect(iframe).toHaveStyle("display: none");
+      expect(screen.getByText("failedLoad...")).toBeInTheDocument();
     });
   });
 
-  it("retries loading when retry button is clicked", async () => {
-    render(<WeatherApp src="https://example.com" />);
-
-    // Simulate an error event
-    const iframe = screen.getByTitle(/embedded content/i);
-    fireEvent.error(iframe);
-
-    await waitFor(() => {
-      expect(screen.getByText(/failed to load content/i)).toBeInTheDocument();
-    });
-
-    // Click retry button
-    const retryButton = screen.getByText(/retry/i);
-    fireEvent.click(retryButton);
-
-    // Loading state should reappear
-    expect(screen.getByText(/loading content/i)).toBeInTheDocument();
+  it("displays iframe on successful load", async () => {
+    fireEvent.load(iframe);
+    expect(iframe).toHaveStyle("display: block");
   });
 });

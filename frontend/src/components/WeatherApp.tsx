@@ -1,5 +1,6 @@
-import { Box, CircularProgress, Typography, Button } from "@mui/material";
-import { useState } from "react";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface EmbedStaticSiteProps {
   src: string;
@@ -7,22 +8,20 @@ interface EmbedStaticSiteProps {
 }
 
 const WeatherApp: React.FC<EmbedStaticSiteProps> = ({ src, title }) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [failedLoad, setFailedLoad] = useState(false);
 
-  const handleLoad = () => {
-    setLoading(false);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (loading) {
+        setLoading(false);
+        setFailedLoad(true);
+      }
+    }, 5000);
 
-  const handleError = () => {
-    setLoading(false);
-    setError(true);
-  };
-
-  const retry = () => {
-    setLoading(true);
-    setError(false);
-  };
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   return (
     <Box
@@ -32,53 +31,38 @@ const WeatherApp: React.FC<EmbedStaticSiteProps> = ({ src, title }) => {
       borderRadius={2}
       overflow="hidden"
     >
-      {loading && !error && (
+      {(loading || failedLoad) && (
         <Box
           display="flex"
           justifyContent="center"
           alignItems="center"
           height="100%"
         >
-          <CircularProgress />
-          <Typography variant="body2" sx={{ marginLeft: 1 }}>
-            Loading content...
-          </Typography>
-        </Box>
-      )}
-
-      {!loading && error && (
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          height="100%"
-        >
-          <Typography variant="body1" color="error">
-            Failed to load content.
-          </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={retry}
-            sx={{ mt: 2 }}
-          >
-            Retry
-          </Button>
+          {loading ? (
+            <>
+              <CircularProgress />
+              <Typography variant="body2" sx={{ marginLeft: 1 }}>
+                {`${t("loadingContent")}...`}
+              </Typography>
+            </>
+          ) : (
+            <Typography variant="body1" sx={{ color: "error" }}>
+              {`${t("failedLoad")}...`}
+            </Typography>
+          )}
         </Box>
       )}
 
       <iframe
-        title={title || "Embedded Content"}
+        title={title || "embeddedWeatherApp"}
         src={src}
         width="100%"
         height="100%"
         style={{
           border: "none",
-          display: loading || error ? "none" : "block",
+          display: loading || failedLoad ? "none" : "block",
         }}
-        onLoad={handleLoad}
-        onError={handleError}
+        onLoad={() => setLoading(false)}
       />
     </Box>
   );

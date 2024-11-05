@@ -16,31 +16,34 @@ class SendEmailView(APIView):
 
         if serializer.is_valid():
             name = serializer.validated_data["name"]
-            email = serializer.validated_data["email"]
+            user_email_address = serializer.validated_data["email"]
             message = serializer.validated_data["message"]
             file = serializer.validated_data.get("file", None)
 
             subject = f"Contact Form Submission from {name}"
-            email_body = f"Message: {message}\n\nFrom: {name}\nEmail: {email}"
+            email_body = (
+                f"Message: {message}\n\nFrom: {name}\nEmail: {user_email_address}"
+            )
 
-            print("ARE ENV VARIABLES WORKING??", os.getenv("EMAIL_HOST_USER"))
-            email_message = EmailMessage(
+            email = EmailMessage(
                 subject=subject,
                 body=email_body,
                 from_email=os.getenv("EMAIL_HOST_USER"),
                 to=[os.getenv("EMAIL_HOST_USER")],
             )
+            email.reply_to = [user_email_address]
 
             # Attach file if present
             if file:
-                email_message.attach(file.name, file.read(), file.content_type)
+                email.attach(file.name, file.read(), file.content_type)
 
             try:
-                email_message.send(fail_silently=False)
+                email.send(fail_silently=False)
                 return Response(
                     {"message": "Email sent successfully!"}, status=status.HTTP_200_OK
                 )
             except Exception as e:
+                print("this failed = ", e)
                 return Response(
                     {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
