@@ -1,6 +1,14 @@
-import { Button, TextField, Typography, Box } from "@mui/material";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import {
+  Button,
+  TextField,
+  Typography,
+  Box,
+  CircularProgress,
+  IconButton,
+} from "@mui/material";
 import axios from "axios";
-import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -19,7 +27,14 @@ const Contact: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fileName, setFileName] = useState<string | null>("No file uploaded");
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [statusType, setStatusType] = useState<"success" | "error" | null>(
+    null,
+  );
 
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
@@ -29,18 +44,31 @@ const Contact: React.FC = () => {
 
     if (data.file && data.file.length > 0) {
       formData.append("file", data.file[0]);
+      setFileName(data.file[0].name); // Update the filename when a file is selected
+    } else {
+      setFileName("No file uploaded");
     }
 
     try {
+      setIsSubmitting(true);
       await axios.post(`${BASE_URL}/api/send_email/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      //   alert(t("emailSent")); // success message;
+
+      // Show success message
+      setStatusMessage(t("emailSent"));
+      setIsSubmitting(false);
+      setStatusType("success");
+      reset(); // Reset form fields on success
+      setFileName("No file uploaded"); // Reset file name display
     } catch (error) {
       console.error(error);
-      //   alert(t("emailFailed")); // error message;
+      // Show error message
+      setStatusMessage(t("emailFailed"));
+      setStatusType("error");
+      setIsSubmitting(false); // Keep form values for editing
     }
   };
 
@@ -48,9 +76,17 @@ const Contact: React.FC = () => {
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        width: "40%",
+        margin: "0 auto",
+      }}
     >
-      <Typography variant="h4">{t("contact")}</Typography>
+      <Typography variant="h4" sx={{ textAlign: "center" }}>
+        {t("contact")}
+      </Typography>
 
       <TextField
         label={t("name")}
@@ -79,14 +115,84 @@ const Contact: React.FC = () => {
         helperText={errors.message ? t("messageRequired") : ""}
       />
 
-      <Button variant="contained" component="label">
-        {t("uploadFile")}
-        <input type="file" {...register("file")} hidden />
+      <Button
+        variant="outlined"
+        component="label"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "10px",
+          borderRadius: 1,
+          textAlign: "left",
+          minHeight: "56px", // Matches height of TextField
+          backgroundColor: "transparent", // Make button look like a text field
+          borderColor: "rgba(0, 0, 0, 0.23)", // Border similar to TextField
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.08)", // Hover effect
+          },
+          textTransform: "none", // Prevent the text from being capitalized
+          color: fileName === "No file uploaded" ? "gray" : "black",
+        }}
+      >
+        <Typography variant="body1">{fileName}</Typography>
+        <input
+          type="file"
+          {...register("file")}
+          hidden
+          onChange={(e) => {
+            if (e.target.files) {
+              setFileName(e.target.files[0].name); // Update filename when file is selected
+            }
+          }}
+        />
+        <IconButton component="span">
+          <AttachFileIcon />
+        </IconButton>
       </Button>
 
-      <Button type="submit" variant="contained" color="primary">
-        {t("send")}
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        disabled={isSubmitting}
+        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+      >
+        {isSubmitting ? (
+          <CircularProgress size={24} color="inherit" />
+        ) : (
+          t("send")
+        )}
       </Button>
+
+      {/* Display status message */}
+      {statusMessage && (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor:
+              statusType === "success"
+                ? "rgba(76, 175, 80, 0.1)"
+                : "rgba(244, 67, 54, 0.1)",
+            color: statusType === "success" ? "#4caf50" : "#f44336",
+            padding: 2,
+            borderRadius: 1,
+            marginTop: 2,
+          }}
+        >
+          {statusType === "success" ? (
+            <Typography variant="body1" sx={{ marginRight: 1 }}>
+              ✅ {statusMessage}
+            </Typography>
+          ) : (
+            <Typography variant="body1" sx={{ marginRight: 1 }}>
+              ❌ {statusMessage}
+            </Typography>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };

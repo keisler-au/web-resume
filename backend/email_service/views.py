@@ -20,16 +20,13 @@ class SendEmailView(APIView):
             message = serializer.validated_data["message"]
             file = serializer.validated_data.get("file", None)
 
-            subject = f"Contact Form Submission from {name}"
-            email_body = (
-                f"Message: {message}\n\nFrom: {name}\nEmail: {user_email_address}"
-            )
-
+            subject = f"Web Resume Contact: {name}, {user_email_address}"
+            body = f"From: {name}\nEmail: {user_email_address}\n\nMessage:\n{message}"
             email = EmailMessage(
                 subject=subject,
-                body=email_body,
-                from_email=os.getenv("EMAIL_HOST_USER"),
-                to=[os.getenv("EMAIL_HOST_USER")],
+                body=body,
+                from_email=os.getenv("HOST_USER_EMAIL"),
+                to=[os.getenv("HOST_USER_EMAIL")],
             )
             email.reply_to = [user_email_address]
 
@@ -43,7 +40,6 @@ class SendEmailView(APIView):
                     {"message": "Email sent successfully!"}, status=status.HTTP_200_OK
                 )
             except Exception as e:
-                print("this failed = ", e)
                 return Response(
                     {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )

@@ -23,5 +23,7 @@
   "loadingContent": "Loading content",
   "failedLoad": "Failed to load content, please refresh the page and try again",
   "retry": "Retry",
-  "embeddedContent": "Embedded Content"
+  "embeddedContent": "Embedded Content",
+  "emailSent": "Email sent!",
+  "emailFailed": "Email failed to send."
 }
