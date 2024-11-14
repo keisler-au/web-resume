@@ -1,6 +1,13 @@
-import { Button, TextField, Typography, Box } from "@mui/material";
-import axios from "axios";
-import React from "react";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import {
+  Button,
+  TextField,
+  Typography,
+  Box,
+  CircularProgress,
+  IconButton,
+} from "@mui/material";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -10,7 +17,7 @@ interface FormValues {
   name: string;
   email: string;
   message: string;
-  file?: FileList;
+  files?: FileList;
 }
 
 const Contact: React.FC = () => {
@@ -19,7 +26,11 @@ const Contact: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormValues>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [fileName, setFileName] = useState<string>(t("fileUpload"));
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
@@ -27,20 +38,30 @@ const Contact: React.FC = () => {
     formData.append("email", data.email);
     formData.append("message", data.message);
 
-    if (data.file && data.file.length > 0) {
-      formData.append("file", data.file[0]);
+    if (data.files && data.files.length > 0) {
+      Array.from(data.files).forEach((file) => {
+        formData.append("files", file);
+      });
     }
 
     try {
-      await axios.post(`${BASE_URL}/api/send_email/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      setIsSubmitting(true);
+      const response = await fetch(`${BASE_URL}/api/send_email/`, {
+        method: "POST",
+        body: formData,
       });
-      //   alert(t("emailSent")); // success message;
+      if (!response.ok) {
+        throw new Error(t("failedFetch"));
+      }
+
+      setStatusMessage(t("emailSent"));
+      setIsSubmitting(false);
+      reset();
+      setFileName(t("fileUpload"));
     } catch (error) {
       console.error(error);
-      //   alert(t("emailFailed")); // error message;
+      setStatusMessage(t("emailFailed"));
+      setIsSubmitting(false);
     }
   };
 
@@ -48,10 +69,17 @@ const Contact: React.FC = () => {
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        width: "40%",
+        margin: "0 auto",
+      }}
     >
-      <Typography variant="h4">{t("contact")}</Typography>
-
+      <Typography variant="h4" sx={{ textAlign: "center" }}>
+        {t("contact")}
+      </Typography>
       <TextField
         label={t("name")}
         variant="outlined"
@@ -59,7 +87,6 @@ const Contact: React.FC = () => {
         error={!!errors.name}
         helperText={errors.name ? t("nameRequired") : ""}
       />
-
       <TextField
         label={t("email")}
         variant="outlined"
@@ -78,15 +105,81 @@ const Contact: React.FC = () => {
         error={!!errors.message}
         helperText={errors.message ? t("messageRequired") : ""}
       />
-
-      <Button variant="contained" component="label">
-        {t("uploadFile")}
-        <input type="file" {...register("file")} hidden />
+      <Button
+        variant="outlined"
+        component="label"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "10px",
+          borderRadius: 1,
+          textAlign: "left",
+          minHeight: "56px",
+          backgroundColor: "transparent",
+          borderColor: "rgba(0, 0, 0, 0.23)",
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.08)",
+          },
+          textTransform: "none",
+          color: fileName === t("fileUpload") ? "gray" : "black",
+        }}
+      >
+        <Typography variant="body1">{fileName}</Typography>
+        <input
+          type="file"
+          multiple
+          hidden
+          {...register("files")}
+          onChange={(e) => {
+            if (e.target.files) {
+              const fileNames = Array.from(e.target.files).map(
+                (file) => file.name,
+              );
+              setFileName(fileNames.join(", "));
+            }
+            register("files").onChange(e);
+          }}
+        />
+        <IconButton component="span">
+          <AttachFileIcon />
+        </IconButton>
+      </Button>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        disabled={isSubmitting}
+        sx={{ display: "flex", alignItems: "center", gap: 1 }}
+      >
+        {isSubmitting ? (
+          <CircularProgress size={24} color="inherit" />
+        ) : (
+          t("send")
+        )}
       </Button>
 
-      <Button type="submit" variant="contained" color="primary">
-        {t("send")}
-      </Button>
+      {statusMessage && (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor:
+              statusMessage === t("emailSent")
+                ? "rgba(76, 175, 80, 0.1)"
+                : "rgba(244, 67, 54, 0.1)",
+            color: statusMessage === t("emailSent") ? "#4caf50" : "#f44336",
+            padding: 2,
+            borderRadius: 1,
+            marginTop: 2,
+          }}
+        >
+          <Typography variant="body1" sx={{ marginRight: 1 }}>
+            {statusMessage === t("emailSent") ? "✅" : "❌"} {statusMessage}
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };

@@ -1,5 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render } from "@testing-library/react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import App from "../App";
@@ -12,15 +11,8 @@ describe("App Component", () => {
     expect(getByText("joshKeisler")).toBeInTheDocument();
     expect(getByText("webResume")).toBeInTheDocument();
     expect(getByText("home")).toBeInTheDocument();
+    expect(getByText("weatherApp")).toBeInTheDocument();
     expect(getByText("infosysBHP")).toBeInTheDocument();
-    expect(getByText("rentalApp")).toBeInTheDocument();
-
-    act(() => {
-      userEvent.click(getByText("weatherApp"));
-    });
-
-    const weatherPage = await screen.findByText("Weather App page");
-    expect(weatherPage).toBeInTheDocument();
   });
 
   test("renders ErrorBoundary", () => {

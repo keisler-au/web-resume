@@ -1,25 +1,86 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import Contact from "../components/Contact";
+import { BASE_URL } from "../constants";
 
-describe("Contact", () => {
-  it("renders the form", () => {
-    render(<Contact />);
-    expect(screen.getByLabelText("name")).toBeInTheDocument();
-    expect(screen.getByLabelText("email")).toBeInTheDocument();
-    expect(screen.getByLabelText("message")).toBeInTheDocument();
-    expect(screen.getByLabelText("uploadFile")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "send" })).toBeInTheDocument();
+const fetchMock = fetch as jest.Mock;
+
+describe("Contact Component", () => {
+  it("renders the contact form with all fields", () => {
+    const { getByText, getByLabelText } = render(<Contact />);
+
+    expect(getByLabelText("name")).toBeInTheDocument();
+    expect(getByLabelText("email")).toBeInTheDocument();
+    expect(getByLabelText("message")).toBeInTheDocument();
+    expect(getByText("fileUpload")).toBeInTheDocument();
+    expect(getByText("send")).toBeInTheDocument();
   });
 
-  it("shows validation messages", async () => {
-    render(<Contact />);
-    fireEvent.click(screen.getByRole("button", { name: "send" }));
+  it("shows validation errors when submitting an empty form", async () => {
+    const { getByText } = render(<Contact />);
 
-    expect(await screen.findByText("name is required")).toBeInTheDocument();
-    expect(await screen.findByText("email is required")).toBeInTheDocument();
-    expect(await screen.findByText("message is required")).toBeInTheDocument();
+    userEvent.click(getByText("send"));
+
+    await waitFor(() => {
+      expect(getByText("nameRequired")).toBeInTheDocument();
+      expect(getByText("emailRequired")).toBeInTheDocument();
+      expect(getByText("messageRequired")).toBeInTheDocument();
+    });
   });
 
-  // Additional tests for successful submission and file upload can be added here
+  it("submits the form successfully with valid data", async () => {
+    const { getByText, getByLabelText } = render(<Contact />);
+
+    const name = "Test name";
+    const email = "test@addresscom";
+    const message = "This is a test message";
+
+    userEvent.type(getByLabelText("name"), name);
+    userEvent.type(getByLabelText("email"), email);
+    userEvent.type(getByLabelText("message"), message);
+
+    userEvent.click(getByText("send"));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/send_email/`, {
+        method: "POST",
+        body: expect.any(FormData),
+      });
+      const formData = fetchMock.mock.calls[0][1].body as FormData;
+      expect(formData.get("name")).toEqual(name);
+      expect(formData.get("email")).toEqual(email);
+      expect(formData.get("message")).toEqual(message);
+    });
+  });
+
+  it("allows file upload", async () => {
+    const { getByText, getByLabelText } = render(<Contact />);
+
+    userEvent.type(getByLabelText("name"), "Test name");
+    userEvent.type(getByLabelText("email"), "test@addresscom");
+    userEvent.type(getByLabelText("message"), "This is a test message");
+
+    const input = getByLabelText("fileUpload");
+    const files = [
+      new File(["hello"], "hello.png", { type: "image/png" }),
+      new File(["there"], "there.png", { type: "image/png" }),
+    ];
+    await userEvent.upload(input, files);
+    userEvent.click(getByText("send"));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/send_email/`, {
+        method: "POST",
+        body: expect.any(FormData),
+      });
+
+      const formDataFiles = (
+        fetchMock.mock.calls[0][1].body as FormData
+      ).getAll("files") as File[];
+      expect(formDataFiles[0].name).toBe(files[0].name);
+      expect(formDataFiles[1].name).toBe(files[1].name);
+    });
+  });
+  // TODO: test statusMessage pathways
 });

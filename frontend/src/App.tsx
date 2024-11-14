@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -34,7 +35,7 @@ const _createRoutesConfig = (t: (key: string) => string): RoutesConfig[] => [
     path: "/weather",
     element: WeatherApp,
     props: {
-      src: "https://keisler-au.github.io/weather-project/",
+      src: process.env.REACT_APP_WEATHER_APP_URL,
       title: "First Project",
     },
   },
