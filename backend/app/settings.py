@@ -65,8 +65,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ANYMAIL = {
     "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),

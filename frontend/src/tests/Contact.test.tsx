@@ -17,7 +17,7 @@ describe("Contact Component", () => {
     expect(getByLabelText("name")).toBeInTheDocument();
     expect(getByLabelText("email")).toBeInTheDocument();
     expect(getByLabelText("message")).toBeInTheDocument();
-    expect(getByText("uploadFile")).toBeInTheDocument();
+    expect(getByText("fileUpload")).toBeInTheDocument();
     expect(getByText("send")).toBeInTheDocument();
   });
 
@@ -64,7 +64,7 @@ describe("Contact Component", () => {
     userEvent.type(getByLabelText("email"), "john@example.com");
     userEvent.type(getByLabelText("message"), "Hello, this is a message.");
 
-    const fileInputElement = getByLabelText("uploadFile");
+    const fileInputElement = getByLabelText("fileUpload");
     const file = new File(["hello"], "hello.png", { type: "image/png" });
     userEvent.upload(fileInputElement, file);
 

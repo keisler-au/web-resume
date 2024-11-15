@@ -30,45 +30,46 @@ const Contact: React.FC = () => {
     reset,
   } = useForm<FormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState<string | null>("No file uploaded");
+  const [fileName, setFileName] = useState<string | null>(t("fileUpload"));
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [statusType, setStatusType] = useState<"success" | "error" | null>(
     null,
   );
 
   const onSubmit = async (data: FormValues) => {
+    console.log(data);
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("message", data.message);
-
+    console.log(data.file);
     if (data.file && data.file.length > 0) {
-      formData.append("file", data.file[0]);
-      setFileName(data.file[0].name); // Update the filename when a file is selected
-    } else {
-      setFileName("No file uploaded");
+      let fileNames = "";
+      Array.from(data.file).forEach((file) => {
+        formData.append("file", file); // Append each file to the 'file' field
+        fileNames += `${file.name}  `;
+      });
+      setFileName(fileNames);
     }
 
     try {
       setIsSubmitting(true);
+      console.log(formData.get("file"));
       await axios.post(`${BASE_URL}/api/send_email/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
-      // Show success message
       setStatusMessage(t("emailSent"));
       setIsSubmitting(false);
       setStatusType("success");
-      reset(); // Reset form fields on success
-      setFileName("No file uploaded"); // Reset file name display
+      reset();
+      setFileName(t("fileUpload"));
     } catch (error) {
       console.error(error);
-      // Show error message
       setStatusMessage(t("emailFailed"));
       setStatusType("error");
-      setIsSubmitting(false); // Keep form values for editing
+      setIsSubmitting(false);
     }
   };
 
@@ -132,17 +133,19 @@ const Contact: React.FC = () => {
             backgroundColor: "rgba(0, 0, 0, 0.08)", // Hover effect
           },
           textTransform: "none", // Prevent the text from being capitalized
-          color: fileName === "No file uploaded" ? "gray" : "black",
+          color: fileName === t("fileUpload") ? "gray" : "black",
         }}
       >
         <Typography variant="body1">{fileName}</Typography>
         <input
+          data-testid="file-input"
           type="file"
+          multiple
           {...register("file")}
           hidden
           onChange={(e) => {
             if (e.target.files) {
-              setFileName(e.target.files[0].name); // Update filename when file is selected
+              setFileName(e.target.files[0].name);
             }
           }}
         />

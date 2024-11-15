@@ -2,22 +2,24 @@ import { render, screen, waitFor } from "@testing-library/react";
 
 import DescriptionList from "../components/Description";
 
+const fetchMock = fetch as jest.Mock;
+
 describe("DescriptionList", () => {
   const pageReference = 1;
 
   beforeEach(() => {
-    (fetch as jest.Mock).mockClear();
+    fetchMock.mockClear();
   });
 
   test("renders loading state initially", () => {
-    (fetch as jest.Mock).mockImplementationOnce(() => new Promise(() => {}));
+    fetchMock.mockImplementationOnce(() => new Promise(() => {}));
     render(<DescriptionList pageReference={pageReference} />);
 
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
 
   test("renders error message when fetch is unsuccessful", async () => {
-    (fetch as jest.Mock).mockImplementationOnce(() =>
+    fetchMock.mockImplementationOnce(() =>
       Promise.resolve({
         ok: false,
       }),
@@ -38,7 +40,7 @@ describe("DescriptionList", () => {
       { id: 2, content: "Description 2", pageReference },
     ];
 
-    (fetch as jest.Mock).mockImplementationOnce(() =>
+    fetchMock.mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve(mockDescriptions),
@@ -54,7 +56,7 @@ describe("DescriptionList", () => {
   });
 
   test("renders error message when fetch results in network error", async () => {
-    (fetch as jest.Mock).mockImplementationOnce(() =>
+    fetchMock.mockImplementationOnce(() =>
       Promise.reject(new Error("Network Error")),
     );
     render(<DescriptionList pageReference={pageReference} />);
