@@ -7,7 +7,6 @@ import {
   CircularProgress,
   IconButton,
 } from "@mui/material";
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -55,11 +54,13 @@ const Contact: React.FC = () => {
     try {
       setIsSubmitting(true);
       console.log(formData.get("file"));
-      await axios.post(`${BASE_URL}/api/send_email/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const response = await fetch(`${BASE_URL}/api/send_email/`, {
+        method: "POST",
+        body: formData,
       });
+      if (!response.ok) {
+        throw new Error(t("failedFetch"));
+      }
       setStatusMessage(t("emailSent"));
       setIsSubmitting(false);
       setStatusType("success");

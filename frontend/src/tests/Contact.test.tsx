@@ -1,13 +1,10 @@
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import axios from "axios";
 
 import Contact from "../components/Contact";
 import { BASE_URL } from "../constants";
 
-// Mock axios
-jest.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+const fetchMock = fetch as jest.Mock;
 
 describe("Contact Component", () => {
   it("renders the contact form with all fields", () => {
@@ -45,43 +42,34 @@ describe("Contact Component", () => {
 
     // Ensure the axios post was called with correct data
     await waitFor(() => {
-      expect(mockedAxios.post).toHaveBeenCalledWith(
-        `${BASE_URL}/api/send_email/`,
-        expect.any(FormData),
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        },
-      );
+      expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/send_email/`, {
+        method: "POST",
+        body: expect.any(FormData),
+      });
     });
   });
 
   it("allows file upload", async () => {
-    const { getByText, getByLabelText } = render(<Contact />);
+    const { getByText, getByLabelText, getByTestId } = render(<Contact />);
 
     userEvent.type(getByLabelText("name"), "John Doe");
     userEvent.type(getByLabelText("email"), "john@example.com");
     userEvent.type(getByLabelText("message"), "Hello, this is a message.");
 
-    const fileInputElement = getByLabelText("fileUpload");
+    const fileInputElement = getByTestId("file-input");
     const file = new File(["hello"], "hello.png", { type: "image/png" });
     userEvent.upload(fileInputElement, file);
 
     userEvent.click(getByText("send"));
 
     await waitFor(() => {
-      expect(mockedAxios.post).toHaveBeenCalledWith(
-        `${BASE_URL}/api/send_email/`,
-        expect.any(FormData),
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        },
-      );
+      expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/send_email/`, {
+        method: "POST",
+        body: expect.any(FormData),
+      });
 
-      const formData = mockedAxios.post.mock.calls[0][1] as FormData;
+      const formData = fetchMock.mock.calls[0][1] as FormData;
+      console.log(fetchMock.mock.calls[0]);
       expect(formData.get("file")).toEqual(file);
     });
   });
