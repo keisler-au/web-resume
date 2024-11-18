@@ -8,3 +8,6 @@ disable=C0114,C0115
 
 [*migrations/]
 disable=C0103
+
+[*.serializers.py]
+disable=W0223

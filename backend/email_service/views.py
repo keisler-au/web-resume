@@ -1,6 +1,7 @@
 # email_service/views.py
 
 import os
+from smtplib import SMTPException
 
 from django.core.mail import EmailMessage
 from rest_framework import status
@@ -12,6 +13,7 @@ from email_service.serializers import EmailSerializer
 
 class SendEmailView(APIView):
     def post(self, request):
+        """Send email with input from Contact form"""
         serializer = EmailSerializer(data=request.data)
 
         if serializer.is_valid():
@@ -38,7 +40,12 @@ class SendEmailView(APIView):
                 return Response(
                     {"message": "Email sent successfully!"}, status=status.HTTP_200_OK
                 )
-            except Exception as e:
+            except SMTPException as e:
+                return Response(
+                    {"error": f"SMTP error: {str(e)}"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
+            except Exception as e:  # pylint: disable=broad-except
                 return Response(
                     {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
