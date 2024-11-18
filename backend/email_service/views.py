@@ -18,7 +18,7 @@ class SendEmailView(APIView):
             name = serializer.validated_data["name"]
             user_email_address = serializer.validated_data["email"]
             message = serializer.validated_data["message"]
-            file = serializer.validated_data.get("file", None)
+            files = serializer.validated_data.get("files", None)
 
             subject = f"Web Resume Contact: {name}, {user_email_address}"
             body = f"From: {name}\nEmail: {user_email_address}\n\nMessage:\n{message}"
@@ -30,10 +30,9 @@ class SendEmailView(APIView):
             )
             email.reply_to = [user_email_address]
 
-            # Attach file if present
-            if file:
-                email.attach(file.name, file.read(), file.content_type)
-
+            if files:
+                for file in files:
+                    email.attach(file.name, file.read(), file.content_type)
             try:
                 email.send(fail_silently=False)
                 return Response(

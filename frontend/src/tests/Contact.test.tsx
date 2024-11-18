@@ -10,7 +10,6 @@ describe("Contact Component", () => {
   it("renders the contact form with all fields", () => {
     const { getByText, getByLabelText } = render(<Contact />);
 
-    // Check if form fields and buttons are rendered
     expect(getByLabelText("name")).toBeInTheDocument();
     expect(getByLabelText("email")).toBeInTheDocument();
     expect(getByLabelText("message")).toBeInTheDocument();
@@ -23,7 +22,6 @@ describe("Contact Component", () => {
 
     userEvent.click(getByText("send"));
 
-    // Wait for validation errors to appear
     await waitFor(() => {
       expect(getByText("nameRequired")).toBeInTheDocument();
       expect(getByText("emailRequired")).toBeInTheDocument();
@@ -34,32 +32,41 @@ describe("Contact Component", () => {
   it("submits the form successfully with valid data", async () => {
     const { getByText, getByLabelText } = render(<Contact />);
 
-    userEvent.type(getByLabelText("name"), "John Doe");
-    userEvent.type(getByLabelText("email"), "john@example.com");
-    userEvent.type(getByLabelText("message"), "Hello, this is a message.");
+    const name = "Test name";
+    const email = "test@addresscom";
+    const message = "This is a test message";
+
+    userEvent.type(getByLabelText("name"), name);
+    userEvent.type(getByLabelText("email"), email);
+    userEvent.type(getByLabelText("message"), message);
 
     userEvent.click(getByText("send"));
 
-    // Ensure the axios post was called with correct data
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/send_email/`, {
         method: "POST",
         body: expect.any(FormData),
       });
+      const formData = fetchMock.mock.calls[0][1].body as FormData;
+      expect(formData.get("name")).toEqual(name);
+      expect(formData.get("email")).toEqual(email);
+      expect(formData.get("message")).toEqual(message);
     });
   });
 
   it("allows file upload", async () => {
-    const { getByText, getByLabelText, getByTestId } = render(<Contact />);
+    const { getByText, getByLabelText } = render(<Contact />);
 
-    userEvent.type(getByLabelText("name"), "John Doe");
-    userEvent.type(getByLabelText("email"), "john@example.com");
-    userEvent.type(getByLabelText("message"), "Hello, this is a message.");
+    userEvent.type(getByLabelText("name"), "Test name");
+    userEvent.type(getByLabelText("email"), "test@addresscom");
+    userEvent.type(getByLabelText("message"), "This is a test message");
 
-    const fileInputElement = getByTestId("file-input");
-    const file = new File(["hello"], "hello.png", { type: "image/png" });
-    userEvent.upload(fileInputElement, file);
-
+    const input = getByLabelText("fileUpload");
+    const files = [
+      new File(["hello"], "hello.png", { type: "image/png" }),
+      new File(["there"], "there.png", { type: "image/png" }),
+    ];
+    await userEvent.upload(input, files);
     userEvent.click(getByText("send"));
 
     await waitFor(() => {
@@ -68,9 +75,12 @@ describe("Contact Component", () => {
         body: expect.any(FormData),
       });
 
-      const formData = fetchMock.mock.calls[0][1] as FormData;
-      console.log(fetchMock.mock.calls[0]);
-      expect(formData.get("file")).toEqual(file);
+      const formDataFiles = (
+        fetchMock.mock.calls[0][1].body as FormData
+      ).getAll("files") as File[];
+      expect(formDataFiles[0].name).toBe(files[0].name);
+      expect(formDataFiles[1].name).toBe(files[1].name);
     });
   });
+  // TODO: test statusMessage pathways
 });

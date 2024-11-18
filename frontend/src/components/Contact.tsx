@@ -7,7 +7,7 @@ import {
   CircularProgress,
   IconButton,
 } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -17,7 +17,7 @@ interface FormValues {
   name: string;
   email: string;
   message: string;
-  file?: FileList;
+  files?: FileList;
 }
 
 const Contact: React.FC = () => {
@@ -29,31 +29,23 @@ const Contact: React.FC = () => {
     reset,
   } = useForm<FormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState<string | null>(t("fileUpload"));
+  const [fileName, setFileName] = useState<string>(t("fileUpload"));
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
-  const [statusType, setStatusType] = useState<"success" | "error" | null>(
-    null,
-  );
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("message", data.message);
-    console.log(data.file);
-    if (data.file && data.file.length > 0) {
-      let fileNames = "";
-      Array.from(data.file).forEach((file) => {
-        formData.append("file", file); // Append each file to the 'file' field
-        fileNames += `${file.name}  `;
+
+    if (data.files && data.files.length > 0) {
+      Array.from(data.files).forEach((file) => {
+        formData.append("files", file);
       });
-      setFileName(fileNames);
     }
 
     try {
       setIsSubmitting(true);
-      console.log(formData.get("file"));
       const response = await fetch(`${BASE_URL}/api/send_email/`, {
         method: "POST",
         body: formData,
@@ -61,15 +53,14 @@ const Contact: React.FC = () => {
       if (!response.ok) {
         throw new Error(t("failedFetch"));
       }
+
       setStatusMessage(t("emailSent"));
       setIsSubmitting(false);
-      setStatusType("success");
       reset();
       setFileName(t("fileUpload"));
     } catch (error) {
       console.error(error);
       setStatusMessage(t("emailFailed"));
-      setStatusType("error");
       setIsSubmitting(false);
     }
   };
@@ -89,7 +80,6 @@ const Contact: React.FC = () => {
       <Typography variant="h4" sx={{ textAlign: "center" }}>
         {t("contact")}
       </Typography>
-
       <TextField
         label={t("name")}
         variant="outlined"
@@ -97,7 +87,6 @@ const Contact: React.FC = () => {
         error={!!errors.name}
         helperText={errors.name ? t("nameRequired") : ""}
       />
-
       <TextField
         label={t("email")}
         variant="outlined"
@@ -116,7 +105,6 @@ const Contact: React.FC = () => {
         error={!!errors.message}
         helperText={errors.message ? t("messageRequired") : ""}
       />
-
       <Button
         variant="outlined"
         component="label"
@@ -127,34 +115,36 @@ const Contact: React.FC = () => {
           padding: "10px",
           borderRadius: 1,
           textAlign: "left",
-          minHeight: "56px", // Matches height of TextField
-          backgroundColor: "transparent", // Make button look like a text field
-          borderColor: "rgba(0, 0, 0, 0.23)", // Border similar to TextField
+          minHeight: "56px",
+          backgroundColor: "transparent",
+          borderColor: "rgba(0, 0, 0, 0.23)",
           "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.08)", // Hover effect
+            backgroundColor: "rgba(0, 0, 0, 0.08)",
           },
-          textTransform: "none", // Prevent the text from being capitalized
+          textTransform: "none",
           color: fileName === t("fileUpload") ? "gray" : "black",
         }}
       >
         <Typography variant="body1">{fileName}</Typography>
         <input
-          data-testid="file-input"
           type="file"
           multiple
-          {...register("file")}
           hidden
+          {...register("files")}
           onChange={(e) => {
             if (e.target.files) {
-              setFileName(e.target.files[0].name);
+              const fileNames = Array.from(e.target.files).map(
+                (file) => file.name,
+              );
+              setFileName(fileNames.join(", "));
             }
+            register("files").onChange(e);
           }}
         />
         <IconButton component="span">
           <AttachFileIcon />
         </IconButton>
       </Button>
-
       <Button
         type="submit"
         variant="contained"
@@ -169,7 +159,6 @@ const Contact: React.FC = () => {
         )}
       </Button>
 
-      {/* Display status message */}
       {statusMessage && (
         <Box
           sx={{
@@ -177,24 +166,18 @@ const Contact: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor:
-              statusType === "success"
+              statusMessage === t("emailSent")
                 ? "rgba(76, 175, 80, 0.1)"
                 : "rgba(244, 67, 54, 0.1)",
-            color: statusType === "success" ? "#4caf50" : "#f44336",
+            color: statusMessage === t("emailSent") ? "#4caf50" : "#f44336",
             padding: 2,
             borderRadius: 1,
             marginTop: 2,
           }}
         >
-          {statusType === "success" ? (
-            <Typography variant="body1" sx={{ marginRight: 1 }}>
-              ✅ {statusMessage}
-            </Typography>
-          ) : (
-            <Typography variant="body1" sx={{ marginRight: 1 }}>
-              ❌ {statusMessage}
-            </Typography>
-          )}
+          <Typography variant="body1" sx={{ marginRight: 1 }}>
+            {statusMessage === t("emailSent") ? "✅" : "❌"} {statusMessage}
+          </Typography>
         </Box>
       )}
     </Box>

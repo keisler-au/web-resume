@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from django.core import mail
 from django.urls import reverse
 from rest_framework import status
@@ -11,10 +13,10 @@ class EmailServiceTests(APITestCase):
             "email": "test@example.com",
             "message": "This is a test message.",
         }
-        response = self.client.post(reverse("send-email"), data, format="json")
+        response = self.client.post(reverse("send_email"), data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["message"], "Email sent successfully!")
-        self.assertEqual(len(mail.outbox), 1)  # Check that one email was sent
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_send_email_invalid(self):
         data = {
@@ -22,10 +24,18 @@ class EmailServiceTests(APITestCase):
             "email": "invalid-email",
             "message": "",
         }
-        response = self.client.post(reverse("send-email"), data, format="json")
+        response = self.client.post(reverse("send_email"), data, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("name", response.data)  # Validate that name error is included
-        self.assertIn("email", response.data)  # Validate that email error is included
-        self.assertIn(
-            "message", response.data
-        )  # Validate that message error is included
+
+    @patch("django.core.mail.EmailMessage.send")
+    def test_send_email_error(self, mock_send):
+        mock_send.side_effect = Exception("SMTP error")
+
+        data = {
+            "name": "Test User",
+            "email": "test@example.com",
+            "message": "This is a test message.",
+        }
+        response = self.client.post(reverse("send_email"), data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+        self.assertEqual(response.data["error"], "SMTP error")

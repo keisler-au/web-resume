@@ -15,7 +15,7 @@
   "name": "Name",
   "email": "Email",
   "message": "Message",
-  "fileUpload": "No File Uploaded",
+  "fileUpload": "No Files Uploaded",
   "send": "Send",
   "nameRequired": "Name Required",
   "emailRequired": "Email Required",
