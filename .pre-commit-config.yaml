@@ -26,13 +26,13 @@ repos:
         files: \.py$
         entry: bash -c "cd backend && poetry run black ."
 
-  # - repo: local
-  #   hooks:
-  #     - id: pylint
-  #       name: pylint
-  #       language: system
-  #       files: \.py$
-  #       entry: bash -c "cd backend && poetry run pylint ."
+  - repo: local
+    hooks:
+      - id: pylint
+        name: pylint
+        language: system
+        files: \.py$
+        entry: bash -c "cd backend && poetry run pylint ."
 
   - repo: local
     hooks:
