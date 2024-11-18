@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { act } from "react";
 
-import WeatherApp from "../components/WeatherApp";
+import WeatherApp from "../components/SelfTaught";
 
 describe("WeatherApp", () => {
   let iframe: HTMLElement;

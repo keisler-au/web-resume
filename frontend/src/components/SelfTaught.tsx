@@ -25,6 +25,7 @@ const WeatherApp: React.FC<EmbedStaticSiteProps> = ({ src, title }) => {
 
   return (
     <Box
+      id="selfTaught"
       position="relative"
       width="100%"
       height="80vh"

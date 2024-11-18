@@ -8,6 +8,7 @@ from rest_framework.test import APITestCase
 
 class EmailServiceTests(APITestCase):
     def test_send_email_success(self):
+        """Recieve 200 status code when sending email with valid inputs"""
         data = {
             "name": "Test User",
             "email": "test@example.com",
@@ -19,6 +20,7 @@ class EmailServiceTests(APITestCase):
         self.assertEqual(len(mail.outbox), 1)
 
     def test_send_email_invalid(self):
+        """Recieve 400 status code when sending email with invalid inputs"""
         data = {
             "name": "",
             "email": "invalid-email",
@@ -29,6 +31,7 @@ class EmailServiceTests(APITestCase):
 
     @patch("django.core.mail.EmailMessage.send")
     def test_send_email_error(self, mock_send):
+        """Recieve 500 status code when SMTP error occurs during email send"""
         mock_send.side_effect = Exception("SMTP error")
 
         data = {

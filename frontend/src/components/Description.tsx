@@ -1,4 +1,5 @@
 import {
+  Box,
   List,
   ListItem,
   Typography,
@@ -13,10 +14,9 @@ import { BASE_URL } from "../constants";
 interface Description {
   id: number;
   content: string;
-  pageReference: number;
 }
 
-const DescriptionList: React.FC<Record<string, number>> = ({
+const DescriptionList: React.FC<Record<string, string>> = ({
   pageReference,
 }) => {
   const { t } = useTranslation();
@@ -59,9 +59,18 @@ const DescriptionList: React.FC<Record<string, number>> = ({
   }
 
   return (
-    <List>
+    // scrollMarginTop: according to Home.tsx/headerFromTop variable
+    <List id={pageReference} sx={{ scrollMarginTop: "6vh" }}>
       {descriptions.map((description) => (
-        <ListItem key={description.id}>
+        <ListItem
+          key={description.id}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Typography>{description.content}</Typography>
         </ListItem>
       ))}

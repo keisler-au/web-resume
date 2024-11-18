@@ -4,7 +4,10 @@ django-settings-module=app.settings
 ignore-patterns=admin.py,migrations/
 
 [*.admin.py]
-disable=C0114,C0115
+disable=C0114,C0115,C0116
 
 [*migrations/]
 disable=C0103
+
+[*.serializers.py]
+disable=W0223

@@ -67,6 +67,7 @@ const Contact: React.FC = () => {
 
   return (
     <Box
+      id="contact"
       component="form"
       onSubmit={handleSubmit(onSubmit)}
       sx={{
