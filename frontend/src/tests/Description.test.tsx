@@ -5,7 +5,7 @@ import DescriptionList from "../components/Description";
 const fetchMock = fetch as jest.Mock;
 
 describe("DescriptionList", () => {
-  const pageReference = 1;
+  const pageReference = "test";
 
   beforeEach(() => {
     fetchMock.mockClear();

@@ -11,7 +11,6 @@ import React, { useEffect, useState } from "react";
 
 interface Project {
   title: string;
-  description: string;
   imageUrl: string;
   link: string;
 }
@@ -19,36 +18,28 @@ interface Project {
 const projects: Project[] = [
   {
     title: "Psychology",
-    description: "Redesigning the Parks Canada camping reservation system",
     imageUrl: "/Mountain.jpg",
-    link: "#",
+    link: "#psychology",
   },
   {
     title: "Self-taught",
-    description: "Designing an Airtable dashboard for a non-profit",
     imageUrl: "/Mountain.jpg",
-    link: "#",
+    link: "#selfTaught",
   },
   {
     title: "Infosys/BHP",
-    description:
-      "A lightmeter app to help beginner photographers take photos with confidence",
     imageUrl: "/Mountain.jpg",
-    link: "#",
+    link: "#infosysBHP",
   },
   {
     title: "Web Resume",
-    description:
-      "A lightmeter app to help beginner photographers take photos with confidence",
     imageUrl: "/Mountain.jpg",
-    link: "#",
+    link: "#webResume",
   },
   {
     title: "Next Adventure",
-    description:
-      "A lightmeter app to help beginner photographers take photos with confidence",
     imageUrl: "/Mountain.jpg",
-    link: "#",
+    link: "#contact",
   },
 ];
 
@@ -63,39 +54,27 @@ const Home: React.FC = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   // TODO: Fix responsitivity
   // TODO: Fix card height
-
   const headerIsolation = "131vh";
   const headerFromBottom = "27vh";
   const headerFromTop = "6vh";
   const transformRate = 150;
   return (
     <>
-      <Box
-        sx={{
-          position: "sticky",
-          top: `-${headerIsolation}`,
-          zIndex: 1,
-        }}
-      >
-        <Box
-          sx={{
-            minHeight: `${headerIsolation}`,
-          }}
-        ></Box>
+      <Box position="sticky" top={`-${headerIsolation}`} zIndex={1}>
+        <Box minHeight={`${headerIsolation}`}></Box>
 
         {/* Cards*/}
         <Box
-          sx={{
-            position: "fixed",
-            bottom: "18vh",
-            left: "10vw",
-            right: "10vw",
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "flex-end",
-          }}
+          position="fixed"
+          bottom="18vh"
+          left="10vw"
+          right="10vw"
+          display="flex"
+          justifyContent="space-evenly"
+          alignItems="flex-end"
         >
           {projects.map((project, index) => {
             const size = 200 + index * 30;
@@ -103,10 +82,10 @@ const Home: React.FC = () => {
               <Card
                 key={index}
                 sx={{
-                  width: `calc(${size}px / 1.2)`,
-                  height: `${size - 40}px`,
                   display: "flex",
                   alignItems: "flex-end",
+                  width: `calc(${size}px / 1.2)`,
+                  height: `${size - 40}px`,
                   opacity: Math.max(1 - scrollY / transformRate, -1),
                   transform: `scaleX(${1 - Math.min(scrollY / (transformRate + 30), 0.9)}) scaleY(${1 - Math.min(scrollY / transformRate, 0.9)})`,
                   transition: "opacity 0.1s ease, transform 0.1s ease",
@@ -123,7 +102,8 @@ const Home: React.FC = () => {
                     <Typography
                       variant="h6"
                       component="div"
-                      sx={{ display: "flex", justifyContent: "center" }}
+                      display="flex"
+                      justifyContent="center"
                     >
                       {project.title}
                     </Typography>
@@ -136,15 +116,14 @@ const Home: React.FC = () => {
 
         {/* Header  */}
         <Box
+          position="sticky"
+          bottom={headerFromBottom}
+          minHeight={headerFromTop}
+          padding="2% 20%"
+          display="flex"
+          justifyContent="space-evenly"
+          alignItems="flex-end"
           sx={{
-            position: "sticky",
-            bottom: headerFromBottom,
-            minHeight: headerFromTop,
-            padding: "2% 20%",
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "flex-end",
-            zIndex: 1,
             background: "white",
             opacity: Math.min((scrollY - transformRate) / transformRate, 1),
             transform: `scale(${Math.min(scrollY / 400, 1)})`,
@@ -153,7 +132,7 @@ const Home: React.FC = () => {
         >
           {projects.map((project) => {
             return (
-              <Link href={project.link} color="inherit">
+              <Link key={project.link} href={project.link} color="inherit">
                 <Typography
                   variant="h6"
                   component="div"

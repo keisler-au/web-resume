@@ -9,7 +9,8 @@ class DescriptionList(ListAPIView):
 
     def get_queryset(self):
         content = Description.objects.all()
+        print("content = ", content)
         if self.kwargs:
-            page = self.kwargs.get("page", 0)
+            page = self.kwargs.get("page", "")
             content = Description.objects.filter(page=page)
         return content
