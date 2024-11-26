@@ -1,8 +1,7 @@
 import { render } from "@testing-library/react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import App from "../App";
-import { ErrorFallback } from "../components/Errors";
+import App, { ErrorFallback } from "../App";
 
 describe("App Component", () => {
   test("renders NavBar and routes", async () => {

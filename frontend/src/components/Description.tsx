@@ -61,7 +61,15 @@ const DescriptionList: React.FC<Record<string, number>> = ({
   return (
     <List>
       {descriptions.map((description) => (
-        <ListItem key={description.id}>
+        <ListItem
+          key={description.id}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Typography>{description.content}</Typography>
         </ListItem>
       ))}
