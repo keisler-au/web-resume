@@ -24,10 +24,12 @@ function App() {
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Home />
       <Psychology />
+
       <SelfTaught
         src={process.env.REACT_APP_WEATHER_APP_URL as string}
         title={"First Project"}
       />
+
       <WorkExperience />
       <WebResume />
       <Contact />

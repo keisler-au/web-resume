@@ -1,13 +1,11 @@
 [MASTER]
 load-plugins=pylint_django
 django-settings-module=app.settings
-ignore-patterns=admin.py,migrations/
+ignore-patterns=admin.py
+ignore=migrations/
 
 [*.admin.py]
 disable=C0114,C0115,C0116
-
-[*migrations/]
-disable=C0103
 
 [*.serializers.py]
 disable=W0223

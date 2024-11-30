@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from descriptions.models import Description
+from descriptions.models import Page, Section
 
 
-@admin.register(Description)
-class DescriptionAdmin(admin.ModelAdmin):
-    list_display = ("content", "page")
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+
+
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+    list_display = ("id", "header", "page")

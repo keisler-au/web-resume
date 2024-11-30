@@ -2,6 +2,9 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { CardLayout, TextLayout } from "./CardLayout";
+import { Description } from "./Descriptions";
+
 interface EmbedStaticSiteProps {
   src: string;
   title?: string;
@@ -24,48 +27,52 @@ const WeatherApp: React.FC<EmbedStaticSiteProps> = ({ src, title }) => {
   }, [loading]);
 
   return (
-    <Box
-      id="selfTaught"
-      position="relative"
-      width="100%"
-      height="80vh"
-      borderRadius={2}
-      overflow="hidden"
-    >
-      {(loading || failedLoad) && (
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          height="100%"
-        >
-          {loading ? (
-            <>
-              <CircularProgress />
-              <Typography variant="body2" sx={{ marginLeft: 1 }}>
-                {`${t("loadingContent")}...`}
-              </Typography>
-            </>
-          ) : (
-            <Typography variant="body1" sx={{ color: "error" }}>
-              {`${t("failedLoad")}...`}
-            </Typography>
+    <CardLayout
+      dMultiplier={1.2}
+      pageReference="Self-taught"
+      renderFunction={(description: Description[]) => (
+        <Box display="flex">
+          <Box display="flex" flexDirection="column">
+            {description[0].sections.map((section) => (
+              <TextLayout section={section} />
+            ))}
+          </Box>
+          {(loading || failedLoad) && (
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              height="100%"
+            >
+              {loading ? (
+                <>
+                  <CircularProgress />
+                  <Typography variant="body2" sx={{ marginLeft: 1 }}>
+                    {`${t("loadingContent")}...`}
+                  </Typography>
+                </>
+              ) : (
+                <Typography variant="body1" sx={{ color: "error" }}>
+                  {`${t("failedLoad")}...`}
+                </Typography>
+              )}
+            </Box>
           )}
+
+          <iframe
+            title={title || "embeddedWeatherApp"}
+            src={src}
+            width="40%"
+            height="100%"
+            style={{
+              border: "none",
+              display: loading || failedLoad ? "none" : "block",
+            }}
+            onLoad={() => setLoading(false)}
+          />
         </Box>
       )}
-
-      <iframe
-        title={title || "embeddedWeatherApp"}
-        src={src}
-        width="100%"
-        height="100%"
-        style={{
-          border: "none",
-          display: loading || failedLoad ? "none" : "block",
-        }}
-        onLoad={() => setLoading(false)}
-      />
-    </Box>
+    />
   );
 };
 
