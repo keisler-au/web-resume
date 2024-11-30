@@ -1,14 +1,22 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { act } from "react";
 
-import WeatherApp from "../components/SelfTaught";
+import { Description } from "../components/Descriptions";
+import SelfTaught from "../components/SelfTaught";
+
+jest.mock("../components/CardLayout", () => ({
+  TextLayout: () => <div></div>,
+}));
 
 describe("WeatherApp", () => {
   let iframe: HTMLElement;
+  const testDescription: Description[] = [
+    { sections: [{ header: "test header", content: "test content" }] },
+  ];
 
   beforeEach(() => {
     jest.useFakeTimers();
-    render(<WeatherApp src="someSource" />);
+    render(<SelfTaught description={testDescription} src="someSource" />);
     iframe = screen.getByTitle("embeddedWeatherApp"); // Assign iframe here
   });
   afterEach(() => {

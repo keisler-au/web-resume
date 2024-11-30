@@ -1,13 +1,17 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
-from descriptions.models import Description
+from descriptions.models import Page, Section
 
 
-class DescriptionSerializer(ModelSerializer):
+class SectionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Description
-        fields = (
-            "id",
-            "content",
-            "page",
-        )
+        model = Section
+        fields = ["id", "header", "content"]
+
+
+class PageSerializer(serializers.ModelSerializer):
+    sections = SectionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Page
+        fields = ["id", "name", "sections"]

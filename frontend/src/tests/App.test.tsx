@@ -5,13 +5,13 @@ import App, { ErrorFallback } from "../App";
 
 describe("App Component", () => {
   test("renders NavBar and routes", async () => {
-    const { getByText } = render(<App />);
-
-    expect(getByText("joshKeisler")).toBeInTheDocument();
-    expect(getByText("webResume")).toBeInTheDocument();
-    expect(getByText("home")).toBeInTheDocument();
-    expect(getByText("weatherApp")).toBeInTheDocument();
-    expect(getByText("infosysBHP")).toBeInTheDocument();
+    const { getAllByText } = render(<App />);
+    expect(getAllByText("joshKeisler")).toHaveLength(1);
+    expect(getAllByText("psychology")).toHaveLength(2);
+    expect(getAllByText("selfTaught")).toHaveLength(2);
+    expect(getAllByText("workExperience")).toHaveLength(2);
+    expect(getAllByText("webResume")).toHaveLength(2);
+    expect(getAllByText("contact")).toHaveLength(2);
   });
 
   test("renders ErrorBoundary", () => {

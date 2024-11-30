@@ -1,22 +1,20 @@
-import {
-  Box,
-  List,
-  ListItem,
-  Typography,
-  CircularProgress,
-  Alert,
-} from "@mui/material";
+import { CircularProgress, Alert } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
 
-interface Description {
-  id: number;
-  content: string;
+type DescriptionsProps = {
+  render: Function;
+  pageReference: string;
+};
+
+export interface Description {
+  sections: { header: string; content: string }[];
 }
 
-const DescriptionList: React.FC<Record<string, string>> = ({
+const Descriptions: React.FC<DescriptionsProps> = ({
+  render,
   pageReference,
 }) => {
   const { t } = useTranslation();
@@ -58,24 +56,7 @@ const DescriptionList: React.FC<Record<string, string>> = ({
     );
   }
 
-  return (
-    // scrollMarginTop: according to Home.tsx/headerFromTop variable
-    <List id={pageReference} sx={{ scrollMarginTop: "6vh" }}>
-      {descriptions.map((description) => (
-        <ListItem
-          key={description.id}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography>{description.content}</Typography>
-        </ListItem>
-      ))}
-    </List>
-  );
+  return render(descriptions);
 };
 
-export default DescriptionList;
+export default Descriptions;

@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
+import { CardLayout, TextLayout } from "./CardLayout";
+import { Description } from "./Descriptions";
 
 interface FormValues {
   name: string;
@@ -20,7 +22,7 @@ interface FormValues {
   files?: FileList;
 }
 
-const Contact: React.FC = () => {
+const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
   const { t } = useTranslation();
   const {
     register,
@@ -50,7 +52,7 @@ const Contact: React.FC = () => {
         method: "POST",
         body: formData,
       });
-      if (!response.ok) {
+      if (response && !response.ok) {
         throw new Error(t("failedFetch"));
       }
 
@@ -66,121 +68,142 @@ const Contact: React.FC = () => {
   };
 
   return (
+    // <CardLayout
+    //   dMultiplier={1.5}
+    //   pageReference="contact"
+    //   renderFunction={(description: Description[]) => (
+
     <Box
-      id="contact"
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 2,
-        width: "40%",
-        margin: "0 auto",
+        alignItems: "center",
       }}
     >
-      <Typography variant="h4" sx={{ textAlign: "center" }}>
-        {t("contact")}
-      </Typography>
-      <TextField
-        label={t("name")}
-        variant="outlined"
-        {...register("name", { required: true })}
-        error={!!errors.name}
-        helperText={errors.name ? t("nameRequired") : ""}
+      <TextLayout
+        section={description[0].sections[0]}
+        styles={{ textAlign: "center" }}
       />
-      <TextField
-        label={t("email")}
-        variant="outlined"
-        type="email"
-        {...register("email", { required: true })}
-        error={!!errors.email}
-        helperText={errors.email ? t("emailRequired") : ""}
-      />
-
-      <TextField
-        label={t("message")}
-        variant="outlined"
-        multiline
-        rows={4}
-        {...register("message", { required: true })}
-        error={!!errors.message}
-        helperText={errors.message ? t("messageRequired") : ""}
-      />
-      <Button
-        variant="outlined"
-        component="label"
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
         sx={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "10px",
-          borderRadius: 1,
-          textAlign: "left",
-          minHeight: "56px",
-          backgroundColor: "transparent",
-          borderColor: "rgba(0, 0, 0, 0.23)",
-          "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.08)",
-          },
-          textTransform: "none",
-          color: fileName === t("fileUpload") ? "gray" : "black",
+          flexDirection: "column",
+          gap: 2,
+          width: "40%",
+          margin: "0 auto",
         }}
       >
-        <Typography variant="body1">{fileName}</Typography>
-        <input
-          type="file"
-          multiple
-          hidden
-          {...register("files")}
-          onChange={(e) => {
-            if (e.target.files) {
-              const fileNames = Array.from(e.target.files).map(
-                (file) => file.name,
-              );
-              setFileName(fileNames.join(", "));
-            }
-            register("files").onChange(e);
-          }}
+        <TextField
+          label={t("name")}
+          variant="outlined"
+          {...register("name", { required: true })}
+          error={!!errors.name}
+          helperText={errors.name ? t("nameRequired") : ""}
+          sx={{ background: "beige", borderRadius: 1 }}
         />
-        <IconButton component="span">
-          <AttachFileIcon />
-        </IconButton>
-      </Button>
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        disabled={isSubmitting}
-        sx={{ display: "flex", alignItems: "center", gap: 1 }}
-      >
-        {isSubmitting ? (
-          <CircularProgress size={24} color="inherit" />
-        ) : (
-          t("send")
-        )}
-      </Button>
+        <TextField
+          label={t("email")}
+          variant="outlined"
+          type="email"
+          {...register("email", { required: true })}
+          error={!!errors.email}
+          helperText={errors.email ? t("emailRequired") : ""}
+          sx={{ background: "beige", borderRadius: 1 }}
+        />
 
-      {statusMessage && (
-        <Box
+        <TextField
+          label={t("message")}
+          variant="outlined"
+          multiline
+          rows={4}
+          {...register("message", { required: true })}
+          error={!!errors.message}
+          helperText={errors.message ? t("messageRequired") : ""}
+          sx={{ background: "beige", borderRadius: 1 }}
+        />
+        <Button
+          variant="outlined"
+          component="label"
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            backgroundColor:
-              statusMessage === t("emailSent")
-                ? "rgba(76, 175, 80, 0.1)"
-                : "rgba(244, 67, 54, 0.1)",
-            color: statusMessage === t("emailSent") ? "#4caf50" : "#f44336",
-            padding: 2,
+            justifyContent: "space-between",
+            padding: "10px",
             borderRadius: 1,
-            marginTop: 2,
+            textAlign: "left",
+            minHeight: "56px",
+            backgroundColor: "beige",
+            borderColor: "rgba(0, 0, 0, 0.23)",
+            "&:hover": {
+              backgroundColor: "rgba(0, 0, 0, 0.08)",
+            },
+            textTransform: "none",
+            color: fileName === t("fileUpload") ? "gray" : "black",
           }}
         >
-          <Typography variant="body1" sx={{ marginRight: 1 }}>
-            {statusMessage === t("emailSent") ? "✅" : "❌"} {statusMessage}
-          </Typography>
-        </Box>
-      )}
+          <Typography variant="body1">{fileName}</Typography>
+          <input
+            type="file"
+            multiple
+            hidden
+            {...register("files")}
+            onChange={(e) => {
+              if (e.target.files) {
+                const fileNames = Array.from(e.target.files).map(
+                  (file) => file.name,
+                );
+                setFileName(fileNames.join(", "));
+              }
+              register("files").onChange(e);
+            }}
+          />
+          <IconButton component="span">
+            <AttachFileIcon />
+          </IconButton>
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={isSubmitting}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            background: "rgb(204, 153, 51)",
+            color: "black",
+          }}
+        >
+          {isSubmitting ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            t("send")
+          )}
+        </Button>
+
+        {statusMessage && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor:
+                statusMessage === t("emailSent")
+                  ? "rgba(76, 175, 80, 0.1)"
+                  : "rgba(244, 67, 54, 0.1)",
+              color: statusMessage === t("emailSent") ? "#4caf50" : "#f44336",
+              padding: 2,
+              borderRadius: 1,
+              // marginTop: 2,
+            }}
+          >
+            <Typography variant="body1" sx={{ marginRight: 1 }}>
+              {statusMessage === t("emailSent") ? "✅" : "❌"} {statusMessage}
+            </Typography>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

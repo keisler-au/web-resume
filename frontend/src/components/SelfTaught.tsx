@@ -2,12 +2,20 @@ import { Box, CircularProgress, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import { CardLayout, TextLayout } from "./CardLayout";
+import { Description } from "./Descriptions";
+
 interface EmbedStaticSiteProps {
+  description: Description[];
   src: string;
   title?: string;
 }
 
-const WeatherApp: React.FC<EmbedStaticSiteProps> = ({ src, title }) => {
+const WeatherApp: React.FC<EmbedStaticSiteProps> = ({
+  description,
+  src,
+  title,
+}) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [failedLoad, setFailedLoad] = useState(false);
@@ -24,14 +32,12 @@ const WeatherApp: React.FC<EmbedStaticSiteProps> = ({ src, title }) => {
   }, [loading]);
 
   return (
-    <Box
-      id="selfTaught"
-      position="relative"
-      width="100%"
-      height="80vh"
-      borderRadius={2}
-      overflow="hidden"
-    >
+    <Box display="flex">
+      <Box display="flex" flexDirection="column">
+        {description[0].sections.map((section, index) => (
+          <TextLayout key={index} section={section} />
+        ))}
+      </Box>
       {(loading || failedLoad) && (
         <Box
           display="flex"
@@ -57,7 +63,7 @@ const WeatherApp: React.FC<EmbedStaticSiteProps> = ({ src, title }) => {
       <iframe
         title={title || "embeddedWeatherApp"}
         src={src}
-        width="100%"
+        width="40%"
         height="100%"
         style={{
           border: "none",

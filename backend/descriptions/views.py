@@ -1,16 +1,13 @@
 from rest_framework.generics import ListAPIView
 
-from descriptions.models import Description
-from descriptions.serializers import DescriptionSerializer
+from descriptions.models import Page
+from descriptions.serializers import PageSerializer
 
 
 class DescriptionList(ListAPIView):
-    serializer_class = DescriptionSerializer
+    serializer_class = PageSerializer
 
     def get_queryset(self):
-        content = Description.objects.all()
-        print("content = ", content)
-        if self.kwargs:
-            page = self.kwargs.get("page", "")
-            content = Description.objects.filter(page=page)
-        return content
+        page_name = self.kwargs.get("page", None)
+        queryset = Page.objects.prefetch_related("sections")
+        return queryset.filter(name=page_name) if page_name else queryset

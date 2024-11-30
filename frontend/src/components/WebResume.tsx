@@ -1,7 +1,10 @@
-import DescriptionList from "./Description";
+import React from "react";
 
-const WebResume = () => {
-  return <DescriptionList pageReference="webResume" />;
-};
+import { TextLayout } from "./CardLayout";
+import { Description } from "./Descriptions";
+
+const WebResume: React.FC<{ description: Description[] }> = ({
+  description,
+}) => <TextLayout section={description[0].sections[0]} />;
 
 export default WebResume;

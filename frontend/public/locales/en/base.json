@@ -1,17 +1,13 @@
 {
   "joshKeisler": "Josh Keisler",
   "webResume": "Web Resume",
-  "home": "Home",
-  "weatherApp": "Weather App",
-  "infosysBHP": "Infosys & BHP",
-  "rentalApp": "Rental App",
-  "descriptions": "Descriptions",
+  "workExperience": "Infosys/BHP",
   "error": "Something went wrong:",
   "notFound": "Not Found",
   "404": "404 - Page Not Found",
   "doesNotExist": "The page you're looking for does not exist.",
   "failedFetch": "Failed to fetch data",
-  "contact": "Contact",
+  "contact": "Next Adventure",
   "name": "Name",
   "email": "Email",
   "message": "Message",
@@ -25,5 +21,8 @@
   "retry": "Retry",
   "embeddedContent": "Embedded Content",
   "emailSent": "Email sent!",
-  "emailFailed": "Email failed to send."
+  "emailFailed": "Email failed to send.",
+  "hello": "Hi, welcome to my IT journey and please reach out!",
+  "psychology": "Psychology",
+  "selfTaught": "Self-taught"
 }

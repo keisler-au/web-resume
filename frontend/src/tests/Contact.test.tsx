@@ -1,14 +1,25 @@
-import { render, waitFor } from "@testing-library/react";
+import { render, act, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Contact from "../components/Contact";
+import { Description } from "../components/Descriptions";
 import { BASE_URL } from "../constants";
 
 const fetchMock = fetch as jest.Mock;
 
+jest.mock("../components/CardLayout", () => ({
+  TextLayout: () => <div></div>,
+}));
+
 describe("Contact Component", () => {
+  const testDescriptions: Description[] = [
+    { sections: [{ header: "test header", content: "test content" }] },
+  ];
+
   it("renders the contact form with all fields", () => {
-    const { getByText, getByLabelText } = render(<Contact />);
+    const { getByText, getByLabelText } = render(
+      <Contact description={testDescriptions} />,
+    );
 
     expect(getByLabelText("name")).toBeInTheDocument();
     expect(getByLabelText("email")).toBeInTheDocument();
@@ -18,9 +29,11 @@ describe("Contact Component", () => {
   });
 
   it("shows validation errors when submitting an empty form", async () => {
-    const { getByText } = render(<Contact />);
+    const { getByText } = render(<Contact description={testDescriptions} />);
 
-    userEvent.click(getByText("send"));
+    act(() => {
+      userEvent.click(getByText("send"));
+    });
 
     await waitFor(() => {
       expect(getByText("nameRequired")).toBeInTheDocument();
@@ -30,17 +43,21 @@ describe("Contact Component", () => {
   });
 
   it("submits the form successfully with valid data", async () => {
-    const { getByText, getByLabelText } = render(<Contact />);
+    const { getByText, getByLabelText } = render(
+      <Contact description={testDescriptions} />,
+    );
 
     const name = "Test name";
     const email = "test@addresscom";
     const message = "This is a test message";
 
-    userEvent.type(getByLabelText("name"), name);
-    userEvent.type(getByLabelText("email"), email);
-    userEvent.type(getByLabelText("message"), message);
+    act(() => {
+      userEvent.type(getByLabelText("name"), name);
+      userEvent.type(getByLabelText("email"), email);
+      userEvent.type(getByLabelText("message"), message);
 
-    userEvent.click(getByText("send"));
+      userEvent.click(getByText("send"));
+    });
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/send_email/`, {
@@ -55,19 +72,25 @@ describe("Contact Component", () => {
   });
 
   it("allows file upload", async () => {
-    const { getByText, getByLabelText } = render(<Contact />);
-
-    userEvent.type(getByLabelText("name"), "Test name");
-    userEvent.type(getByLabelText("email"), "test@addresscom");
-    userEvent.type(getByLabelText("message"), "This is a test message");
+    const { getByText, getByLabelText } = render(
+      <Contact description={testDescriptions} />,
+    );
+    act(() => {
+      userEvent.type(getByLabelText("name"), "Test name");
+      userEvent.type(getByLabelText("email"), "test@addresscom");
+      userEvent.type(getByLabelText("message"), "This is a test message");
+    });
 
     const input = getByLabelText("fileUpload");
     const files = [
       new File(["hello"], "hello.png", { type: "image/png" }),
       new File(["there"], "there.png", { type: "image/png" }),
     ];
-    await userEvent.upload(input, files);
-    userEvent.click(getByText("send"));
+
+    act(() => {
+      userEvent.upload(input, files);
+      userEvent.click(getByText("send"));
+    });
 
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/send_email/`, {

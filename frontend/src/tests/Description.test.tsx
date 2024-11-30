@@ -1,11 +1,12 @@
 import { render, screen, waitFor } from "@testing-library/react";
 
-import DescriptionList from "../components/Description";
+import Descriptions from "../components/Descriptions";
 
 const fetchMock = fetch as jest.Mock;
 
-describe("DescriptionList", () => {
+describe("Descriptions", () => {
   const pageReference = "test";
+  const mockRender = jest.fn();
 
   beforeEach(() => {
     fetchMock.mockClear();
@@ -13,7 +14,7 @@ describe("DescriptionList", () => {
 
   test("renders loading state initially", () => {
     fetchMock.mockImplementationOnce(() => new Promise(() => {}));
-    render(<DescriptionList pageReference={pageReference} />);
+    render(<Descriptions render={mockRender} pageReference={pageReference} />);
 
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
@@ -25,7 +26,7 @@ describe("DescriptionList", () => {
       }),
     );
 
-    render(<DescriptionList pageReference={pageReference} />);
+    render(<Descriptions render={mockRender} pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
@@ -47,11 +48,10 @@ describe("DescriptionList", () => {
       }),
     );
 
-    render(<DescriptionList pageReference={pageReference} />);
+    render(<Descriptions render={mockRender} pageReference={pageReference} />);
 
     await waitFor(() => {
-      expect(screen.getByText("Description 1")).toBeInTheDocument();
-      expect(screen.getByText("Description 2")).toBeInTheDocument();
+      expect(mockRender).toBeCalledWith(mockDescriptions);
     });
   });
 
@@ -59,7 +59,7 @@ describe("DescriptionList", () => {
     fetchMock.mockImplementationOnce(() =>
       Promise.reject(new Error("Network Error")),
     );
-    render(<DescriptionList pageReference={pageReference} />);
+    render(<Descriptions render={mockRender} pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
