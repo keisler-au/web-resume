@@ -11,8 +11,6 @@ import SelfTaught from "./components/SelfTaught";
 import WebResume from "./components/WebResume";
 import WorkExperience from "./components/WorkExperience";
 
-import "./index.css";
-
 export const ErrorFallback = ({ error }: any) => {
   const { t } = useTranslation();
   return (
