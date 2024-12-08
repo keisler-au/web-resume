@@ -1,18 +1,16 @@
+import React from "react";
+
 import { CardLayout, TextLayout } from "./CardLayout";
 import { Description } from "./Descriptions";
 
-const WorkExperience = () => (
-  <CardLayout
-    dMultiplier={1.3}
-    pageReference="Work Experience"
-    renderFunction={(description: Description[]) => (
-      <>
-        {description[0].sections.map((section) => (
-          <TextLayout section={section} />
-        ))}
-      </>
-    )}
-  />
+const WorkExperience: React.FC<{ description: Description[] }> = ({
+  description,
+}) => (
+  <>
+    {description[0].sections.map((section, index) => (
+      <TextLayout key={index} section={section} />
+    ))}
+  </>
 );
 
 export default WorkExperience;

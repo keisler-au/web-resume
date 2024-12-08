@@ -1,0 +1,63 @@
+name: CI/CD Pipeline for AWS
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger when pushing tags that start with 'v'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Build Stage
+      - name: Build Backend Docker Image
+        run: docker build -t backend ./backend
+
+      - name: Build Frontend Docker Image
+        run: docker build -t frontend ./frontend
+
+      # Test Stage
+      - name: Run Backend Tests
+        run: docker run --rm backend pytest
+
+      - name: Run Frontend Tests
+        run: docker run --rm frontend npm test
+
+  deploy:
+    needs: build-and-test  # Ensures this job only runs if build-and-test succeeds
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
+
+      - name: Log in to Amazon ECR
+        run: |
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.DOCKER_REPO_BACKEND }}
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.DOCKER_REPO_FRONTEND }}
+
+      - name: Push Backend Docker Image to ECR
+        run: |
+          docker tag backend:latest ${{ secrets.DOCKER_REPO_BACKEND }}:latest
+          docker push ${{ secrets.DOCKER_REPO_BACKEND }}:latest
+
+      - name: Push Frontend Docker Image to ECR
+        run: |
+          docker tag frontend:latest ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
+          docker push ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service --cluster my-app-cluster --service backend-service --force-new-deployment
+          aws ecs update-service --cluster my-app-cluster --service frontend-service --force-new-deployment

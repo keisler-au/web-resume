@@ -3,7 +3,7 @@
 from django.db import migrations
 
 
-def update_page_field(apps):
+def update_page_field(apps, schema_editor):
     Description = apps.get_model("descriptions", "Description")
     for description in Description.objects.filter(page="2"):
         description.page = "psychology"

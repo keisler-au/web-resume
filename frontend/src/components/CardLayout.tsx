@@ -1,4 +1,4 @@
-import { Paper, CardContent, Typography } from "@mui/material";
+import { Box, Paper, CardContent, Typography } from "@mui/material";
 import React from "react";
 
 import Descriptions from "./Descriptions";
@@ -10,7 +10,8 @@ export const TextLayout: React.FC<any> = ({ section, styles = {} }) => {
       <Typography
         variant="h5"
         sx={{
-          color: "#333",
+          // color: "#333",
+          color: "black",
           fontWeight: "bold",
           fontSize: "1.1rem",
         }}
@@ -21,7 +22,8 @@ export const TextLayout: React.FC<any> = ({ section, styles = {} }) => {
         <Typography
           variant="body1"
           sx={{
-            color: "#555",
+            // color: "#555",
+            color: "black",
             fontSize: "1rem",
           }}
         >
@@ -51,8 +53,11 @@ export const CardLayout: React.FC<CardLayoutProps> = ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#F5B700",
-      borderRadius: "0",
+      // background: "radial-gradient(circle, #d8d8d8, #151515)",
+      background: "none",
+      // backgroundImage: `url('/selfTaughtFaded.png')`, // Replace with your image URL
+
+      // borderRadius: "0",
       boxShadow: "none",
       scrollMarginTop: 80,
     }}
@@ -67,13 +72,24 @@ export const CardLayout: React.FC<CardLayoutProps> = ({
         alignItems: "center",
       }}
     >
+      {" "}
       {/* Inner Card */}
       <Paper
+        data-testid="inner-card"
         sx={{
           height: `calc(52vh * ${dMultiplier})`,
           width: `calc(60vw * ${dMultiplier})`,
-          backgroundColor: "#F5B700",
-          boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.2)",
+          // backgroundColor: "#F5B700",
+          background: "transparent",
+          // boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.2)",
+          boxShadow: "0px 15px 25px rgba(0, 0, 0, 0.4)",
+          backgroundImage: `url('/selfTaughtFaded.png')`, // Replace with your image URL
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          // filter: "blur(3px)", // Blurs the background
+          // opacity: 0.3, // Makes it slightly faded
+          border: "4px solid white",
           display: "flex",
           flexDirection: "column",
           padding: "3%",
