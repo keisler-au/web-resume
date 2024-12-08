@@ -13,8 +13,6 @@ import { useTranslation } from "react-i18next";
 
 import Logo from "./Logo";
 
-import "../index.css";
-
 const Home: React.FC<{ projects: string[] }> = ({ projects }) => {
   const { t } = useTranslation();
 
