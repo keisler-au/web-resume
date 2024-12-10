@@ -43,7 +43,12 @@ jobs:
       - name: Capture network name
         id: network
         run: |
-          NETWORK_NAME=$(docker network ls --filter "driver=bridge" --filter "scope=local" --format "{{.Name}}" | grep -m 1 'act-')
+          NETWORK_NAME=$(docker network ls --filter "driver=bridge" --filter "scope=local" --format "{{.Name}}" | grep -m 1 'act-' || echo "")
+          if [ -z "$NETWORK_NAME" ]; then
+            echo "No act-related network found. Available networks:"
+            docker network ls
+            exit 1
+          fi
           echo "NETWORK_NAME=$NETWORK_NAME" >> $GITHUB_ENV
 
       - name: Run Backend Tests
