@@ -18,6 +18,17 @@ jobs:
           echo "DB_HOST=db" >> backend/.env
           docker compose -f docker-compose.yml up -d
 
+      - name: Add Wait-for-it Script
+        run: |
+          curl -o wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+          chmod +x wait-for-it.sh
+
+      # - name: Start Docker Compose
+      #   run: docker compose up -d
+
+      - name: Wait for DB to Be Ready
+        run: ./wait-for-it.sh db:5432 --timeout=30 -- echo "Database is ready"
+
       - name: Run Backend Tests
         run: |
           docker compose exec backend python manage.py migrate
