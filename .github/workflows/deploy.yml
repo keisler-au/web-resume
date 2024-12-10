@@ -10,31 +10,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # # Build Stages
-      # - name: Build Containers from Docker-Compose
-      #   run: |
-      #     echo "DB_NAME=postgres\nDB_USER=postgres\nDB_PASSWORD=admin\nDB_HOST=db" > backend/.env
-      #     docker compose -f docker-compose.yml up -d
-
-            # Stage 1: Spin up the PostgreSQL container
-      - name: Spin up PostgreSQL container
+      - name: Build Containers from Docker-Compose
         run: |
-          echo "DB_NAME=postgres\nDB_USER=postgres\nDB_PASSWORD=admin\nDB_HOST=db" > backend/.env
-          docker compose -f docker-compose.yml up -d db
+          echo "DB_NAME=postgres" > backend/.env
+          echo "DB_USER=postgres" >> backend/.env
+          echo "DB_PASSWORD=admin" >> backend/.env
+          echo "DB_HOST=db" >> backend/.env
+          docker compose -f docker-compose.yml up -d
 
-      # Stage 2: Wait for the DB to be ready
-      - name: Wait for 20 seconds to ensure DB is up
-        run: |
-          sleep 20
-
-      # Stage 3: Spin up the Backend and Frontend containers
-      - name: Spin up Backend and Frontend containers
-        run: |
-          docker compose -f docker-compose.yml up -d backend frontend
-
-      # Tests Stage
       - name: Run Backend Tests
-        run: docker compose exec backend python manage.py test
+        run: |
+          docker compose exec backend python manage.py migrate
+          docker compose exec backend python manage.py test
 
       - name: Run Frontend Tests
         run: docker compose exec frontend npm test -- --silent --watchAll=false
