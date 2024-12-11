@@ -9,6 +9,8 @@ services:
       - ./backend:/backend-app
     environment:
       - PYTHONUNBUFFERED=1
+    env_file:
+      - ./backend/.env
     depends_on:
       - db
 
