@@ -12,7 +12,7 @@ jobs:
 
       - name: Build Containers
         run: |
-          echo "POSTGRES_PASSWORD=admin" >> backend/.env
+          echo "POSTGRES_PASSWORD=admin" > backend/.env
           docker compose up -d --build
 
       - name: Run Backend Tests
