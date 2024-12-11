@@ -10,35 +10,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # - name: Build Containers from Docker-Compose
-      #   run: |
-      #     echo "DB_NAME=postgres" > backend/.env
-      #     echo "DB_USER=postgres" >> backend/.env
-      #     echo "DB_PASSWORD=postgres" >> backend/.env
-      #     echo "DB_HOST=db" >> backend/.env
-      #     echo "DB_PORT=5432" >> backend/.env
-      #     docker compose -f docker-compose.yml up -d
-
-      - name: Add Wait-for-it Script
-        run: |
-          curl -o wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
-          chmod +x wait-for-it.sh
-
-      # - name: Start Docker Compose
-      #   run: docker compose up -d
-
       - name: Start Docker Compose for Database
         run: |
-          echo "DB_NAME=postgres" > backend/.env
-          echo "DB_USER=postgres" >> backend/.env
-          echo "DB_PASSWORD=postgres" >> backend/.env
           echo "POSTGRES_PASSWORD=postgres" >> backend/.env
-          echo "DB_HOST=db" >> backend/.env
-          echo "DB_PORT=5432" >> backend/.env
           docker compose up -d db --build
-
-      - name: Wait for DB to Be Ready
-        run: ./wait-for-it.sh db:5432 --timeout=60 -- echo "Database is ready"
 
       - name: Start Backend and Frontend Containers
         run: |
@@ -50,9 +25,7 @@ jobs:
           docker compose up -d backend frontend --build
 
       - name: Run Backend Tests
-        run: |
-          docker compose exec backend python manage.py migrate
-          docker compose exec backend python manage.py test
+        run: docker compose exec backend python manage.py test
 
       - name: Run Frontend Tests
         run: docker compose exec frontend npm test -- --silent --watchAll=false
