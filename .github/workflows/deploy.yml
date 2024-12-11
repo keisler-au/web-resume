@@ -17,7 +17,7 @@ jobs:
           docker compose up -d --build
 
       - name: Run Backend Tests
-        run: docker compose exec backend python manage.py t
+        run: docker compose exec backend python manage.py test
 
       - name: Run Frontend Tests
         run: docker compose exec frontend npm test -- --silent --watchAll=false
