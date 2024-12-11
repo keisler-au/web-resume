@@ -65,13 +65,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
 
-ANYMAIL = {
-    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
-}
+# ANYMAIL = {
+#     "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
+#     "MAILGUN_SENDER_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
+# }
 
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587  # SMTP port for TLS
@@ -105,7 +106,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.getenv("DB_NAME", "postgres"),
         "USER": os.getenv("DB_USERNAME", "postgres"),
-        "PASSWORD": os.getenv("DB_PASSWORD", "postgres"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST", "db"),
         "PORT": os.getenv("DB_PORT", "5432"),
     },

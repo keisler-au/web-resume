@@ -10,19 +10,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Start Docker Compose for Database
+      - name: Build Containers
         run: |
-          echo "POSTGRES_PASSWORD=postgres" >> backend/.env
-          docker compose up -d db --build
-
-      - name: Start Backend and Frontend Containers
-        run: |
-          echo "DB_NAME=postgres" > backend/.env
-          echo "DB_USER=postgres" >> backend/.env
-          echo "DB_PASSWORD=postgres" >> backend/.env
-          echo "DB_HOST=db" >> backend/.env
-          echo "DB_PORT=5432" >> backend/.env
-          docker compose up -d backend frontend --build
+          echo "POSTGRES_PASSWORD=admin" >> backend/.env
+          docker compose up -d --build
 
       - name: Run Backend Tests
         run: docker compose exec backend python manage.py test
