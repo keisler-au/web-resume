@@ -12,11 +12,12 @@ jobs:
 
       - name: Build Containers
         run: |
-          echo "POSTGRES_PASSWORD=admin" > backend/.env
+          echo "DB_PASSWORD=admin" > backend/.env
+          echo "POSTGRES_PASSWORD=admin" >> backend/.env
           docker compose up -d --build
 
       - name: Run Backend Tests
-        run: docker compose exec backend python manage.py test
+        run: docker compose exec backend python manage.py t
 
       - name: Run Frontend Tests
         run: docker compose exec frontend npm test -- --silent --watchAll=false
