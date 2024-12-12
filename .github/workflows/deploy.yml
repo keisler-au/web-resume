@@ -22,7 +22,6 @@ jobs:
       - name: Run Frontend Tests
         run: |
           docker container ls
-          docker logs frontend
           docker ps -a
           docker-compose --verbose up -d --build
           docker compose exec frontend npm test -- --silent --watchAll=false
