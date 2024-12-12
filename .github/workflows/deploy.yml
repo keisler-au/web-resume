@@ -8,22 +8,20 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build Containers
         run: |
           echo "DB_PASSWORD=admin" > backend/.env
           echo "POSTGRES_PASSWORD=admin" >> backend/.env
-          docker compose up -d --build
+          docker compose build --no-cache
 
       - name: Run Backend Tests
-        run: docker compose exec backend python manage.py test
+        run: docker compose run backend python manage.py test
 
       - name: Run Frontend Tests
         run: |
-          docker container ls
-          docker ps -a
-          docker compose --verbose up -d --build
+          docker compose run frontend npm list react-scripts
           docker compose exec frontend npm test -- --silent --watchAll=false
 
   deploy:
