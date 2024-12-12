@@ -9,21 +9,21 @@ RUN poetry install --no-root
 COPY . .
 
 
-FROM build AS development
-WORKDIR /backend-app
-COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-COPY --from=build /usr/local/bin /usr/local/bin
-COPY --from=build /backend-app /backend-app
+# FROM build AS development
+# WORKDIR /backend-app
+# COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+# COPY --from=build /usr/local/bin /usr/local/bin
+# COPY --from=build /backend-app /backend-app
 
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# EXPOSE 8000
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
-FROM build AS production
+# FROM build AS production
 
-WORKDIR /backend-app
-COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-COPY --from=build /usr/local/bin /usr/local/bin
-COPY --from=build /backend-app /backend-app
-EXPOSE 8000
-CMD ["uvicorn", "your_project_name.asgi:application", "--host", "0.0.0.0", "--port", "8000", "--workers", "3"]
+# WORKDIR /backend-app
+# COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+# COPY --from=build /usr/local/bin /usr/local/bin
+# COPY --from=build /backend-app /backend-app
+# EXPOSE 8000
+# CMD ["uvicorn", "your_project_name.asgi:application", "--host", "0.0.0.0", "--port", "8000", "--workers", "3"]

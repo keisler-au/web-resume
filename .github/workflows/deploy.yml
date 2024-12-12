@@ -14,17 +14,13 @@ jobs:
         run: |
           echo "DB_PASSWORD=admin" > backend/.env
           echo "POSTGRES_PASSWORD=admin" >> backend/.env
-          docker compose up -d --build
+          docker compose build --no-cache
 
       - name: Run Backend Tests
-        run: docker compose exec backend python manage.py test
+        run: docker compose run backend python manage.py test
 
       - name: Run Frontend Tests
-        run: |
-          docker container ls
-          docker ps -a
-          docker compose --verbose up -d --build
-          docker compose exec frontend npm test -- --silent --watchAll=false
+        run: docker compose run frontend npm test -- --silent --watchAll=false
 
   deploy:
     if: startsWith(github.ref, 'refs/tags/v')
