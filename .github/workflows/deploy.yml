@@ -23,7 +23,7 @@ jobs:
         run: |
           docker container ls
           docker ps -a
-          docker-compose --verbose up -d --build
+          docker compose --verbose up -d --build
           docker compose exec frontend npm test -- --silent --watchAll=false
 
   deploy:
