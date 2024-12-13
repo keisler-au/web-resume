@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-# from django.core import mail
+from django.core import mail
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -17,7 +17,7 @@ class EmailServiceTests(APITestCase):
         response = self.client.post(reverse("send_email"), data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["message"], "Email sent successfully!")
-        # self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(len(mail.outbox), 1)
 
     def test_send_email_invalid(self):
         """Recieve 400 status code when sending email with invalid inputs"""

@@ -4,8 +4,8 @@ services:
       context: ./backend
     ports:
       - "8000:8000"
-    # volumes:
-    #   - ./backend:/backend-app
+    volumes:
+      - ./backend:/backend-app
     environment:
       - PYTHONUNBUFFERED=1
     depends_on:
@@ -16,8 +16,9 @@ services:
       context: ./frontend
     ports:
       - "3000:3000"
-    # volumes:
-    #   - ./frontend:/frontend-app
+    volumes:
+      - ./frontend:/frontend-app
+      - /frontend-app/node_modules
     stdin_open: true
     tty: true
     depends_on:
