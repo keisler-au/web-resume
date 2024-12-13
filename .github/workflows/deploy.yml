@@ -20,9 +20,7 @@ jobs:
         run: docker compose run backend python manage.py test
 
       - name: Run Frontend Tests
-        run: |
-          docker compose run frontend npm list react-scripts
-          docker compose exec frontend npm test -- --silent --watchAll=false
+        run: docker compose run frontend npm test -- --silent --watchAll=false
 
   deploy:
     if: startsWith(github.ref, 'refs/tags/v')
