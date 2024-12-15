@@ -23,15 +23,6 @@ jobs:
       - name: Run Frontend Tests
         run: docker compose run frontend npm test -- --silent --watchAll=false
 
-  deploy:
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: build-and-test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -53,6 +44,22 @@ jobs:
         run: |
           docker tag frontend:latest ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
           docker push ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
+
+  deploy:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: eu-north-1
 
       - name: Deploy to ECS
         run: |
