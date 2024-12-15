@@ -37,6 +37,7 @@ jobs:
 
       - name: Push Backend Docker Image to ECR
         run: |
+          docker images
           docker tag backend:latest ${{ secrets.DOCKER_REPO_BACKEND }}:latest
           docker push ${{ secrets.DOCKER_REPO_BACKEND }}:latest
 
