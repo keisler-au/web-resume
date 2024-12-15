@@ -63,5 +63,5 @@ jobs:
 
       - name: Deploy to ECS
         run: |
-          aws ecs update-service --cluster app-cluster --service backend-service --force-new-deployment
-          aws ecs update-service --cluster app-cluster --service frontend-service --force-new-deployment
+          aws ecs update-service --cluster app-cluster --service backend --force-new-deployment
+          aws ecs update-service --cluster app-cluster --service frontend --force-new-deployment
