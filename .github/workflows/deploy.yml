@@ -3,14 +3,14 @@ name: CI/CD Pipeline for AWS
 on: [push]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build Containers
+      - name: Build Development Images
         run: |
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" > backend/.env
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> backend/.env
@@ -22,6 +22,18 @@ jobs:
 
       - name: Run Frontend Tests
         run: docker compose run frontend npm test -- --silent --watchAll=false
+
+  deploy:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Production Containers
+        run: docker
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
@@ -35,24 +47,12 @@ jobs:
           aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin ${{ secrets.DOCKER_REPO_BACKEND }}
           aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin ${{ secrets.DOCKER_REPO_FRONTEND }}
 
-      - name: Push Backend Docker Image to ECR
+      - name: Push Docker Images to ECR
         run: |
-          docker tag web-resume-backend:latest ${{ secrets.DOCKER_REPO_BACKEND }}:latest
+          docker build -f backend/Dockerfile --target production -t ${{ secrets.DOCKER_REPO_BACKEND }}:latest ./backend
+          docker build -f frontend/Dockerfile --target production -t ${{ secrets.DOCKER_REPO_FRONTEND }}:latest ./frontend
           docker push ${{ secrets.DOCKER_REPO_BACKEND }}:latest
-
-      - name: Push Frontend Docker Image to ECR
-        run: |
-          docker tag web-resume-frontend:latest ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
           docker push ${{ secrets.DOCKER_REPO_FRONTEND }}:latest
-
-  deploy:
-    if: startsWith(github.ref, 'refs/tags/v')
-    needs: build-and-test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v2

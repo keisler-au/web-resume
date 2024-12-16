@@ -1,5 +1,4 @@
 FROM python:3.12.0-slim as build
-
 WORKDIR /backend-app
 COPY pyproject.toml .
 COPY poetry.lock .
@@ -7,23 +6,11 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-root
 COPY . .
+EXPOSE 8000
+
+FROM build AS development
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
-# FROM build AS development
-# WORKDIR /backend-app
-# COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-# COPY --from=build /usr/local/bin /usr/local/bin
-# COPY --from=build /backend-app /backend-app
-
-# EXPOSE 8000
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-
-# FROM build AS production
-
-# WORKDIR /backend-app
-# COPY --from=build /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-# COPY --from=build /usr/local/bin /usr/local/bin
-# COPY --from=build /backend-app /backend-app
-# EXPOSE 8000
-# CMD ["uvicorn", "your_project_name.asgi:application", "--host", "0.0.0.0", "--port", "8000", "--workers", "3"]
+FROM build AS production
+CMD ["gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8000"]
