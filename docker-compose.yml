@@ -2,6 +2,9 @@ services:
   backend:
     build:
       context: ./backend
+      target: production
+      args:
+        BUILD_STAGE: ${BUILD_STAGE:-production}
     ports:
       - "8000:8000"
     volumes:
@@ -15,6 +18,7 @@ services:
   frontend:
     build:
       context: ./frontend
+      target: production
     ports:
       - "3000:3000"
     volumes:

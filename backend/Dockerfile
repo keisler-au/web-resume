@@ -1,5 +1,4 @@
 FROM python:3.12.0-slim as build
-
 WORKDIR /backend-app
 COPY pyproject.toml .
 COPY poetry.lock .

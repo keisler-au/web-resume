@@ -1,5 +1,4 @@
 FROM node:20.5.0-slim AS build
-
 WORKDIR /frontend-app
 COPY package.json package-lock.json ./
 RUN npm install
