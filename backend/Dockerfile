@@ -13,4 +13,4 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
 FROM build AS production
-CMD ["gunicorn", "web_resume.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8000"]
