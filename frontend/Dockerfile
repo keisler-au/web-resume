@@ -1,4 +1,6 @@
 FROM node:20.5.0-slim AS build
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
 WORKDIR /frontend-app
 COPY package.json package-lock.json ./
 RUN npm install
