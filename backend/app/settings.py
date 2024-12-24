@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "descriptions",
+    "content",
     "email_service",
     "anymail",
 ]

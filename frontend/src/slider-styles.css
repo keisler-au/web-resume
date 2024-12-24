@@ -1,0 +1,27 @@
+.slick-prev,
+.slick-next {
+  min-height: 5rem;
+  min-width: 2rem;
+  color: white;
+  z-index: 2;
+}
+.slick-next {
+  right: 25rem;
+}
+.slick-prev {
+  left: 25rem;
+}
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+  color: white;
+}
+
+.slick-dots li button:before {
+  color: white;
+}
+
+.slick-dots li.slick-active button:before {
+  color: white;
+}

@@ -1,6 +1,6 @@
 name: CI/CD Pipeline for AWS
 
-on: [push]
+on: []
 
 jobs:
   test:
@@ -40,21 +40,18 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          # SSH into the VPS and perform the deployment
-          ssh -o StrictHostKeyChecking=no root@your_vultr_ip << 'EOF'
-            # Navigate to project directory
-            cd /path/to/your/project
+          ssh -o StrictHostKeyChecking=no root@${{secrets.VULTR_IP_ADDRESS }} << 'EOF'
+            cd ~/web-resume/app
 
-            # Pull the latest changes from the repository
             git pull origin main
 
-            # Stop and remove the current containers
-            docker-compose down
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" > backend/.env
+            echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> backend/.env
+            echo "HOST_USER_EMAIL=${{ secrets.HOST_USER_EMAIL }}" >> backend/.env
+            echo "MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }}" >> backend/.env
+            echo "MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }}" >> backend/.env
+            docker-compose -f compose.yaml -f production.yaml up --build -d
 
-            # Rebuild the images and start the new containers
-            docker-compose up --build -d
-
-            # Clean up unused Docker resources (containers, images, networks, and volumes)
             docker system prune -af
             docker volume prune -f
           EOF
