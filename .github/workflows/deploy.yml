@@ -1,6 +1,6 @@
 name: CI/CD Pipeline for AWS
 
-on: [push]
+on: []
 
 jobs:
   test:

@@ -1,0 +1,27 @@
+.slick-prev,
+.slick-next {
+  min-height: 3rem;
+  color: white;
+  z-index: 2;
+}
+.slick-next {
+  right: 14rem;
+}
+.slick-prev {
+  left: 14rem;
+}
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+  color: white;
+}
+
+/* Override slick carousel dots to make them white */
+.slick-dots li button:before {
+  color: white; /* Change the color to white */
+}
+
+.slick-dots li.slick-active button:before {
+  color: white; /* Keep the active dot white */
+}

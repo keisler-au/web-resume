@@ -1,228 +1,143 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-  Typography,
-  Paper,
-  Container,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { WavingHand } from "@mui/icons-material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { Box, Typography, Button, useTheme } from "@mui/material";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import Logo from "./Logo";
+import theme from "../theme";
+import PageLayout from "./PageLayout";
 
-const Home: React.FC<{ projects: string[] }> = ({ projects }) => {
-  const { t } = useTranslation();
-
-  const [scrollY, setScrollY] = useState(0);
-
-  const handleScroll = () => {
-    setScrollY(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // TODO: Fix responsitivity
-  // TODO: Fix card height
-  // TODO: Check CSS
-  // TODO: CardLayout responsive styles
-
-  const nextSectionScrollsIntoView = "131vh";
-  const distanceOfHeaderFromTop = "14vh";
-  const headerFromBottom = "36.5vh";
-  const transformRate = 150;
-  const cardsOpacity = Math.max(1 - scrollY / transformRate, -1);
+// Reusable Button Component
+export const NavButton: React.FC<{
+  to: string;
+  label: string;
+}> = ({ to, label }) => {
   return (
-    <>
-      <Paper
+    <Link
+      to={to}
+      style={{
+        textDecoration: "none",
+      }}
+    >
+      <Button
+        color="primary"
         sx={{
-          position: "sticky",
-          top: `-${nextSectionScrollsIntoView}`,
-          zIndex: 1,
-          background: "radial-gradient(circle, #d8d8d8, #151515)",
-          backgroundAttachment: "fixed",
+          display: "flex",
+          flexDirection: "column",
+          gap: 0.5,
+          fontSize: "1.2rem",
         }}
       >
-        <Logo scrollY={scrollY} />
-        <Box
-          minHeight={`calc(${nextSectionScrollsIntoView} - ${distanceOfHeaderFromTop})`}
-        ></Box>
+        {label}
+        <div
+          style={{
+            backgroundColor: theme.palette.primary.main,
+            width: "8rem",
+            height: 1,
+          }}
+        ></div>
+      </Button>
+    </Link>
+  );
+};
 
+const Home: React.FC = () => {
+  const theme = useTheme();
+
+  return (
+    // <Box
+    //   sx={{
+    //     display: "flex",
+    //     flexDirection: "column",
+    //     alignItems: "center",
+    //     justifyContent: "space-between",
+    //     textAlign: "center",
+    //     padding: "5rem 1rem", // Increased padding for more space
+    //     color: theme.palette.text.primary,
+    //     minHeight: "40vh",
+    //     maxHeight: "40vh",
+    //   }}
+    // >
+    //   {/* Main Heading */}
+    //   <Typography
+    //     variant="h2"
+    //     sx={{ marginBottom: "2.5rem", marginTop: "2.5rem", height: "6rem" }}
+    //   >
+    // Josh Keisler
+    // <WavingHand
+    //   sx={{ marginLeft: "2rem", color: "yellow", fontSize: 50 }}
+    // />
+    //   </Typography>
+
+    //   {/* Subheading */}
+    //   <Typography variant="h5" sx={{ marginBottom: ".5rem" }}>
+    //     Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions
+    //   </Typography>
+
+    //   {/* Brief Description */}
+    //   <Typography
+    //     variant="body1"
+    //     sx={{
+    //       marginBottom: "2.5rem",
+    //       maxWidth: "50%",
+    //     }}
+    //   >
+    // Passionate about building efficient and scalable web applications, with
+    // experience in full-stack development, CI/CD pipelines, and
+    // containerization technologies.
+    //   </Typography>
+
+    <PageLayout
+      homeStyling={true}
+      heading="Josh Keisler"
+      description="Passionate about building efficient and scalable web applications, with
+          experience in full-stack development, CI/CD pipelines, and
+          containerization technologies."
+    >
+      {/* Buttons Section */}
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.paper,
+          height: "56vh",
+          paddingTop: "10vh",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            position: "sticky",
-            bottom: "73vh",
-            marginLeft: "24vw",
+            gap: "2rem",
+            flexWrap: "wrap",
+            justifyContent: "center",
           }}
         >
-          <Typography
-            variant="h1" // Or h2, h3, etc. based on your heading level
-            sx={{
-              fontSize: "3rem", // Adjust font size
-              fontWeight: "bold", // Make the header bold
-              color: "#333", // Dark gray color
-              textAlign: "center", // Center-align the text
-              textTransform: "uppercase", // Uppercase text
-              letterSpacing: "0.1em", // Add spacing between letters
-              lineHeight: 1.2, // Adjust line height for better readability
-              fontFamily: "'Playfair Display', serif", // Fancy font
-              marginBottom: "1rem", // Add some spacing below the header
-              padding: "0.5rem", // Optional padding
-            }}
-          >
-            {t("joshKeisler")}
-          </Typography>
-          <Typography
-            sx={{
-              opacity: Math.max(1 - scrollY / 800, -1),
-              // transform: `scaleX(${1 - Math.min(scrollY / (transformRate + 30), 0.9)}) scaleY(${1 - Math.min(scrollY / transformRate, 0.9)})`,
-              transition: "opacity 0.1s ease, transform 0.1s ease",
-              marginLeft: "1.8rem",
-            }}
-          >
-            {t("hello")}
-          </Typography>
+          {/* Reusable Nav Buttons */}
+          <NavButton to="/about" label="About Me" />
+          <NavButton to="/experience" label="Experience" />
+          <NavButton to="/projects" label="Projects" />
         </Box>
 
-        {/* Cards*/}
-        {cardsOpacity > 0 && (
-          <Container
-            sx={{
-              position: "fixed",
-              bottom: "18vh",
-              left: "10vw",
-              right: "10vw",
-              display: "flex",
-              flexDirection: "column",
-              opacity: Math.max(1 - scrollY / transformRate, -1),
-              transform: `scaleX(${1 - Math.min(scrollY / (transformRate + 30), 0.9)}) scaleY(${1 - Math.min(scrollY / transformRate, 0.9)})`,
-              transition: "opacity 0.1s ease, transform 0.1s ease",
-            }}
-          >
-            <Box
+        {/* Contact Me Button */}
+        <Box
+          sx={{ marginTop: "2rem", display: "flex", justifyContent: "center" }}
+        >
+          <Link to="/contact">
+            <Button
+              color="primary"
               sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "flex-end",
+                "&:hover": {
+                  backgroundColor: theme.palette.text.primary,
+                },
+                fontSize: "1.2rem",
+                border: 1,
+                borderColor: theme.palette.primary.main,
               }}
             >
-              {projects.map((project, index) => {
-                const size = 200 + index * 30;
-                return (
-                  <Card
-                    key={index}
-                    sx={{
-                      display: "flex",
-                      alignItems: "flex-end",
-                      width: `calc(${size}px / 1.2)`,
-                      height: `${size}px`,
-
-                      background: "transparent",
-                    }}
-                  >
-                    <CardActionArea href={`#${project}`}>
-                      <CardMedia
-                        component="img"
-                        height="40%"
-                        image={`/${project}.webp`}
-                        alt={project}
-                      />
-                      <CardContent>
-                        <Typography
-                          variant="h6"
-                          component="div"
-                          display="flex"
-                          justifyContent="center"
-                          sx={{ color: "white" }}
-                        >
-                          {t(`${project}`)}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                );
-              })}
-            </Box>
-          </Container>
-        )}
-
-        {/* Header  */}
-        <Container
-          sx={{
-            position: "sticky",
-            bottom: headerFromBottom,
-            // minHeight: headerFromTop,
-            // padding: "10% 20%",
-            paddingBottom: "2vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-end",
-            opacity: Math.min((scrollY - transformRate) / transformRate, 1),
-            transform: `scale(${Math.min(scrollY / 400, 1)})`,
-            transition: "opacity 0.1s ease, transform 0.1s ease",
-          }}
-        >
-          {projects.map((project, index) => {
-            return (
-              <CardActionArea
-                key={index}
-                href={`#${project}`}
-                sx={{
-                  width: "fit-content",
-                  borderRadius: "3px",
-                }}
-              >
-                {/* Background layer */}
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    // filter: "blur(3)", // Blurs the background
-                    opacity: 0.3, // Makes it slightly faded
-                    zIndex: 1, // Behind the child
-                    backgroundImage: `url('/${project}.webp')`, // Replace with your image URL
-                    backgroundRepeat: "no-repeat",
-                  }}
-                />
-
-                {/* Content layer */}
-
-                <CardContent
-                  sx={{
-                    position: "relative",
-                    zIndex: 2,
-                  }}
-                >
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: "white",
-                      textAlign: "center",
-                      padding: "0 2.7vh",
-                    }}
-                  >
-                    {t(project)}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            );
-          })}
-        </Container>
-      </Paper>
-    </>
+              Contact Me
+            </Button>
+          </Link>
+        </Box>
+      </Box>
+    </PageLayout>
   );
 };
 

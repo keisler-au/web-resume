@@ -6,6 +6,7 @@ import {
   Box,
   CircularProgress,
   IconButton,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { BASE_URL } from "../constants";
 import { CardLayout, TextLayout } from "./CardLayout";
 import { Description } from "./Descriptions";
+import PageLayout from "./PageLayout";
 
 interface FormValues {
   name: string;
@@ -22,8 +24,46 @@ interface FormValues {
   files?: FileList;
 }
 
+const CustomTextField: React.FC<{
+  label: string;
+  name: string;
+  type?: string;
+  rows?: number;
+  register: any;
+  errors: any;
+  theme: any;
+}> = ({ label, name, type = "text", rows = 1, register, errors, theme }) => {
+  return (
+    <TextField
+      label={label}
+      variant="outlined"
+      type={type}
+      multiline={rows > 1}
+      rows={rows}
+      {...register(name, { required: true })}
+      error={!!errors[name]}
+      helperText={errors[name] ? `${label} is required` : ""}
+      sx={{
+        "& .MuiOutlinedInput-root": {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.action.hover,
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: theme.palette.secondary.main,
+          },
+        },
+        "& .MuiInputLabel-root.Mui-focused": {
+          color: theme.palette.secondary.main,
+        },
+      }}
+    />
+  );
+};
+
 const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
   const { t } = useTranslation();
+  const theme = useTheme();
   const {
     register,
     handleSubmit,
@@ -68,17 +108,9 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
   };
 
   return (
-    // <CardLayout
-    //   dMultiplier={1.5}
-    //   pageReference="contact"
-    //   renderFunction={(description: Description[]) => (
-
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
+    <PageLayout
+      heading="Get in Contact"
+      description="Feel free to reach out using the email form, LinkedIn or GitHub, I look forward to hearing from you!"
     >
       <TextLayout
         section={description[0].sections[0]}
@@ -93,36 +125,36 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
           gap: 2,
           width: "40%",
           margin: "0 auto",
+          padding: theme.spacing(4), // Padding for form
+          border: `1px solid ${theme.palette.secondary.main}`,
+          borderRadius: 1,
+          marginBottom: "3rem",
         }}
       >
-        <TextField
+        <CustomTextField
           label={t("name")}
-          variant="outlined"
-          {...register("name", { required: true })}
-          error={!!errors.name}
-          helperText={errors.name ? t("nameRequired") : ""}
-          sx={{ background: "beige", borderRadius: 1 }}
+          name="name"
+          register={register}
+          errors={errors}
+          theme={theme}
         />
-        <TextField
+        <CustomTextField
           label={t("email")}
-          variant="outlined"
+          name="email"
           type="email"
-          {...register("email", { required: true })}
-          error={!!errors.email}
-          helperText={errors.email ? t("emailRequired") : ""}
-          sx={{ background: "beige", borderRadius: 1 }}
+          register={register}
+          errors={errors}
+          theme={theme}
+        />
+        <CustomTextField
+          label={t("message")}
+          name="message"
+          rows={4}
+          register={register}
+          errors={errors}
+          theme={theme}
         />
 
-        <TextField
-          label={t("message")}
-          variant="outlined"
-          multiline
-          rows={4}
-          {...register("message", { required: true })}
-          error={!!errors.message}
-          helperText={errors.message ? t("messageRequired") : ""}
-          sx={{ background: "beige", borderRadius: 1 }}
-        />
         <Button
           variant="outlined"
           component="label"
@@ -130,17 +162,20 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "10px",
+            padding: theme.spacing(1.5),
             borderRadius: 1,
             textAlign: "left",
             minHeight: "56px",
-            backgroundColor: "beige",
-            borderColor: "rgba(0, 0, 0, 0.23)",
+            borderColor: theme.palette.primary.dark,
             "&:hover": {
-              backgroundColor: "rgba(0, 0, 0, 0.08)",
+              borderColor: theme.palette.secondary.main,
+              backgroundColor: theme.palette.action.hover,
             },
             textTransform: "none",
-            color: fileName === t("fileUpload") ? "gray" : "black",
+            color:
+              fileName === t("fileUpload")
+                ? theme.palette.text.disabled
+                : theme.palette.text.primary,
           }}
         >
           <Typography variant="body1">{fileName}</Typography>
@@ -163,6 +198,7 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
             <AttachFileIcon />
           </IconButton>
         </Button>
+
         <Button
           type="submit"
           variant="contained"
@@ -171,8 +207,9 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
             display: "flex",
             alignItems: "center",
             gap: 1,
-            background: "rgb(204, 153, 51)",
-            color: "black",
+            "&:hover": {
+              backgroundColor: theme.palette.primary.dark, // Hover effect for primary button
+            },
           }}
         >
           {isSubmitting ? (
@@ -190,12 +227,14 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
               justifyContent: "center",
               backgroundColor:
                 statusMessage === t("emailSent")
-                  ? "rgba(76, 175, 80, 0.1)"
-                  : "rgba(244, 67, 54, 0.1)",
-              color: statusMessage === t("emailSent") ? "#4caf50" : "#f44336",
-              padding: 2,
+                  ? theme.palette.success.light
+                  : theme.palette.error.light,
+              color:
+                statusMessage === t("emailSent")
+                  ? theme.palette.success.main
+                  : theme.palette.error.main,
+              padding: theme.spacing(2),
               borderRadius: 1,
-              // marginTop: 2,
             }}
           >
             <Typography variant="body1" sx={{ marginRight: 1 }}>
@@ -204,7 +243,7 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
           </Box>
         )}
       </Box>
-    </Box>
+    </PageLayout>
   );
 };
 
