@@ -9,6 +9,8 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 
+import theme from "../theme";
+
 // Reusable NavButton Component with Props for route and label
 interface NavButtonProps {
   to: string;
@@ -25,7 +27,6 @@ const NavButton: React.FC<NavButtonProps> = ({ to, label }) => {
 
 const Navbar: React.FC = () => {
   return (
-    // <AppBar position="fixed" color="secondary">
     <Box position="fixed" width="100%">
       <Toolbar
         sx={{
@@ -33,7 +34,6 @@ const Navbar: React.FC = () => {
           justifyContent: "right",
         }}
       >
-        {/* Left-aligned Typography */}
         <Typography
           variant="h4"
           sx={{
@@ -44,21 +44,19 @@ const Navbar: React.FC = () => {
         >
           Josh Keisler
         </Typography>
-        <Box
-          sx={
-            {
-              // width: "50%",
-              // display: "flex",
-              // justifyContent: "space-evenly",
-            }
-          }
-        >
-          <NavButton to="/" label="Home" />
-          <NavButton to="/about" label="About Me" />
-          <NavButton to="/experience" label="Experience" />
-          <NavButton to="/projects" label="Projects" />
-          <NavButton to="/contact" label="Contact Me" />
-        </Box>
+
+        <NavButton to="/" label="Home" />
+        <NavButton to="/about" label="About Me" />
+        <NavButton to="/experience" label="Experience" />
+        <NavButton to="/projects" label="Projects" />
+        <Link to="/contact">
+          <Button
+            color="primary"
+            sx={{ border: `1px solid ${theme.palette.primary.main}` }}
+          >
+            Contact
+          </Button>
+        </Link>
       </Toolbar>
     </Box>
   );

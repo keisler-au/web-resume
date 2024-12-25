@@ -24,10 +24,11 @@ interface TabData {
       content: string[];
     }[];
   }[];
+  defaultTab?: number;
 }
 
-const TabbedCards: React.FC<TabData> = ({ tabs }) => {
-  const [value, setValue] = useState(0);
+const TabbedCards: React.FC<TabData> = ({ tabs, defaultTab = 0 }) => {
+  const [value, setValue] = useState(defaultTab);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

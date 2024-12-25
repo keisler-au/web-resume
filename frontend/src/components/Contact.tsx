@@ -109,8 +109,8 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
 
   return (
     <PageLayout
-      heading="Get in Contact"
-      description="Feel free to reach out using the email form, LinkedIn or GitHub, I look forward to hearing from you!"
+      heading="Get in Touch"
+      description="Feel free to reach out through the email form, LinkedIn, or GitHub, I look forward to hearing from you!"
     >
       <TextLayout
         section={description[0].sections[0]}

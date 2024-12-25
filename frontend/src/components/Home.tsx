@@ -45,56 +45,14 @@ const Home: React.FC = () => {
   const theme = useTheme();
 
   return (
-    // <Box
-    //   sx={{
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     alignItems: "center",
-    //     justifyContent: "space-between",
-    //     textAlign: "center",
-    //     padding: "5rem 1rem", // Increased padding for more space
-    //     color: theme.palette.text.primary,
-    //     minHeight: "40vh",
-    //     maxHeight: "40vh",
-    //   }}
-    // >
-    //   {/* Main Heading */}
-    //   <Typography
-    //     variant="h2"
-    //     sx={{ marginBottom: "2.5rem", marginTop: "2.5rem", height: "6rem" }}
-    //   >
-    // Josh Keisler
-    // <WavingHand
-    //   sx={{ marginLeft: "2rem", color: "yellow", fontSize: 50 }}
-    // />
-    //   </Typography>
-
-    //   {/* Subheading */}
-    //   <Typography variant="h5" sx={{ marginBottom: ".5rem" }}>
-    //     Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions
-    //   </Typography>
-
-    //   {/* Brief Description */}
-    //   <Typography
-    //     variant="body1"
-    //     sx={{
-    //       marginBottom: "2.5rem",
-    //       maxWidth: "50%",
-    //     }}
-    //   >
-    // Passionate about building efficient and scalable web applications, with
-    // experience in full-stack development, CI/CD pipelines, and
-    // containerization technologies.
-    //   </Typography>
-
     <PageLayout
       homeStyling={true}
       heading="Josh Keisler"
+      subHeading="Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions"
       description="Passionate about building efficient and scalable web applications, with
           experience in full-stack development, CI/CD pipelines, and
           containerization technologies."
     >
-      {/* Buttons Section */}
       <Box
         sx={{
           backgroundColor: theme.palette.background.paper,
@@ -110,13 +68,10 @@ const Home: React.FC = () => {
             justifyContent: "center",
           }}
         >
-          {/* Reusable Nav Buttons */}
           <NavButton to="/about" label="About Me" />
           <NavButton to="/experience" label="Experience" />
           <NavButton to="/projects" label="Projects" />
         </Box>
-
-        {/* Contact Me Button */}
         <Box
           sx={{ marginTop: "2rem", display: "flex", justifyContent: "center" }}
         >

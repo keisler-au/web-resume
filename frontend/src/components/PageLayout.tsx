@@ -7,15 +7,17 @@ import Footer from "./Footer";
 import Navbar from "./NavBar";
 
 interface PageLayoutProps {
-  homeStyling?: boolean;
   heading: string;
   description: string;
   children?: any;
+  homeStyling?: boolean;
+  subHeading?: string;
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({
   homeStyling,
   heading,
+  subHeading,
   description,
   children,
 }) => (
@@ -36,7 +38,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         marginBottom: "4vh",
       }}
     >
-      {/* Heading, Subheading, and Description with fixed heights */}
       <Typography
         variant={homeStyling ? "h2" : "h3"}
         sx={{
@@ -45,11 +46,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
             : theme.palette.text.primary,
           marginTop: "5rem",
           fontWeight: "bold",
-          height: "6rem", // Fixed height for heading
-          overflow: "hidden", // Prevent text overflow
+          height: "6rem",
+          overflow: "hidden",
           display: "flex",
-          alignItems: "center", // Centering the text vertically
-          justifyContent: "center", // Centering horizontally
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         {heading}
@@ -59,11 +60,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
           />
         )}
       </Typography>
-      {homeStyling && (
-        <Typography variant="h5">
-          Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions
-        </Typography>
-      )}
+      {homeStyling && <Typography variant="h5">{subHeading}</Typography>}
       <Typography
         variant="body1"
         sx={{

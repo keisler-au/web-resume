@@ -4,6 +4,8 @@ import React from "react";
 
 const Footer: React.FC<{ homeStyling?: boolean }> = ({ homeStyling }) => {
   const theme = useTheme();
+  const linkedInUrl = "https://www.linkedin.com/in/josh-keisler-93b070a1/";
+  const gitHubUrl = "https://github.com/keisler-au/";
 
   return (
     <Box
@@ -21,23 +23,23 @@ const Footer: React.FC<{ homeStyling?: boolean }> = ({ homeStyling }) => {
       }}
     >
       <Link
-        href="https://www.linkedin.com/in/your-profile/"
+        href={linkedInUrl}
         target="_blank"
         rel="noopener noreferrer"
         color="inherit"
         sx={{ marginRight: theme.spacing(2) }}
       >
         <LinkedIn fontSize="large" />
-        https://www.linkedin.com/in/your-profile/
+        {linkedInUrl}
       </Link>
       <Link
-        href="https://github.com/your-profile"
+        href={gitHubUrl}
         target="_blank"
         rel="noopener noreferrer"
         color="inherit"
       >
         <GitHub fontSize="large" />
-        https://github.com/your-profile
+        {gitHubUrl}
       </Link>
     </Box>
   );
