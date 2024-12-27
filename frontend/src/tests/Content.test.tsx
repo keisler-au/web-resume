@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
 
-import Descriptions from "../components/Descriptions";
+import Content from "../components/Content";
 
 const fetchMock = fetch as jest.Mock;
 
-describe("Descriptions", () => {
+describe("Content", () => {
   const pageReference = "test";
   const mockRender = jest.fn();
 
@@ -14,7 +14,7 @@ describe("Descriptions", () => {
 
   test("renders loading state initially", () => {
     fetchMock.mockImplementationOnce(() => new Promise(() => {}));
-    render(<Descriptions render={mockRender} pageReference={pageReference} />);
+    render(<Content render={mockRender} pageReference={pageReference} />);
 
     expect(screen.getByTestId("loading-spinner")).toBeInTheDocument();
   });
@@ -26,7 +26,7 @@ describe("Descriptions", () => {
       }),
     );
 
-    render(<Descriptions render={mockRender} pageReference={pageReference} />);
+    render(<Content render={mockRender} pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
@@ -35,8 +35,8 @@ describe("Descriptions", () => {
     });
   });
 
-  test("renders descriptions when fetch is successful", async () => {
-    const mockDescriptions = [
+  test("renders content when fetch is successful", async () => {
+    const mockContent = [
       { id: 1, content: "Description 1", pageReference },
       { id: 2, content: "Description 2", pageReference },
     ];
@@ -44,14 +44,14 @@ describe("Descriptions", () => {
     fetchMock.mockImplementationOnce(() =>
       Promise.resolve({
         ok: true,
-        json: () => Promise.resolve(mockDescriptions),
+        json: () => Promise.resolve(mockContent),
       }),
     );
 
-    render(<Descriptions render={mockRender} pageReference={pageReference} />);
+    render(<Content render={mockRender} pageReference={pageReference} />);
 
     await waitFor(() => {
-      expect(mockRender).toBeCalledWith(mockDescriptions);
+      expect(mockRender).toBeCalledWith(mockContent);
     });
   });
 
@@ -59,7 +59,7 @@ describe("Descriptions", () => {
     fetchMock.mockImplementationOnce(() =>
       Promise.reject(new Error("Network Error")),
     );
-    render(<Descriptions render={mockRender} pageReference={pageReference} />);
+    render(<Content render={mockRender} pageReference={pageReference} />);
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(

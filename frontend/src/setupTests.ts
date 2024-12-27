@@ -11,3 +11,13 @@ jest.mock("react-i18next", () => ({
     t: (key: string) => key,
   }),
 }));
+
+global.matchMedia =
+  global.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+    };
+  };

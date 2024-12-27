@@ -2,7 +2,6 @@ import { render, act, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import Contact from "../components/Contact";
-import { Description } from "../components/Descriptions";
 import { BASE_URL } from "../constants";
 
 const fetchMock = fetch as jest.Mock;
@@ -12,14 +11,8 @@ jest.mock("../components/CardLayout", () => ({
 }));
 
 describe("Contact Component", () => {
-  const testDescriptions: Description[] = [
-    { sections: [{ header: "test header", content: "test content" }] },
-  ];
-
   it("renders the contact form with all fields", () => {
-    const { getByText, getByLabelText } = render(
-      <Contact description={testDescriptions} />,
-    );
+    const { getByText, getByLabelText } = render(<Contact />);
 
     expect(getByLabelText("name")).toBeInTheDocument();
     expect(getByLabelText("email")).toBeInTheDocument();
@@ -29,23 +22,21 @@ describe("Contact Component", () => {
   });
 
   it("shows validation errors when submitting an empty form", async () => {
-    const { getByText } = render(<Contact description={testDescriptions} />);
+    const { getByText } = render(<Contact />);
 
     act(() => {
       userEvent.click(getByText("send"));
     });
 
     await waitFor(() => {
-      expect(getByText("nameRequired")).toBeInTheDocument();
-      expect(getByText("emailRequired")).toBeInTheDocument();
-      expect(getByText("messageRequired")).toBeInTheDocument();
+      expect(getByText("name is required")).toBeInTheDocument();
+      expect(getByText("email is required")).toBeInTheDocument();
+      expect(getByText("message is required")).toBeInTheDocument();
     });
   });
 
   it("submits the form successfully with valid data", async () => {
-    const { getByText, getByLabelText } = render(
-      <Contact description={testDescriptions} />,
-    );
+    const { getByText, getByLabelText } = render(<Contact />);
 
     const name = "Test name";
     const email = "test@addresscom";
@@ -72,9 +63,7 @@ describe("Contact Component", () => {
   });
 
   it("allows file upload", async () => {
-    const { getByText, getByLabelText } = render(
-      <Contact description={testDescriptions} />,
-    );
+    const { getByText, getByLabelText } = render(<Contact />);
     act(() => {
       userEvent.type(getByLabelText("name"), "Test name");
       userEvent.type(getByLabelText("email"), "test@addresscom");

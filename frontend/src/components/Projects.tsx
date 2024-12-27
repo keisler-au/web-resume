@@ -7,64 +7,41 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { DiPostgresql } from "react-icons/di";
+import { FaAws, FaDocker, FaReact, FaLinux } from "react-icons/fa";
+import { SiPrecommit, SiGithubactions } from "react-icons/si";
 
-import PageLayout from "./PageLayout";
-
-const technologyDescriptions = {
-  AWS: [
-    "Due to pricing I moved to a Linux VPS, but I successfully deployed to AWS by:",
-    "1. Pushing images to ECR and configuring them into Task Definitions to utilise Fargate.",
-    "2. Creating Services to run Tasks within ECS.",
-    "3. Configuring an ALB with HTTP:80 and HTTPS:443 Listeners and Routing rules to connect to the appropriate Target Groups.",
-    "4. Creating Security Group Inbound and Outbound rules, and modifying it's Roles and defined VPC endpoints to allow the tasks to access Parameter Store Secrets.",
-    "5. Creating a separate admin account using IAM rather than defaulting to the root user account.",
-    "6. Connecting to a Postgres database hosted in RDS.",
-    "7. Using CloudWatch Logs for debugging Target Health Check failures.",
-  ],
-  Docker: [
-    "In containerizing this application with docker I learnt:",
-    "Dockerfile structures and multi-stage builds.",
-    "How networks can be orchestrated between containers and the host, and the role of docker-compose, Kubernetes, and Docker Swarm in development and production",
-    "Docker volumes, and it's interaction between containers and the host",
-  ],
-  WSL: [
-    "Working with WSL has helped me understand:",
-    "The differences between Windows and Linux.",
-    "The Linux file structure and where things are run and stored.",
-    "How package managers and dependencies are both a miracle and a nightmare.",
-  ],
-  "Django and Postgres": [
-    "This resume uses a Django and Postgres backend to serve up its text content.",
-    "This implementation is only for demonstration, but a lot of my experience with Django comes from my previous experience at BHP, where I completed a lot of development tickets concerning query optimisation in Django and Graphene.",
-  ],
-  React: [
-    "In building the frontend I learnt a lot about:",
-    "Implementing code designs like render propping.",
-    "CSS styling techniques and interactions.",
-    "UI design with technologies like MUI components.",
-  ],
-  "GitHub Actions": [
-    "In creating a pipeline I became exposed to:",
-    "Automating unit test runs within a docker setup.",
-    "Yaml files and the different settings and configurations.",
-    "The many servers, infrastructure and deployments options available for the different size and scalability of applications.",
-  ],
-  "Pre-commit": [
-    "Building this into the workflow and using it to enforce linting and styling rules.",
-  ],
+const techIcons = {
+  "Django and Postgres": DiPostgresql,
+  AWS: FaAws,
+  Docker: FaDocker,
+  "Pre-commit": SiPrecommit,
+  "GitHub Actions": SiGithubactions,
+  React: FaReact,
+  WSL: FaLinux,
 };
 
-const Projects: React.FC = () => {
+const getContent = (data, selectedTech) =>
+  data.find((obj) => obj.label === selectedTech)?.cards[0]?.content;
+
+const Projects: React.FC = ({ data }) => {
   const [selectedTech, setSelectedTech] = useState<string>("AWS");
+  const [selectedCardContent, setSelectedCardContent] = useState<any[]>([]);
   const theme = useTheme();
+
+  useEffect(() => {
+    if (data?.length > 0) {
+      const content = getContent(data, selectedTech);
+      setSelectedCardContent(content || []); // Default to empty array
+    }
+  }, [data, selectedTech]);
 
   const handleOpen = (tech: string) => setSelectedTech(tech);
 
+  const SelectedIcon = techIcons[selectedTech];
+
   return (
-    <PageLayout
-      heading="Web Resume Tech Stack"
-      description="Explore the different technologies I have used in building this website."
-    >
+    <>
       <Box
         sx={{
           display: "flex",
@@ -72,49 +49,59 @@ const Projects: React.FC = () => {
           gap: 2,
         }}
       >
-        {Object.keys(technologyDescriptions).map((tech) => (
+        {data.map(({ label }) => (
           <Button
-            onClick={() => handleOpen(tech)}
+            key={label}
+            onClick={() => handleOpen(label)}
             variant="outlined"
             sx={{
               color: theme.palette.secondary.main,
-              border: `1px solid ${selectedTech === tech ? theme.palette.secondary.main : theme.palette.primary.main}`,
+              border: `1px solid ${
+                selectedTech === label
+                  ? theme.palette.secondary.main
+                  : theme.palette.primary.main
+              }`,
               "&:hover": {
                 border: `1px solid ${theme.palette.secondary.main}`,
                 backgroundColor: theme.palette.primary.dark,
               },
             }}
           >
-            {tech}
+            {label}
           </Button>
         ))}
       </Box>
 
-      {selectedTech && (
+      {selectedCardContent.length > 0 && (
         <Card
           sx={{ marginTop: "2rem", maxWidth: 600, marginX: "auto", padding: 2 }}
         >
           <CardContent>
-            <Typography variant="h6" sx={{ marginBottom: 1 }}>
-              {selectedTech}
+            <Typography
+              variant="h6"
+              // sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <SelectedIcon
+                style={{
+                  marginBottom: "1rem",
+                  minHeight: "1.5rem",
+                  minWidth: "1.5rem",
+                }}
+              />
             </Typography>
-            <Typography variant="body1" sx={{ marginBottom: 2 }}>
-              {technologyDescriptions[
-                selectedTech as keyof typeof technologyDescriptions
-              ].map((description: string, index: number) => (
-                <Typography
-                  key={index}
-                  variant="body1"
-                  sx={{ marginBottom: 1, marginLeft: index === 0 ? 0 : 2 }}
-                >
-                  {description}
-                </Typography>
-              ))}
-            </Typography>
+            {selectedCardContent.map((content, index: number) => (
+              <Typography
+                key={index}
+                variant="body1"
+                sx={{ marginBottom: 1, marginLeft: index === 0 ? 0 : 2 }}
+              >
+                {content.description}
+              </Typography>
+            ))}
           </CardContent>
         </Card>
       )}
-    </PageLayout>
+    </>
   );
 };
 

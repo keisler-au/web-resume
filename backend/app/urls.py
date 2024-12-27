@@ -22,6 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # any request starting with http://localhost:8000/descriptions/
     # bawill be forwarded to thdescriptions/urls.py file.
-    path("descriptions/", include("descriptions.urls")),
+    path("content/", include("content.urls")),
     path("api/", include("email_service.urls")),
 ]

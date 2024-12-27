@@ -4,35 +4,27 @@ import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
 
-type DescriptionsProps = {
+type ContentProps = {
   render: Function;
   pageReference: string;
 };
 
-export interface Description {
-  sections: { header: string; content: string }[];
-}
-
-const Descriptions: React.FC<DescriptionsProps> = ({
-  render,
-  pageReference,
-}) => {
+const Content: React.FC<ContentProps> = ({ render, pageReference }) => {
   const { t } = useTranslation();
-  const [descriptions, setDescriptions] = useState<Description[]>([]);
+  // TODO: Add typing to content
+  const [content, setContent] = useState([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${BASE_URL}/descriptions/${pageReference}/`,
-        );
+        const response = await fetch(`${BASE_URL}/content/${pageReference}/`);
         if (!response.ok) {
           throw new Error(t("failedFetch"));
         }
         const data = await response.json();
-        setDescriptions(data);
+        setContent(data);
         setError(null);
       } catch (err: any) {
         setError(err.message);
@@ -56,7 +48,7 @@ const Descriptions: React.FC<DescriptionsProps> = ({
     );
   }
 
-  return render(descriptions);
+  return render(content);
 };
 
-export default Descriptions;
+export default Content;

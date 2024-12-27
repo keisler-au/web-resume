@@ -13,9 +13,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
-import { CardLayout, TextLayout } from "./CardLayout";
-import { Description } from "./Descriptions";
-import PageLayout from "./PageLayout";
 
 interface FormValues {
   name: string;
@@ -61,7 +58,7 @@ const CustomTextField: React.FC<{
   );
 };
 
-const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
+const Contact: React.FC = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const {
@@ -108,142 +105,133 @@ const Contact: React.FC<{ description: Description[] }> = ({ description }) => {
   };
 
   return (
-    <PageLayout
-      heading="Get in Touch"
-      description="Feel free to reach out through the email form, LinkedIn, or GitHub, I look forward to hearing from you!"
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        width: "40%",
+        margin: "0 auto",
+        padding: theme.spacing(4), // Padding for form
+        border: `1px solid ${theme.palette.secondary.main}`,
+        borderRadius: 1,
+        marginBottom: "3rem",
+      }}
     >
-      <TextLayout
-        section={description[0].sections[0]}
-        styles={{ textAlign: "center" }}
+      <CustomTextField
+        label={t("name")}
+        name="name"
+        register={register}
+        errors={errors}
+        theme={theme}
       />
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
+      <CustomTextField
+        label={t("email")}
+        name="email"
+        type="email"
+        register={register}
+        errors={errors}
+        theme={theme}
+      />
+      <CustomTextField
+        label={t("message")}
+        name="message"
+        rows={4}
+        register={register}
+        errors={errors}
+        theme={theme}
+      />
+
+      <Button
+        variant="outlined"
+        component="label"
         sx={{
           display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          width: "40%",
-          margin: "0 auto",
-          padding: theme.spacing(4), // Padding for form
-          border: `1px solid ${theme.palette.secondary.main}`,
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: theme.spacing(1.5),
           borderRadius: 1,
-          marginBottom: "3rem",
+          textAlign: "left",
+          minHeight: "56px",
+          borderColor: theme.palette.primary.dark,
+          "&:hover": {
+            borderColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.action.hover,
+          },
+          textTransform: "none",
+          color:
+            fileName === t("fileUpload")
+              ? theme.palette.text.disabled
+              : theme.palette.text.primary,
         }}
       >
-        <CustomTextField
-          label={t("name")}
-          name="name"
-          register={register}
-          errors={errors}
-          theme={theme}
-        />
-        <CustomTextField
-          label={t("email")}
-          name="email"
-          type="email"
-          register={register}
-          errors={errors}
-          theme={theme}
-        />
-        <CustomTextField
-          label={t("message")}
-          name="message"
-          rows={4}
-          register={register}
-          errors={errors}
-          theme={theme}
-        />
-
-        <Button
-          variant="outlined"
-          component="label"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: theme.spacing(1.5),
-            borderRadius: 1,
-            textAlign: "left",
-            minHeight: "56px",
-            borderColor: theme.palette.primary.dark,
-            "&:hover": {
-              borderColor: theme.palette.secondary.main,
-              backgroundColor: theme.palette.action.hover,
-            },
-            textTransform: "none",
-            color:
-              fileName === t("fileUpload")
-                ? theme.palette.text.disabled
-                : theme.palette.text.primary,
+        <Typography variant="body1">{fileName}</Typography>
+        <input
+          type="file"
+          multiple
+          hidden
+          {...register("files")}
+          onChange={(e) => {
+            if (e.target.files) {
+              const fileNames = Array.from(e.target.files).map(
+                (file) => file.name,
+              );
+              setFileName(fileNames.join(", "));
+            }
+            register("files").onChange(e);
           }}
-        >
-          <Typography variant="body1">{fileName}</Typography>
-          <input
-            type="file"
-            multiple
-            hidden
-            {...register("files")}
-            onChange={(e) => {
-              if (e.target.files) {
-                const fileNames = Array.from(e.target.files).map(
-                  (file) => file.name,
-                );
-                setFileName(fileNames.join(", "));
-              }
-              register("files").onChange(e);
-            }}
-          />
-          <IconButton component="span">
-            <AttachFileIcon />
-          </IconButton>
-        </Button>
+        />
+        <IconButton component="span">
+          <AttachFileIcon />
+        </IconButton>
+      </Button>
 
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={isSubmitting}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            "&:hover": {
-              backgroundColor: theme.palette.primary.dark, // Hover effect for primary button
-            },
-          }}
-        >
-          {isSubmitting ? (
-            <CircularProgress size={24} color="inherit" />
-          ) : (
-            t("send")
-          )}
-        </Button>
-
-        {statusMessage && (
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor:
-                statusMessage === t("emailSent")
-                  ? theme.palette.success.light
-                  : theme.palette.error.light,
-              color:
-                statusMessage === t("emailSent")
-                  ? theme.palette.success.main
-                  : theme.palette.error.main,
-              padding: theme.spacing(2),
-              borderRadius: 1,
-            }}
-          >
-            <Typography variant="body1" sx={{ marginRight: 1 }}>
-              {statusMessage === t("emailSent") ? "✅" : "❌"} {statusMessage}
-            </Typography>
-          </Box>
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={isSubmitting}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          "&:hover": {
+            backgroundColor: theme.palette.primary.dark, // Hover effect for primary button
+          },
+        }}
+      >
+        {isSubmitting ? (
+          <CircularProgress size={24} color="inherit" />
+        ) : (
+          t("send")
         )}
-      </Box>
-    </PageLayout>
+      </Button>
+
+      {statusMessage && (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor:
+              statusMessage === t("emailSent")
+                ? theme.palette.success.light
+                : theme.palette.error.light,
+            color:
+              statusMessage === t("emailSent")
+                ? theme.palette.success.main
+                : theme.palette.error.main,
+            padding: theme.spacing(2),
+            borderRadius: 1,
+          }}
+        >
+          <Typography variant="body1" sx={{ marginRight: 1 }}>
+            {statusMessage === t("emailSent") ? "✅" : "❌"} {statusMessage}
+          </Typography>
+        </Box>
+      )}
+    </Box>
   );
 };
 

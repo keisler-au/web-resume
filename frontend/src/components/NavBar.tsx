@@ -1,17 +1,9 @@
-import {
-  Box,
-  Typography,
-  AppBar,
-  Toolbar,
-  Button,
-  useTheme,
-} from "@mui/material";
+import { Box, Typography, Toolbar, Button } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
 import theme from "../theme";
 
-// Reusable NavButton Component with Props for route and label
 interface NavButtonProps {
   to: string;
   label: string;

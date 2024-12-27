@@ -1,14 +1,15 @@
 .slick-prev,
 .slick-next {
-  min-height: 3rem;
+  min-height: 5rem;
+  min-width: 2rem;
   color: white;
   z-index: 2;
 }
 .slick-next {
-  right: 14rem;
+  right: 25rem;
 }
 .slick-prev {
-  left: 14rem;
+  left: 25rem;
 }
 .slick-prev:hover,
 .slick-prev:focus,
@@ -17,11 +18,10 @@
   color: white;
 }
 
-/* Override slick carousel dots to make them white */
 .slick-dots li button:before {
-  color: white; /* Change the color to white */
+  color: white;
 }
 
 .slick-dots li.slick-active button:before {
-  color: white; /* Keep the active dot white */
+  color: white;
 }

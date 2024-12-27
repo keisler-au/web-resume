@@ -8,7 +8,7 @@ import {
   Tabs,
   Tab,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
@@ -17,34 +17,39 @@ import "slick-carousel/slick/slick-theme.css";
 import "../slider-styles.css";
 
 interface TabData {
-  tabs: {
+  data: {
     label: string;
     cards: {
       title: string;
       content: string[];
     }[];
   }[];
-  defaultTab?: number;
+  defaultTab: number;
 }
 
-const TabbedCards: React.FC<TabData> = ({ tabs, defaultTab = 0 }) => {
+const TabbedCards: React.FC<TabData> = ({ data, defaultTab }) => {
   const [value, setValue] = useState(defaultTab);
+
+  useEffect(() => {
+    setValue(defaultTab);
+  }, [defaultTab]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   const sliderSettings = {
+    // className: "center",
     dots: true, // Show dots for navigation
     infinite: true, // Infinite loop scrolling
     speed: 500, // Transition speed between slides
     slidesToShow: 1, // Show only one slide at a time
     slidesToScroll: 1, // Scroll one slide at a time
-    centerMode: true,
+    // centerMode: true,
     centerPadding: "0", // No extra padding around the center slide
     nextArrow: <ArrowForwardIos />,
     prevArrow: <ArrowBackIos />,
-    swipe: false, // Disable mouse swipe
+    swipe: true, // Disable mouse swipe
   };
 
   return (
@@ -56,17 +61,16 @@ const TabbedCards: React.FC<TabData> = ({ tabs, defaultTab = 0 }) => {
         textColor="secondary"
         indicatorColor="secondary"
       >
-        {tabs.map((tab, index) => (
+        {data.map((tab, index) => (
           <Tab key={index} label={tab.label} />
         ))}
       </Tabs>
 
       {/* Tab Content */}
-      {tabs.map((tab, index) =>
+      {data.map((tab, index) =>
         value === index ? (
           <Box key={index}>
             <Slider {...sliderSettings}>
-              {/* <Box sx={{ display: "flex", justifyContent: "center" }}> */}
               {tab.cards.map((card, cardIndex) => (
                 <Box
                   key={cardIndex}
@@ -81,17 +85,17 @@ const TabbedCards: React.FC<TabData> = ({ tabs, defaultTab = 0 }) => {
                       top: "50%", // Position from the top
                       left: "50%", // Position from the left
                       transform: "translate(-50%, -50%)", // Center the card
-                      maxWidth: "55%", // Set max width for the card
+                      maxWidth: "35%", // Set max width for the card
                       width: "70%", // Allow responsive resizing
                       height: "70%",
                       backgroundColor: theme.palette.text.secondary, // Optional: Styling
                     }}
                   >
-                    <CardHeader title={card.title} />
+                    <CardHeader title={card.title} sx={{ paddingBottom: 0 }} />
                     <CardContent>
-                      {card.content.map((line, lineIndex) => (
+                      {card.content.map((content, lineIndex) => (
                         <Typography key={lineIndex} variant="body2">
-                          {line}
+                          {content.description}
                         </Typography>
                       ))}
                     </CardContent>

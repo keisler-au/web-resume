@@ -6,26 +6,17 @@ import theme from "../theme";
 import Footer from "./Footer";
 import Navbar from "./NavBar";
 
-interface PageLayoutProps {
-  heading: string;
-  description: string;
-  children?: any;
-  homeStyling?: boolean;
-  subHeading?: string;
-}
+// interface PageLayoutProps {
+//   data: Data;
+//   children: React.FC;
+// }
 
-const PageLayout: React.FC<PageLayoutProps> = ({
-  homeStyling,
-  heading,
-  subHeading,
-  description,
-  children,
-}) => (
+const PageLayout: React.FC = ({ data, children }) => (
   <>
-    {!homeStyling && <Navbar />}
+    {!data.sub_heading && <Navbar />}
     <Box
       sx={{
-        backgroundColor: homeStyling
+        backgroundColor: data.sub_heading
           ? "primary"
           : theme.palette.background.paper,
         display: "flex",
@@ -35,14 +26,14 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         minHeight: "40vh",
         maxHeight: "40vh",
         textAlign: "center",
-        marginBottom: "4vh",
+        marginBottom: data.sub_heading ? "0" : "4vh",
       }}
     >
       <Typography
-        variant={homeStyling ? "h2" : "h3"}
+        variant={data.sub_heading ? "h2" : "h3"}
         sx={{
-          color: homeStyling
-            ? theme.palette.secondary.main
+          color: data.sub_heading
+            ? theme.palette.background.paper
             : theme.palette.text.primary,
           marginTop: "5rem",
           fontWeight: "bold",
@@ -53,14 +44,16 @@ const PageLayout: React.FC<PageLayoutProps> = ({
           justifyContent: "center",
         }}
       >
-        {heading}
-        {homeStyling && (
+        {data.main_heading}
+        {data.sub_heading && (
           <WavingHand
             sx={{ marginLeft: "2rem", color: "yellow", fontSize: 50 }}
           />
         )}
       </Typography>
-      {homeStyling && <Typography variant="h5">{subHeading}</Typography>}
+      {data.sub_heading && (
+        <Typography variant="h5">{data.sub_heading}</Typography>
+      )}
       <Typography
         variant="body1"
         sx={{
@@ -72,13 +65,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
           justifyContent: "center", // Centering horizontally
         }}
       >
-        {description}
+        {data.description}
       </Typography>
     </Box>
-
-    {/* Render children below */}
     {children}
-    <Footer homeStyling={homeStyling} />
+    <Footer homeStyling={data.sub_heading} />
   </>
 );
 
