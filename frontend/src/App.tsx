@@ -24,21 +24,25 @@ export const ErrorFallback = ({ error }: any) => {
   );
 };
 
-// data returned from view will likely be a list -> data: {...}[]
-export interface Data {
-  data: {
-    heading: string;
-    subHeading?: string;
-    descriptions: string;
-    body?: {
-      label: string;
-      cards: {
-        title: string;
-        content: string[];
-      }[];
-    }[];
-  };
+export interface HeadingData {
+  main_heading: string;
+  sub_heading?: string;
+  description: string;
 }
+export interface BodyData {
+  label: string;
+  cards: {
+    title: string;
+    content: {
+      description: string;
+    }[];
+  }[];
+}
+interface PageData {
+  heading: HeadingData[];
+  body?: BodyData[];
+}
+
 interface PageConfig {
   path: string;
   page: React.FC<any>;
@@ -71,13 +75,14 @@ const App = () => (
               path={pageConfig.path === "home" ? "/" : pageConfig.path}
               element={
                 <Content
-                  render={(page) => {
+                  render={(pageData: PageData[]) => {
+                    console.log(pageData);
                     const PageComponent = pageConfig.page;
-                    const props = page[0].body
-                      ? { data: page[0].body, ...pageConfig.props }
+                    const props = pageData[0].body
+                      ? { data: pageData[0].body, ...pageConfig.props }
                       : {};
                     return (
-                      <PageLayout data={page[0].heading[0]}>
+                      <PageLayout data={pageData[0].heading[0]}>
                         <PageComponent {...props} />
                       </PageLayout>
                     );

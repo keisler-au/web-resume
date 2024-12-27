@@ -12,23 +12,13 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
+import { BodyData } from "../App";
 import theme from "../theme";
 import "slick-carousel/slick/slick-theme.css";
 import "../slider-styles.css";
 
-interface TabData {
-  data: {
-    label: string;
-    cards: {
-      title: string;
-      content: string[];
-    }[];
-  }[];
-  defaultTab: number;
-}
-
-const TabbedCards: React.FC<TabData> = ({ data, defaultTab }) => {
-  const [value, setValue] = useState(defaultTab);
+const TabbedCards: React.FC<BodyData[]> = (data, defaultTab) => {
+  const [value, setValue] = useState<number>(defaultTab);
 
   useEffect(() => {
     setValue(defaultTab);
@@ -39,17 +29,17 @@ const TabbedCards: React.FC<TabData> = ({ data, defaultTab }) => {
   };
 
   const sliderSettings = {
-    // className: "center",
-    dots: true, // Show dots for navigation
-    infinite: true, // Infinite loop scrolling
-    speed: 500, // Transition speed between slides
-    slidesToShow: 1, // Show only one slide at a time
-    slidesToScroll: 1, // Scroll one slide at a time
-    // centerMode: true,
-    centerPadding: "0", // No extra padding around the center slide
+    className: "center",
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: "0",
     nextArrow: <ArrowForwardIos />,
     prevArrow: <ArrowBackIos />,
-    swipe: true, // Disable mouse swipe
+    swipe: true,
   };
 
   return (
@@ -66,7 +56,6 @@ const TabbedCards: React.FC<TabData> = ({ data, defaultTab }) => {
         ))}
       </Tabs>
 
-      {/* Tab Content */}
       {data.map((tab, index) =>
         value === index ? (
           <Box key={index}>
@@ -75,20 +64,20 @@ const TabbedCards: React.FC<TabData> = ({ data, defaultTab }) => {
                 <Box
                   key={cardIndex}
                   sx={{
-                    position: "relative", // Make the container relative
-                    height: "40vh", // Set a fixed height to define the layout
+                    position: "relative",
+                    height: "40vh",
                   }}
                 >
                   <Card
                     sx={{
-                      position: "absolute", // Absolute positioning
-                      top: "50%", // Position from the top
-                      left: "50%", // Position from the left
-                      transform: "translate(-50%, -50%)", // Center the card
-                      maxWidth: "35%", // Set max width for the card
-                      width: "70%", // Allow responsive resizing
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      maxWidth: "35%",
+                      width: "70%",
                       height: "70%",
-                      backgroundColor: theme.palette.text.secondary, // Optional: Styling
+                      backgroundColor: theme.palette.text.secondary,
                     }}
                   >
                     <CardHeader title={card.title} sx={{ paddingBottom: 0 }} />
@@ -102,7 +91,6 @@ const TabbedCards: React.FC<TabData> = ({ data, defaultTab }) => {
                   </Card>
                 </Box>
               ))}
-              {/* </Box> */}
             </Slider>
           </Box>
         ) : null,

@@ -7,11 +7,14 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { IconType } from "react-icons";
 import { DiPostgresql } from "react-icons/di";
 import { FaAws, FaDocker, FaReact, FaLinux } from "react-icons/fa";
 import { SiPrecommit, SiGithubactions } from "react-icons/si";
 
-const techIcons = {
+import { BodyData } from "../App";
+
+const techIcons: { [key: string]: IconType } = {
   "Django and Postgres": DiPostgresql,
   AWS: FaAws,
   Docker: FaDocker,
@@ -21,10 +24,13 @@ const techIcons = {
   WSL: FaLinux,
 };
 
-const getContent = (data, selectedTech) =>
-  data.find((obj) => obj.label === selectedTech)?.cards[0]?.content;
+const getContent = (
+  data: BodyData[],
+  selectedTech: string,
+): { description: string }[] =>
+  data.find((obj) => obj.label === selectedTech)?.cards[0]?.content || [];
 
-const Projects: React.FC = ({ data }) => {
+const Projects: React.FC<BodyData[]> = (data) => {
   const [selectedTech, setSelectedTech] = useState<string>("AWS");
   const [selectedCardContent, setSelectedCardContent] = useState<any[]>([]);
   const theme = useTheme();
@@ -32,7 +38,7 @@ const Projects: React.FC = ({ data }) => {
   useEffect(() => {
     if (data?.length > 0) {
       const content = getContent(data, selectedTech);
-      setSelectedCardContent(content || []); // Default to empty array
+      setSelectedCardContent(content); // Default to empty array
     }
   }, [data, selectedTech]);
 

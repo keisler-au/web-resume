@@ -1,17 +1,18 @@
 import { WavingHand } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { ReactNode } from "react";
 
 import theme from "../theme";
 import Footer from "./Footer";
 import Navbar from "./NavBar";
+import { HeadingData } from "../App";
 
-// interface PageLayoutProps {
-//   data: Data;
-//   children: React.FC;
-// }
+interface PageLayoutProps {
+  data: HeadingData;
+  children: ReactNode;
+}
 
-const PageLayout: React.FC = ({ data, children }) => (
+const PageLayout: React.FC<PageLayoutProps> = ({ data, children }) => (
   <>
     {!data.sub_heading && <Navbar />}
     <Box

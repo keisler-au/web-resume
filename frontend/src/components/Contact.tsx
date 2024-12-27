@@ -68,7 +68,7 @@ const Contact: React.FC = () => {
     reset,
   } = useForm<FormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState<string>(t("fileUpload"));
+  const [fileName, setFileName] = useState(t("fileUpload"));
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const onSubmit = async (data: FormValues) => {
@@ -114,7 +114,7 @@ const Contact: React.FC = () => {
         gap: 2,
         width: "40%",
         margin: "0 auto",
-        padding: theme.spacing(4), // Padding for form
+        padding: theme.spacing(4),
         border: `1px solid ${theme.palette.secondary.main}`,
         borderRadius: 1,
         marginBottom: "3rem",
@@ -197,7 +197,7 @@ const Contact: React.FC = () => {
           alignItems: "center",
           gap: 1,
           "&:hover": {
-            backgroundColor: theme.palette.primary.dark, // Hover effect for primary button
+            backgroundColor: theme.palette.primary.dark,
           },
         }}
       >

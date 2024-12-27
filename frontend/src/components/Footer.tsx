@@ -2,7 +2,7 @@ import { LinkedIn, GitHub } from "@mui/icons-material";
 import { Box, Link, useTheme } from "@mui/material";
 import React from "react";
 
-const Footer: React.FC<{ homeStyling?: boolean }> = ({ homeStyling }) => {
+const Footer: React.FC<{ homeStyling?: string }> = ({ homeStyling }) => {
   const theme = useTheme();
   const linkedInUrl = "https://www.linkedin.com/in/josh-keisler-93b070a1/";
   const gitHubUrl = "https://github.com/keisler-au/";

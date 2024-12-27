@@ -11,9 +11,8 @@ type ContentProps = {
 
 const Content: React.FC<ContentProps> = ({ render, pageReference }) => {
   const { t } = useTranslation();
-  // TODO: Add typing to content
   const [content, setContent] = useState([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
