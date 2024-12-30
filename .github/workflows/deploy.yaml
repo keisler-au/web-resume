@@ -50,7 +50,4 @@ jobs:
             echo "MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }}" >> backend/.env
             echo "MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }}" >> backend/.env
             sudo docker-compose -f compose.yaml -f production.yaml up --build -d
-
-            sudo docker system prune -af
-            sudo docker volume prune -f
           EOF
