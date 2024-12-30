@@ -1,6 +1,6 @@
-name: CI/CD Pipeline for AWS
+name: CI/CD Pipeline
 
-on: []
+on: [push]
 
 jobs:
   test:
@@ -32,7 +32,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-
       - name: Set up SSH for deployment
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -40,8 +39,8 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no root@${{secrets.VULTR_IP_ADDRESS }} << 'EOF'
-            cd ~/web-resume/app
+          ssh -o StrictHostKeyChecking=no linuxuser@${{secrets.VULTR_IP_ADDRESS }} << 'EOF'
+            cd ~/web-resume
 
             git pull origin main
 
@@ -50,8 +49,8 @@ jobs:
             echo "HOST_USER_EMAIL=${{ secrets.HOST_USER_EMAIL }}" >> backend/.env
             echo "MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }}" >> backend/.env
             echo "MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }}" >> backend/.env
-            docker-compose -f compose.yaml -f production.yaml up --build -d
+            sudo docker-compose -f compose.yaml -f production.yaml up --build -d
 
-            docker system prune -af
-            docker volume prune -f
+            sudo docker system prune -af
+            sudo docker volume prune -f
           EOF
