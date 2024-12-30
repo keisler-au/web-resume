@@ -38,7 +38,7 @@ def populate_data(apps, schema_editor):
         page=projects_page,
         main_heading="Web Resume Tech Stack",
         sub_heading=None,
-        description="Explore the different technologies I have used in building this website.",
+        description="Explore the different technologies I have used in building this website:",
     )
     PageHeading.objects.create(
         page=contact_page,
@@ -146,11 +146,11 @@ def populate_data(apps, schema_editor):
     )
     CardContent.objects.create(
         card=weather_app_card,
-        description="The public API has since been decommissioned, but this project demonstrated my understanding of data fetching and structuring components within a project.",
+        description="This was my first project that I created in 2021, the public API has since been decommissioned but it demonstrated my understanding of RESTful APIs and React at that time, and it lead to my employment at Infosys.",
     )
     CardContent.objects.create(
         card=weather_app_card,
-        description="[Link to project](https://keisler-au.github.io/weather-project/)",
+        description="https://keisler-au.github.io/weather-project/",
     )
 
     infosys_section = PageBody.objects.create(

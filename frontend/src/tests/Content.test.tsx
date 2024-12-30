@@ -30,7 +30,7 @@ describe("Content", () => {
 
     await waitFor(() => {
       expect(screen.getByTestId("error-message")).toHaveTextContent(
-        "failedFetch",
+        "Failed to fetch data.",
       );
     });
   });

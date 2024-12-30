@@ -30,7 +30,7 @@ const getContent = (
 ): { description: string }[] =>
   data.find((obj) => obj.label === selectedTech)?.cards[0]?.content || [];
 
-const Projects: React.FC<BodyData[]> = (data) => {
+const Projects: React.FC<{ data: BodyData[] }> = ({ data }) => {
   const [selectedTech, setSelectedTech] = useState<string>("AWS");
   const [selectedCardContent, setSelectedCardContent] = useState<any[]>([]);
   const theme = useTheme();
@@ -38,14 +38,14 @@ const Projects: React.FC<BodyData[]> = (data) => {
   useEffect(() => {
     if (data?.length > 0) {
       const content = getContent(data, selectedTech);
-      setSelectedCardContent(content); // Default to empty array
+      setSelectedCardContent(content);
     }
   }, [data, selectedTech]);
 
   const handleOpen = (tech: string) => setSelectedTech(tech);
 
   const SelectedIcon = techIcons[selectedTech];
-
+  console.log(data);
   return (
     <>
       <Box
@@ -83,10 +83,7 @@ const Projects: React.FC<BodyData[]> = (data) => {
           sx={{ marginTop: "2rem", maxWidth: 600, marginX: "auto", padding: 2 }}
         >
           <CardContent>
-            <Typography
-              variant="h6"
-              // sx={{ display: "flex", justifyContent: "center" }}
-            >
+            <Typography variant="h6">
               <SelectedIcon
                 style={{
                   marginBottom: "1rem",

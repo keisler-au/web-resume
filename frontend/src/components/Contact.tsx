@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
 
@@ -59,7 +58,6 @@ const CustomTextField: React.FC<{
 };
 
 const Contact: React.FC = () => {
-  const { t } = useTranslation();
   const theme = useTheme();
   const {
     register,
@@ -68,7 +66,7 @@ const Contact: React.FC = () => {
     reset,
   } = useForm<FormValues>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState(t("fileUpload"));
+  const [fileName, setFileName] = useState("No Files Uploaded");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const onSubmit = async (data: FormValues) => {
@@ -90,16 +88,16 @@ const Contact: React.FC = () => {
         body: formData,
       });
       if (response && !response.ok) {
-        throw new Error(t("failedFetch"));
+        throw new Error("Failed to fetch data");
       }
 
-      setStatusMessage(t("emailSent"));
+      setStatusMessage("Email sent!");
       setIsSubmitting(false);
       reset();
-      setFileName(t("fileUpload"));
+      setFileName("No Files Uploaded");
     } catch (error) {
       console.error(error);
-      setStatusMessage(t("emailFailed"));
+      setStatusMessage("Email failed to send.");
       setIsSubmitting(false);
     }
   };
@@ -121,14 +119,14 @@ const Contact: React.FC = () => {
       }}
     >
       <CustomTextField
-        label={t("name")}
+        label="Name"
         name="name"
         register={register}
         errors={errors}
         theme={theme}
       />
       <CustomTextField
-        label={t("email")}
+        label="Email"
         name="email"
         type="email"
         register={register}
@@ -136,7 +134,7 @@ const Contact: React.FC = () => {
         theme={theme}
       />
       <CustomTextField
-        label={t("message")}
+        label="Message"
         name="message"
         rows={4}
         register={register}
@@ -162,7 +160,7 @@ const Contact: React.FC = () => {
           },
           textTransform: "none",
           color:
-            fileName === t("fileUpload")
+            fileName === "No Files Uploaded"
               ? theme.palette.text.disabled
               : theme.palette.text.primary,
         }}
@@ -201,11 +199,7 @@ const Contact: React.FC = () => {
           },
         }}
       >
-        {isSubmitting ? (
-          <CircularProgress size={24} color="inherit" />
-        ) : (
-          t("send")
-        )}
+        {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "Send"}
       </Button>
 
       {statusMessage && (
@@ -215,11 +209,11 @@ const Contact: React.FC = () => {
             alignItems: "center",
             justifyContent: "center",
             backgroundColor:
-              statusMessage === t("emailSent")
+              statusMessage === "Email sent!"
                 ? theme.palette.success.light
                 : theme.palette.error.light,
             color:
-              statusMessage === t("emailSent")
+              statusMessage === "Email sent!"
                 ? theme.palette.success.main
                 : theme.palette.error.main,
             padding: theme.spacing(2),
@@ -227,7 +221,7 @@ const Contact: React.FC = () => {
           }}
         >
           <Typography variant="body1" sx={{ marginRight: 1 }}>
-            {statusMessage === t("emailSent") ? "✅" : "❌"} {statusMessage}
+            {statusMessage === "Email sent!" ? "✅" : "❌"} {statusMessage}
           </Typography>
         </Box>
       )}

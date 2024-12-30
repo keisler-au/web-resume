@@ -2,7 +2,7 @@ import { LinkedIn, GitHub } from "@mui/icons-material";
 import { Box, Link, useTheme } from "@mui/material";
 import React from "react";
 
-const Footer: React.FC<{ homeStyling?: string }> = ({ homeStyling }) => {
+const Footer: React.FC<{ homeStyling: boolean }> = ({ homeStyling }) => {
   const theme = useTheme();
   const linkedInUrl = "https://www.linkedin.com/in/josh-keisler-93b070a1/";
   const gitHubUrl = "https://github.com/keisler-au/";
@@ -11,15 +11,15 @@ const Footer: React.FC<{ homeStyling?: string }> = ({ homeStyling }) => {
     <Box
       component="footer"
       sx={{
-        position: "fixed", // Fix the footer at the bottom
+        position: "fixed",
         bottom: homeStyling ? 20 : 0,
         width: "100%",
-        padding: theme.spacing(1, 2), // Reduced padding for a smaller height
+        padding: theme.spacing(1, 2),
         textAlign: "center",
         display: "flex",
-        justifyContent: homeStyling ? "center" : "right", // Center the icons horizontally
-        alignItems: "center", // Align the icons vertically
-        height: "45px", // Reduced height for a compact footer
+        justifyContent: homeStyling ? "center" : "right",
+        alignItems: "center",
+        height: "45px",
       }}
     >
       <Link

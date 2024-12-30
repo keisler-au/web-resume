@@ -1,4 +1,4 @@
-import { Box, Button, useTheme } from "@mui/material";
+import { Typography, Box, Button, useTheme } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -44,10 +44,16 @@ const Home: React.FC = () => {
     <Box
       sx={{
         backgroundColor: theme.palette.background.paper,
-        height: "60vh",
-        paddingTop: "10vh",
+        height: "56vh",
+        paddingTop: "6vh",
       }}
     >
+      <Typography
+        variant="h5"
+        sx={{ display: "flex", justifyContent: "center", marginBottom: "6vh" }}
+      >
+        Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions
+      </Typography>
       <Box
         sx={{
           display: "flex",

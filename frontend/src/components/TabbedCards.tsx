@@ -7,6 +7,7 @@ import {
   CardHeader,
   Tabs,
   Tab,
+  Link,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
@@ -17,8 +18,11 @@ import theme from "../theme";
 import "slick-carousel/slick/slick-theme.css";
 import "../slider-styles.css";
 
-const TabbedCards: React.FC<BodyData[]> = (data, defaultTab) => {
-  const [value, setValue] = useState<number>(defaultTab);
+const TabbedCards: React.FC<{ data: BodyData[]; defaultTab: number }> = ({
+  data,
+  defaultTab,
+}) => {
+  const [value, setValue] = useState(defaultTab);
 
   useEffect(() => {
     setValue(defaultTab);
@@ -82,11 +86,17 @@ const TabbedCards: React.FC<BodyData[]> = (data, defaultTab) => {
                   >
                     <CardHeader title={card.title} sx={{ paddingBottom: 0 }} />
                     <CardContent>
-                      {card.content.map((content, lineIndex) => (
-                        <Typography key={lineIndex} variant="body2">
-                          {content.description}
-                        </Typography>
-                      ))}
+                      {card.content.map((content, lineIndex) =>
+                        content.description.includes("http") ? (
+                          <Link key={lineIndex} href={content.description}>
+                            {content.description}
+                          </Link>
+                        ) : (
+                          <Typography key={lineIndex} variant="body2">
+                            {content.description}
+                          </Typography>
+                        ),
+                      )}
                     </CardContent>
                   </Card>
                 </Box>

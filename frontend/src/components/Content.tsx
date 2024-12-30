@@ -1,6 +1,5 @@
 import { CircularProgress, Alert } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 import { BASE_URL } from "../constants";
 
@@ -10,7 +9,6 @@ type ContentProps = {
 };
 
 const Content: React.FC<ContentProps> = ({ render, pageReference }) => {
-  const { t } = useTranslation();
   const [content, setContent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +18,7 @@ const Content: React.FC<ContentProps> = ({ render, pageReference }) => {
       try {
         const response = await fetch(`${BASE_URL}/content/${pageReference}/`);
         if (!response.ok) {
-          throw new Error(t("failedFetch"));
+          throw new Error("Failed to fetch data.");
         }
         const data = await response.json();
         setContent(data);
@@ -33,7 +31,7 @@ const Content: React.FC<ContentProps> = ({ render, pageReference }) => {
     };
 
     fetchData();
-  }, [t, pageReference]);
+  }, [pageReference]);
 
   if (loading) {
     return <CircularProgress data-testid="loading-spinner" />;

@@ -26,12 +26,4 @@ module.exports = {
     "import/no-unresolved": "error",
     "prettier/prettier": "error",
   },
-  overrides: [
-    {
-      files: ["./src/i18n.ts"], // Specify the file to override
-      rules: {
-        "import/no-named-as-default-member": "off", // Disable the rule for this file
-      },
-    },
-  ],
 };

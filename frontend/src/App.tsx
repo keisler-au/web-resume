@@ -1,9 +1,7 @@
-import { Container } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { useTranslation } from "react-i18next";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
 import Contact from "./components/Contact";
@@ -14,15 +12,42 @@ import Projects from "./components/Projects";
 import TabbedCards from "./components/TabbedCards";
 import theme from "./theme";
 
-export const ErrorFallback = ({ error }: any) => {
-  const { t } = useTranslation();
-  return (
-    <Container>
-      <h2>{t("error")}</h2>
-      <pre>{error.message}</pre>
-    </Container>
-  );
-};
+export const ErrorFallback = () => (
+  <div style={{ width: "100vw", height: "100vh", backgroundColor: "#1D3557" }}>
+    <div
+      style={{
+        backgroundColor: "#1D3557",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <h2
+        style={{
+          color: "#E8E8E8",
+          marginTop: "5rem",
+          fontWeight: "bold",
+          height: "6rem",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Something's gone wrong...
+      </h2>
+      <div
+        style={{
+          color: "#E8E8E8",
+          height: "4rem",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Please reach out to joshkeisler.au@gmail.com and try again later, thank
+        you!
+      </div>
+    </div>
+  </div>
+);
 
 export interface HeadingData {
   main_heading: string;
@@ -76,13 +101,15 @@ const App = () => (
               element={
                 <Content
                   render={(pageData: PageData[]) => {
-                    console.log(pageData);
                     const PageComponent = pageConfig.page;
                     const props = pageData[0].body
                       ? { data: pageData[0].body, ...pageConfig.props }
                       : {};
                     return (
-                      <PageLayout data={pageData[0].heading[0]}>
+                      <PageLayout
+                        data={pageData[0].heading[0]}
+                        pageType={pageConfig.path}
+                      >
                         <PageComponent {...props} />
                       </PageLayout>
                     );

@@ -2,28 +2,16 @@ services:
   backend:
     build:
       context: ./backend
-      target: development
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/backend-app
-    environment:
-      - PYTHONUNBUFFERED=1
-      - PYTHONDONTWRITEBYTECODE=1
     depends_on:
       - db
 
   frontend:
     build:
       context: ./frontend
-      target: development
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/frontend-app
-      - /frontend-app/node_modules
-    stdin_open: true
-    tty: true
     depends_on:
       - backend
 
