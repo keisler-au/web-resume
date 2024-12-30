@@ -32,7 +32,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-
       - name: Set up SSH for deployment
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -40,8 +39,8 @@ jobs:
 
       - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no root@${{secrets.VULTR_IP_ADDRESS }} << 'EOF'
-            cd ~/web-resume/app
+          ssh -o StrictHostKeyChecking=no linuxuser@${{secrets.VULTR_IP_ADDRESS }} << 'EOF'
+            cd ~/web-resume
 
             git pull origin main
 
