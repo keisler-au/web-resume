@@ -2,7 +2,7 @@ services:
   backend:
     build:
       context: ./backend
-    image: "${DOCKER_ID}/backend:latest"
+    image: keisler96/backend:latest
     ports:
       - "8000:8000"
     depends_on:
@@ -11,7 +11,7 @@ services:
   frontend:
     build:
       context: ./frontend
-    image: "${DOCKER_ID}/frontend:latest"
+    image: keisler96/frontend:latest
     ports:
       - "3000:3000"
     depends_on:
