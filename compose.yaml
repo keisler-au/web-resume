@@ -2,7 +2,7 @@ services:
   backend:
     build:
       context: ./backend
-    image: "${DOCKER_USERNAME}/backend:latest"
+    image: joshkeisler.au@gmail.com/backend:latest
     ports:
       - "8000:8000"
     depends_on:
@@ -11,7 +11,7 @@ services:
   frontend:
     build:
       context: ./frontend
-    image: "${DOCKER_USERNAME}/frontend:latest"
+    image: joshkeisler.au@gmail.com/frontend:latest
     ports:
       - "3000:3000"
     depends_on:
