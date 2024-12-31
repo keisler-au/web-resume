@@ -36,7 +36,7 @@ jobs:
           echo "MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }}" >> backend/.env
           docker compose -f compose.yaml -f production.yaml build
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_ID }}
 
       - name: Run Backend Tests
         run: docker compose run --rm backend python manage.py test
