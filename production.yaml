@@ -6,6 +6,8 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/ssl/certs/joshkeisler_cert.crt:/etc/ssl/certs/joshkeisler_cert.crt:ro
+      - /etc/ssl/private/joshkeisler_key.key:/etc/ssl/private/joshkeisler_key.key:ro
     depends_on:
       - backend
       - frontend
