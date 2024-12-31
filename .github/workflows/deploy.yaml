@@ -9,6 +9,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Cache Docker layers
         id: cache-docker
         uses: actions/cache@v3
@@ -26,6 +35,8 @@ jobs:
           echo "MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }}" >> backend/.env
           echo "MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }}" >> backend/.env
           docker compose -f compose.yaml -f production.yaml build
+        # env:
+        #   DOCKER_USERNAME: ${{ secrets.DOCKER_ID }}
 
       - name: Run Backend Tests
         run: docker compose run --rm backend python manage.py test
@@ -34,12 +45,6 @@ jobs:
         run: |
           docker build --target build -t frontend-tests ./frontend
           docker run --rm frontend-tests npm test -- --silent --watchAll=false
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Push Docker images to Docker Hub
         run: |
