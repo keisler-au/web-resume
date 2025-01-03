@@ -53,6 +53,8 @@ const Projects: React.FC<{ data: BodyData[] }> = ({ data }) => {
           display: "flex",
           justifyContent: "center",
           gap: 2,
+          flexWrap: "wrap", // Allow buttons to wrap on smaller screens
+          marginBottom: { xs: 2, sm: 3 }, // Adjust margin on smaller screens
         }}
       >
         {data.map(({ label }) => (
@@ -71,6 +73,8 @@ const Projects: React.FC<{ data: BodyData[] }> = ({ data }) => {
                 border: `1px solid ${theme.palette.secondary.main}`,
                 backgroundColor: theme.palette.primary.dark,
               },
+              fontSize: { xs: "0.9rem", sm: "1rem" }, // Adjust font size for mobile
+              padding: { xs: "0.6rem 1.2rem", sm: "0.8rem 1.5rem" }, // Adjust padding for mobile
             }}
           >
             {label}
@@ -80,10 +84,18 @@ const Projects: React.FC<{ data: BodyData[] }> = ({ data }) => {
 
       {selectedCardContent.length > 0 && (
         <Card
-          sx={{ marginTop: "2rem", maxWidth: 600, marginX: "auto", padding: 2 }}
+          sx={{
+            marginTop: "2rem",
+            maxWidth: { xs: "90%", sm: 600 }, // Allow card to take full width on mobile
+            marginX: "auto",
+            padding: { xs: 1, sm: 2 }, // Adjust padding for mobile
+          }}
         >
           <CardContent>
-            <Typography variant="h6">
+            <Typography
+              variant="h6"
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <SelectedIcon
                 style={{
                   marginBottom: "1rem",
@@ -96,7 +108,11 @@ const Projects: React.FC<{ data: BodyData[] }> = ({ data }) => {
               <Typography
                 key={index}
                 variant="body1"
-                sx={{ marginBottom: 1, marginLeft: index === 0 ? 0 : 2 }}
+                sx={{
+                  marginBottom: 1,
+                  marginLeft: index === 0 ? 0 : 2,
+                  fontSize: { xs: "0.9rem", sm: "1rem" }, // Adjust font size for mobile
+                }}
               >
                 {content.description}
               </Typography>

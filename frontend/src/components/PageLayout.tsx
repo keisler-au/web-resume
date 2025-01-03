@@ -28,10 +28,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "40vh",
-        maxHeight: "40vh",
+        minHeight: { xs: "33vh", sm: "40vh" },
+        maxHeight: { xs: "33vh", sm: "40vh" },
         textAlign: "center",
-        marginBottom: "4vh",
+        marginBottom: pageType === "home" ? 0 : "4vh",
+        // padding: { xs: 2, sm: 4 },
       }}
     >
       <Typography
@@ -41,19 +42,23 @@ const PageLayout: React.FC<PageLayoutProps> = ({
             pageType === "home"
               ? theme.palette.background.paper
               : theme.palette.text.primary,
-          marginTop: "5rem",
+          marginTop: { xs: "3rem", sm: "5rem" },
           fontWeight: "bold",
-          height: "6rem",
+          fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
           overflow: "hidden",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
         }}
       >
         {data.main_heading}
         {pageType === "home" && (
           <WavingHand
-            sx={{ marginLeft: "2rem", color: "yellow", fontSize: 50 }}
+            sx={{
+              marginLeft: "1rem",
+              color: "yellow",
+              fontSize: { xs: 30, sm: 50 },
+            }}
           />
         )}
       </Typography>
@@ -63,19 +68,23 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       <Typography
         variant="body1"
         sx={{
-          maxWidth: "40%",
-          height: "4rem",
+          maxWidth: { xs: "90%", sm: "70%", md: "40%" },
+          paddingTop: "3vh",
           overflow: "hidden",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          fontSize: { xs: "2.5vh", sm: "1rem" },
+          textAlign: "center",
         }}
       >
         {pageType === "projects" && (
           <Link
             href="https://github.com/keisler-au/web-resume"
-            sx={{ marginBottom: 2 }}
+            sx={{
+              fontSize: { xs: "0.8rem", sm: "1rem" },
+            }}
           >
             GITHUB - WEB RESUME
           </Link>
@@ -84,7 +93,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       </Typography>
     </Box>
     {children}
-    <Footer homeStyling={pageType === "home"} />
   </>
 );
 

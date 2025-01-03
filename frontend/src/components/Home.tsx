@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import theme from "../theme";
+import Footer from "./Footer";
 
 export const NavButton: React.FC<{
   to: string;
@@ -21,7 +22,7 @@ export const NavButton: React.FC<{
           display: "flex",
           flexDirection: "column",
           gap: 0.5,
-          fontSize: "1.2rem",
+          fontSize: { xs: "1rem", sm: "1.2rem" }, // Adjusted for mobile and laptop
         }}
       >
         {label}
@@ -44,20 +45,28 @@ const Home: React.FC = () => {
     <Box
       sx={{
         backgroundColor: theme.palette.background.paper,
-        height: "56vh",
+        minHeight: { xs: "67vh", sm: "60vh" }, // Ensure full height of the screen
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly", // Distribute space between content
         paddingTop: "6vh",
       }}
     >
       <Typography
         variant="h5"
-        sx={{ display: "flex", justifyContent: "center", marginBottom: "6vh" }}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "6vh",
+          fontSize: { xs: "1.2rem", sm: "1.5rem" }, // Adjust font size for mobile
+        }}
       >
-        Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions
+        Automation | Access | Accountability | Play
       </Typography>
       <Box
         sx={{
           display: "flex",
-          gap: "2rem",
+          gap: { xs: "1rem", sm: "2rem" }, // Adjust gap for mobile
           flexWrap: "wrap",
           justifyContent: "center",
         }}
@@ -67,7 +76,11 @@ const Home: React.FC = () => {
         <NavButton to="/projects" label="Projects" />
       </Box>
       <Box
-        sx={{ marginTop: "2rem", display: "flex", justifyContent: "center" }}
+        sx={{
+          marginTop: "2rem",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
         <Link to="/contact">
           <Button
@@ -76,7 +89,7 @@ const Home: React.FC = () => {
               "&:hover": {
                 backgroundColor: theme.palette.text.primary,
               },
-              fontSize: "1.2rem",
+              fontSize: { xs: "1rem", sm: "1.2rem" }, // Adjust font size for mobile
               border: 1,
               borderColor: theme.palette.primary.main,
             }}
@@ -85,6 +98,7 @@ const Home: React.FC = () => {
           </Button>
         </Link>
       </Box>
+      <Footer />
     </Box>
   );
 };

@@ -56,35 +56,47 @@ const TabbedCards: React.FC<{ data: BodyData[]; defaultTab: number }> = ({
         indicatorColor="secondary"
       >
         {data.map((tab, index) => (
-          <Tab key={index} label={tab.label} />
+          <Tab
+            key={index}
+            label={tab.label}
+            sx={{ padding: "0.5rem", flexShrink: 1 }}
+          />
         ))}
       </Tabs>
 
       {data.map((tab, index) =>
         value === index ? (
-          <Box key={index}>
+          <Box key={index} sx={{ padding: { xs: "0.5rem", sm: "1rem" } }}>
             <Slider {...sliderSettings}>
               {tab.cards.map((card, cardIndex) => (
                 <Box
                   key={cardIndex}
                   sx={{
-                    position: "relative",
-                    height: "40vh",
+                    // position: "relative",
+                    // height: "auto", // Adjust height to be more flexible
+                    padding: { xs: "1rem", sm: "2rem" }, // Adjust padding for smaller screens
                   }}
                 >
                   <Card
                     sx={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "50%",
-                      transform: "translate(-50%, -50%)",
-                      maxWidth: "35%",
-                      width: "70%",
-                      height: "70%",
+                      position: "relative",
+                      maxWidth: { xs: "90%", sm: "40%" },
+                      minWidth: { xs: "90%", sm: "40%" },
+                      minHeight: { xs: "16rem", sm: "70%" },
+                      maxHeight: "16rem",
+
+                      width: "100%",
                       backgroundColor: theme.palette.text.secondary,
+                      margin: "auto",
+                      padding: { xs: "0.5rem", sm: "1rem" },
                     }}
                   >
-                    <CardHeader title={card.title} sx={{ paddingBottom: 0 }} />
+                    <CardHeader
+                      title={card.title}
+                      sx={{
+                        paddingBottom: 0,
+                      }}
+                    />
                     <CardContent>
                       {card.content.map((content, lineIndex) =>
                         content.description.includes("http") ? (

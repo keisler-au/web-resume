@@ -4,13 +4,34 @@
   min-width: 2rem;
   color: white;
   z-index: 2;
+  font-size: 2rem; /* Adjust arrow size */
 }
+
 .slick-next {
-  right: 25rem;
+  right: 0rem; /* Adjust right position for mobile */
 }
+
 .slick-prev {
-  left: 25rem;
+  left: 0rem; /* Adjust left position for mobile */
 }
+
+/* Adjust arrow positions for larger screens */
+@media (min-width: 600px) {
+  .slick-next {
+    right: 25rem; /* For large screens (laptop) */
+  }
+
+  .slick-prev {
+    left: 25rem; /* For large screens (laptop) */
+  }
+
+  .slick-prev,
+  .slick-next {
+    font-size: 3rem; /* Larger arrows for laptop screens */
+  }
+}
+
+/* Hover and focus states for arrows */
 .slick-prev:hover,
 .slick-prev:focus,
 .slick-next:hover,
@@ -18,10 +39,23 @@
   color: white;
 }
 
+/* Dots styling */
 .slick-dots li button:before {
   color: white;
 }
 
+/* Active dot styling */
 .slick-dots li.slick-active button:before {
   color: white;
+}
+
+/* Adjust dots positioning for smaller screens */
+@media (max-width: 600px) {
+  .slick-dots {
+    bottom: -10px; /* Adjust bottom position for mobile */
+  }
+
+  .slick-dots li button:before {
+    font-size: 1rem; /* Reduce dot size for mobile */
+  }
 }
