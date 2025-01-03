@@ -1,0 +1,291 @@
+{
+  "home": [
+    {
+      "heading": [
+        {
+          "main_heading": "Building Apps for You",
+          "description": "My mission is to build apps that are functionally robust, maintainable, and secure. Our needs evolve, and this should be reflected in the codebase. Software provides freedom through access and automation, and I love the challenge of future-proofing it."
+        }
+      ],
+      "body": [
+        {
+          "tabs": [
+            {
+              "cards": [
+                {
+                  "title": "Problem Interests",
+                  "content": [
+                    {
+                      "description": "I am passionate about helping people and I want this represented in the problems I am solving. I strongly believe in principles of Sustainability and Equality of Opportunity, and it is equally important to me that people are not just surviving but thriving. Whether it is working in Healthcare or Personal Development; from Mental Health to the Entertainment industry, I want to be solving problems that is going to bring real benefit to peoples' lives."
+                    }
+                  ]
+                }
+              ],
+              "label": "keep empty"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "heading": [
+        {
+          "main_heading": "Experience",
+          "description": "Whether it is learning a new tech stack, working in a team, or understanding unique and dynamic problems, it is my commitment to architect and build solutions. My experience to-date has been the result of genuine curiosity and interest, if I choose to work for you it means I am invested."
+        }
+      ],
+      "body": [
+        {
+          "tabs": [
+            {
+              "label": "Software Developer",
+              "cards": [
+                {
+                  "title": "Software Developer",
+                  "content": [
+                    {
+                      "description": "As a contractee to BHP I worked on a platform that was used by field workers and miners to automate and standardise the daily onsite mining operations."
+                    },
+                    {
+                      "description": "I created new frontend and backend features, such as a page dedicated to logging reports, and a versions-comparisons UI for data points."
+                    },
+                    {
+                      "description": "I optimised features to resolve performance issues and improve user experience, this often involved backend Graphene and frontend React Relay GQL query optimisation."
+                    },
+                    {
+                      "description": "I refactored code that improved the readability and reusability of particular functions, such as Django admin file uploads and error-message dependent routing."
+                    },
+                    {
+                      "description": "I participated in code reviews and actively welcomed feedback to produce the highest code quality possible."
+                    },
+                    {
+                      "description": "I received an award through Infosys for 'Outstanding Performance'."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Operational Support",
+              "cards": [
+                {
+                  "title": "Operational Support",
+                  "content": [
+                    {
+                      "description": "At BHP I was also an active member in the Operational Support team, where we maintained the functionality of the production application and liaised with clients."
+                    },
+                    {
+                      "description": "I debugged and wrote code fixes for production issues, investigating logs within the AWS infrastructure, reading the codebase, and analysing Django admin records."
+                    },
+                    {
+                      "description": "I prioritised the user experience by actively talking to them when they raised production incident tickets, this gave me an appreciation for their issues and the impact it has on their work."
+                    },
+                    {
+                      "description": "I set up meetings and coordinated the collaborative effort between dev and operational support teams when working through production bugs and feature quality tests."
+                    },
+                    {
+                      "description": "I wrote documentation for the Operational Support team on best practices and debugging techniques for particular features within the platform."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Graduate Position",
+              "cards": [
+                {
+                  "title": "Graduate Position",
+                  "content": [
+                    {
+                      "description": "Infosys is a multinational IT company and for the first three months I successfully completed training courses in C#, Java, SQL, and Angular."
+                    },
+                    {
+                      "description": "I passed fortnightly exams that assessed our proficiency in the required technologies, and despite already knowing Python the strict OOP and static typing of Java and C# was interesting to learn."
+                    },
+                    {
+                      "description": "Prior to Infosys, I had taught myself web development through online resources and I quickly became enamoured by Python, JavaScript, CSS, SQL and Git."
+                    },
+                    {
+                      "description": "Infosys hired me after seeing a small UI project I built that pulled data from a public API (which has since been decommisioned). It's crude, it's naïve, and it's honest, luckily I have learnt a lot since then."
+                    },
+                    {
+                      "description": "https://keisler-au.github.io/weather-project/"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "University",
+              "cards": [
+                {
+                  "title": "University",
+                  "content": [
+                    {
+                      "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                    },
+                    {
+                      "description": "Some of the skills I developed at university involve critical thinking, writing and reading documentation, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
+                    },
+                    {
+                      "description": "I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "technical": [
+    {
+      "heading": [
+        {
+          "main_heading": "Technical Skills",
+          "description": "We need technical skills and core principles to turn visions into products. Below I have outlined what I see as the main tenets of an application, along with my experience in the technologies that go into building these foundations."
+        }
+      ],
+      "body": [
+        {
+          "tabs": [
+            {
+              "label": "Reliable",
+              "cards": [
+                {
+                  "title": "Reliable",
+                  "content": [
+                    {
+                      "description": "Django:"
+                    },
+                    {
+                      "description": "This resume uses Django and a Postgres db to serve up the text content."
+                    },
+                    {
+                      "description": "For BHP, I optimised key server-side functions, focusing on Django and Graphene queries within views, serializers, mutations and resolvers."
+                    },
+                    {
+                      "description": "I wrote, refactored, and debugged functionality within Django's core features (views, serializers, models, admin, templates, etc)."
+                    },
+                    {
+                      "description": "I wrote unit tests for every piece of code I produced and utilised fixture sets to move away from the overhead of prod dumps."
+                    },
+                    {
+                      "description": "React:"
+                    },
+                    {
+                      "description": "For BHP I built new features using tools like MUI, React Relay, and Formik. I also routinely made code improvements such as client-side data validation, which were often inspired by user interactions and incident tickets."
+                    },
+                    {
+                      "description": "For this resume I used similar tools (React, MUI) and implemented design patterns that I learnt such as prop rendering. I have also used Typescript and written some unit tests for key operations."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Maintainable",
+              "cards": [
+                {
+                  "title": "Maintainable",
+                  "content": [
+                    {
+                      "description": "Agile Methodology:"
+                    },
+                    {
+                      "description": "I participated in daily scrums, sprint planning and retrospection, and backlog grooming. Jira tickets, Sprints, Unit tests for every piece of work produced."
+                    },
+                    {
+                      "description": "Git:"
+                    },
+                    {
+                      "description": "As a developer I made a regular practice of managing feature branches, rebasing, and resolving merge conflicts."
+                    },
+                    {
+                      "description": "I participated in code reviews and approving pull requests, while actively taking on any feedback and advice in how to improve the quality of my code."
+                    },
+                    {
+                      "description": "Pre-Commit:"
+                    },
+                    {
+                      "description": "I followed BHP's lead and built Pre-Commit into this project's workflow, to automate and enforce quality styling standards."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Automating",
+              "cards": [
+                {
+                  "title": "Automating",
+                  "content": [
+                    {
+                      "description": "Docker:"
+                    },
+                    {
+                      "description": "I have used multi-stage builds for the docker images, docker-compose for network and volume orchestration, and I am looking to implement Kubernetes for production container management."
+                    },
+                    {
+                      "description": "CI/CD:"
+                    },
+                    {
+                      "description": "Within this project I automated unit test execution, making use of the docker-compose container configuration."
+                    },
+                    {
+                      "description": "Exploring CI/CD options and GitHub Actions showed me the many server, infrastructure and deployment options that are available for differing sized and scalable applications."
+                    },
+                    {
+                      "description": "Dependency Management:"
+                    },
+                    {
+                      "description": "Managing dependencies gave me greater exposure to the Linux file structure and its executables, and an understanding that dependencies and package managers are both a miracle and a nightmare."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Scaleable",
+              "cards": [
+                {
+                  "title": "Scaleable",
+                  "content": [
+                    {
+                      "description": "AWS:"
+                    },
+                    {
+                      "description": "Having learnt the AWS infrastructure that BHP used for their project I decided to replicate it for this web resume. I have since moved to a Linux VPS, but I had successfully deployed to AWS and made use of its scalability features."
+                    },
+                    {
+                      "description": "Successfully deploying to AWS involved using; ECR, Fargate, ECS, ALB, Security Group, VPC endpoints, Parameter Store Secrets, IAM, RDS, CloudWatch."
+                    },
+                    {
+                      "description": "Redis:"
+                    },
+                    {
+                      "description": "For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "contact": [
+    {
+      "heading": [
+        {
+          "main_heading": "Get in Touch!",
+          "description": "I would love to hear from you. If you have a proposal, or you liked or have criticisms about this resume, I would love to hear about it. I am always seeking to improve and I value meeting new people so I hope to hear from you soon."
+        }
+      ]
+    }
+  ]
+}

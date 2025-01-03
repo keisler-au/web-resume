@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import PageLayout from "./components/PageLayout";
 import Projects from "./components/Projects";
 import TabbedCards from "./components/TabbedCards";
+import data from "./fixtureData.json";
 import theme from "./theme";
 
 export const ErrorFallback = () => (
@@ -71,20 +72,14 @@ interface PageData {
 interface PageConfig {
   path: string;
   page: React.FC<any>;
-  props?: any;
 }
 const pageConfigs: PageConfig[] = [
   {
     path: "home",
     page: Home,
   },
-  {
-    path: "about",
-    page: TabbedCards,
-    props: { defaultTab: 0 },
-  },
-  { path: "experience", page: TabbedCards, props: { defaultTab: 2 } },
-  { path: "projects", page: Projects },
+  { path: "experience", page: TabbedCards },
+  { path: "technical", page: TabbedCards },
   { path: "contact", page: Contact },
 ];
 
@@ -94,31 +89,41 @@ const App = () => (
       <CssBaseline />
       <Router>
         <Routes>
-          {pageConfigs.map((pageConfig) => (
-            <Route
-              key={pageConfig.path}
-              path={pageConfig.path === "home" ? "/" : pageConfig.path}
-              element={
-                <Content
-                  render={(pageData: PageData[]) => {
-                    const PageComponent = pageConfig.page;
-                    const props = pageData[0].body
-                      ? { data: pageData[0].body, ...pageConfig.props }
-                      : {};
-                    return (
-                      <PageLayout
-                        data={pageData[0].heading[0]}
-                        pageType={pageConfig.path}
-                      >
-                        <PageComponent {...props} />
-                      </PageLayout>
-                    );
-                  }}
-                  pageReference={pageConfig.path}
-                />
-              }
-            />
-          ))}
+          {pageConfigs.map((pageConfig) => {
+            const PageComponent = pageConfig.page;
+            const pageData = data[pageConfig.path][0];
+
+            return (
+              <Route
+                key={pageConfig.path}
+                path={pageConfig.path === "home" ? "/" : pageConfig.path}
+                // element={
+                //   <Content
+                //     render={(pageData: PageData[]) => {
+                //       const PageComponent = pageConfig.page;
+                //       return (
+                //         <PageLayout
+                //           data={pageData[0].heading[0]}
+                //           pageType={pageConfig.path}
+                //         >
+                //           <PageComponent data={pageData[0].body} />
+                //         </PageLayout>
+                //       );
+                //     }}
+                //     pageReference={pageConfig.path}
+                //   />
+                // }
+                element={
+                  <PageLayout
+                    data={pageData.heading[0]}
+                    pageType={pageConfig.path}
+                  >
+                    <PageComponent data={pageData.body?.[0].tabs} />
+                  </PageLayout>
+                }
+              />
+            );
+          })}
         </Routes>
       </Router>
     </ThemeProvider>

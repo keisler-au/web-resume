@@ -1,91 +1,85 @@
 import { WavingHand } from "@mui/icons-material";
 import { Box, Typography, Link } from "@mui/material";
-import React, { ReactNode } from "react";
+import React, { useState } from "react";
 
 import theme from "../theme";
-import Footer from "./Footer";
 import Navbar from "./NavBar";
 import { HeadingData } from "../App";
 
 interface PageLayoutProps {
   data: HeadingData;
   pageType: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({
   data,
   pageType,
   children,
-}) => (
-  <>
-    {pageType !== "home" && <Navbar />}
-    <Box
-      sx={{
-        backgroundColor:
-          pageType === "home" ? "primary" : theme.palette.background.paper,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "40vh",
-        maxHeight: "40vh",
-        textAlign: "center",
-        marginBottom: "4vh",
-      }}
-    >
-      <Typography
-        variant={pageType === "home" ? "h2" : "h3"}
+}) => {
+  return (
+    <>
+      <Navbar />
+      <Box
         sx={{
-          color:
-            pageType === "home"
-              ? theme.palette.background.paper
-              : theme.palette.text.primary,
-          marginTop: "5rem",
-          fontWeight: "bold",
-          height: "6rem",
-          overflow: "hidden",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {data.main_heading}
-        {pageType === "home" && (
-          <WavingHand
-            sx={{ marginLeft: "2rem", color: "yellow", fontSize: 50 }}
-          />
-        )}
-      </Typography>
-      {/* {pageType === "home" && (
-        <Typography variant="h5">{data.sub_heading}</Typography>
-      )} */}
-      <Typography
-        variant="body1"
-        sx={{
-          maxWidth: "40%",
-          height: "4rem",
-          overflow: "hidden",
+          position: "relative",
+          backgroundColor: theme.palette.background.paper,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           justifyContent: "center",
+          alignItems: "center",
+          minHeight: { xs: "33vh", sm: "40vh" },
+          // maxHeight: { xs: "33vh", sm: "40vh" },
+          textAlign: "center",
+          paddingTop: "2vh",
+          marginBottom: pageType === "home" ? 0 : "4vh",
         }}
       >
-        {pageType === "projects" && (
-          <Link
-            href="https://github.com/keisler-au/web-resume"
-            sx={{ marginBottom: 2 }}
-          >
-            GITHUB - WEB RESUME
-          </Link>
-        )}
-        {data.description}
-      </Typography>
-    </Box>
-    {children}
-    <Footer homeStyling={pageType === "home"} />
-  </>
-);
+        <Typography
+          variant={pageType === "home" ? "h2" : "h3"}
+          sx={{
+            color: theme.palette.primary.main,
+            marginTop: { xs: "3rem", sm: "5rem" },
+            fontWeight: "bold",
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+            // overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          {data.main_heading}
+          {/* {pageType === "home" && (
+            <WavingHand
+              sx={{
+                marginLeft: "2vw",
+                color: "yellow",
+                fontSize: { xs: 30, sm: 50 },
+              }}
+            />
+          )} */}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: theme.palette.text.primary,
+            maxWidth: { xs: "90%", sm: "70%", md: "50%" },
+            paddingTop: "3vh",
+            // overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: { xs: "2.5vh", sm: "1rem" },
+            textAlign: "center",
+          }}
+        >
+          {data.description}
+        </Typography>
+      </Box>
+      {children}
+    </>
+  );
+};
 
 export default PageLayout;
