@@ -18,6 +18,35 @@
 /* Adjust arrow positions for larger screens */
 @media (min-width: 600px) {
   .slick-next {
+    right: 10rem; /* For large screens (laptop) */
+  }
+
+  .slick-prev {
+    left: 10rem; /* For large screens (laptop) */
+  }
+  .slick-prev,
+  .slick-next {
+    font-size: 3rem; /* Larger arrows for laptop screens */
+  }
+}
+
+@media (min-width: 900px) {
+  .slick-next {
+    right: 20rem; /* For large screens (laptop) */
+  }
+
+  .slick-prev {
+    left: 20rem; /* For large screens (laptop) */
+  }
+
+  .slick-prev,
+  .slick-next {
+    font-size: 3rem; /* Larger arrows for laptop screens */
+  }
+}
+
+@media (min-width: 1100px) {
+  .slick-next {
     right: 25rem; /* For large screens (laptop) */
   }
 

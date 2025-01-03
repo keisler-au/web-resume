@@ -41,7 +41,12 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <Box position="fixed" width="100%" zIndex={1000}>
+    <Box
+      position="fixed"
+      width="100%"
+      zIndex={2}
+      sx={{ backgroundColor: theme.palette.background.paper }}
+    >
       <Toolbar
         sx={{
           display: "flex",
