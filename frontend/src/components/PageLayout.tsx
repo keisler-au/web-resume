@@ -72,12 +72,15 @@ const PageLayout: React.FC<PageLayoutProps> = ({
           justifyContent: "center",
         }}
       >
-        {data.description}
         {pageType === "projects" && (
-          <Link href="https://github.com/keisler-au/web-resume">
-            https://github.com/keisler-au/web-resume
+          <Link
+            href="https://github.com/keisler-au/web-resume"
+            sx={{ marginBottom: 2 }}
+          >
+            GITHUB - WEB RESUME
           </Link>
         )}
+        {data.description}
       </Typography>
     </Box>
     {children}

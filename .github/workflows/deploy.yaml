@@ -67,3 +67,4 @@ jobs:
             git pull origin main
             sudo docker-compose -f compose.yaml -f production.yaml pull
             sudo docker-compose -f compose.yaml -f production.yaml up -d
+            sudo docker-compose run backend python manage.py migrate

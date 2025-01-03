@@ -53,6 +53,11 @@ const CustomTextField: React.FC<{
           color: theme.palette.secondary.main,
         },
       }}
+      InputProps={{
+        style: {
+          color: theme.palette.secondary.main,
+        },
+      }}
     />
   );
 };
@@ -61,6 +66,7 @@ const Contact: React.FC = () => {
   const theme = useTheme();
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
@@ -68,6 +74,11 @@ const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fileName, setFileName] = useState("No Files Uploaded");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
+  const watchFields = watch(["name", "email", "message"]);
+  const allFieldsFilled = watchFields.every(
+    (value) => value && value.trim() !== "",
+  );
 
   const onSubmit = async (data: FormValues) => {
     const formData = new FormData();
@@ -159,13 +170,19 @@ const Contact: React.FC = () => {
             backgroundColor: theme.palette.action.hover,
           },
           textTransform: "none",
-          color:
-            fileName === "No Files Uploaded"
-              ? theme.palette.text.disabled
-              : theme.palette.text.primary,
         }}
       >
-        <Typography variant="body1">{fileName}</Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color:
+              fileName === "No Files Uploaded"
+                ? theme.palette.text.primary
+                : theme.palette.secondary.main,
+          }}
+        >
+          {fileName}
+        </Typography>
         <input
           type="file"
           multiple
@@ -197,6 +214,9 @@ const Contact: React.FC = () => {
           "&:hover": {
             backgroundColor: theme.palette.primary.dark,
           },
+          color: allFieldsFilled
+            ? theme.palette.secondary.main
+            : theme.palette.text.primary,
         }}
       >
         {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "Send"}
@@ -208,19 +228,22 @@ const Contact: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor:
-              statusMessage === "Email sent!"
-                ? theme.palette.success.light
-                : theme.palette.error.light,
-            color:
-              statusMessage === "Email sent!"
-                ? theme.palette.success.main
-                : theme.palette.error.main,
+            backgroundColor: theme.palette.background.paper,
+
             padding: theme.spacing(2),
             borderRadius: 1,
           }}
         >
-          <Typography variant="body1" sx={{ marginRight: 1 }}>
+          <Typography
+            variant="body1"
+            sx={{
+              marginRight: 1,
+              color:
+                statusMessage === "Email sent!"
+                  ? theme.palette.success.main
+                  : theme.palette.error.main,
+            }}
+          >
             {statusMessage === "Email sent!" ? "✅" : "❌"} {statusMessage}
           </Typography>
         </Box>
