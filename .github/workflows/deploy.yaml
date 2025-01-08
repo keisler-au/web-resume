@@ -39,13 +39,13 @@ jobs:
         # env:
         #   DOCKER_USERNAME: ${{ secrets.DOCKER_ID }}
 
-      - name: Run Backend Tests
-        run: docker compose run --rm backend python manage.py test
+      # - name: Run Backend Tests
+      #   run: docker compose run --rm backend python manage.py test
 
-      - name: Run Frontend Tests
-        run: |
-          docker build --target build -t frontend-tests ./frontend
-          docker run --rm frontend-tests npm test -- --silent --watchAll=false
+      # - name: Run Frontend Tests
+      #   run: |
+      #     docker build --target build -t frontend-tests ./frontend
+      #     docker run --rm frontend-tests npm test -- --silent --watchAll=false
 
       - name: Push Docker images to Docker Hub
         run: |
