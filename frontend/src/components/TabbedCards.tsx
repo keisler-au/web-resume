@@ -18,15 +18,8 @@ import theme from "../theme";
 import "slick-carousel/slick/slick-theme.css";
 import "../slider-styles.css";
 
-const TabbedCards: React.FC<{ data: BodyData[]; defaultTab: number }> = ({
-  data,
-  defaultTab,
-}) => {
-  const [value, setValue] = useState(defaultTab);
-
-  useEffect(() => {
-    setValue(defaultTab);
-  }, [defaultTab]);
+const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
+  const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -66,54 +59,73 @@ const TabbedCards: React.FC<{ data: BodyData[]; defaultTab: number }> = ({
 
       {data.map((tab, index) =>
         value === index ? (
-          <Box key={index} sx={{ padding: { xs: "0.5rem", sm: "1rem" } }}>
-            <Slider {...sliderSettings}>
-              {tab.cards.map((card, cardIndex) => (
-                <Box
-                  key={cardIndex}
+          <Box key={index}>
+            {/* <Slider {...sliderSettings}> */}
+            {tab.cards.map((card, cardIndex) => (
+              <Box key={cardIndex}>
+                <Card
                   sx={{
-                    // position: "relative",
-                    // height: "auto", // Adjust height to be more flexible
-                    padding: { xs: "1rem", sm: "2rem" }, // Adjust padding for smaller screens
+                    position: "relative",
+                    maxWidth: { xs: "90%", sm: "20%" },
+                    minWidth: { xs: "90%", sm: "40%" },
+                    minHeight: { xs: "16rem", sm: "70%" },
+                    // maxHeight: "16rem",
+                    color: theme.palette.secondary.main,
+                    width: "100%",
+                    backgroundColor: theme.palette.primary.main,
+                    margin: "auto",
+                    // padding: { xs: "0.5rem", sm: "1rem" },
+                    boxShadow: "none",
                   }}
                 >
-                  <Card
-                    sx={{
-                      position: "relative",
-                      maxWidth: { xs: "90%", sm: "40%" },
-                      minWidth: { xs: "90%", sm: "40%" },
-                      minHeight: { xs: "16rem", sm: "70%" },
-                      maxHeight: "16rem",
-
-                      width: "100%",
-                      backgroundColor: theme.palette.text.secondary,
-                      margin: "auto",
-                      padding: { xs: "0.5rem", sm: "1rem" },
-                    }}
-                  >
-                    <CardHeader
+                  {/* <CardHeader
                       title={card.title}
                       sx={{
                         paddingBottom: 0,
                       }}
-                    />
-                    <CardContent>
-                      {card.content.map((content, lineIndex) =>
-                        content.description.includes("http") ? (
-                          <Link key={lineIndex} href={content.description}>
+                    /> */}
+                  <CardContent>
+                    {card.content.map((content, lineIndex) => {
+                      if (content.description.includes("http")) {
+                        return (
+                          <Link
+                            key={lineIndex}
+                            href={content.description}
+                            color="secondary"
+                            sx={{ margin: "2vh 4vh" }}
+                          >
                             {content.description}
                           </Link>
-                        ) : (
-                          <Typography key={lineIndex} variant="body2">
+                        );
+                      } else if (
+                        content.description[content.description.length - 1] ===
+                        ":"
+                      ) {
+                        return (
+                          <Typography
+                            key={lineIndex}
+                            variant="body2"
+                            // sx={{ padding: "1rem" }}
+                          >
                             {content.description}
                           </Typography>
-                        ),
-                      )}
-                    </CardContent>
-                  </Card>
-                </Box>
-              ))}
-            </Slider>
+                        );
+                      }
+                      return (
+                        <Typography
+                          key={lineIndex}
+                          variant="body2"
+                          sx={{ margin: "2vh 4vh" }}
+                        >
+                          {content.description}
+                        </Typography>
+                      );
+                    })}
+                  </CardContent>
+                </Card>
+              </Box>
+            ))}
+            {/* </Slider> */}
           </Box>
         ) : null,
       )}

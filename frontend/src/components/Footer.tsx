@@ -16,7 +16,6 @@ const Footer: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "45px",
-        gap: 2, // Spacing between the icons
       }}
     >
       <Link
@@ -27,6 +26,7 @@ const Footer: React.FC = () => {
         sx={{
           display: { xs: "flex", sm: "inline-flex" },
           alignItems: "center",
+          paddingLeft: 2,
         }}
       >
         <LinkedIn fontSize="large" />
@@ -40,6 +40,7 @@ const Footer: React.FC = () => {
         sx={{
           display: { xs: "flex", sm: "inline-flex" },
           alignItems: "center",
+          paddingLeft: 2,
         }}
       >
         <GitHub fontSize="large" />

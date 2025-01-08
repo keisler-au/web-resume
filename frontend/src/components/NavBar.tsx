@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import theme from "../theme";
+import Footer from "./Footer";
 
 interface NavButtonProps {
   to: string;
@@ -51,22 +52,31 @@ const Navbar: React.FC = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          padding: theme.spacing(1, 2),
         }}
       >
-        <Typography
-          variant="h4"
+        <Box
           sx={{
-            fontWeight: "bold",
             position: "relative",
-            left: { xs: "0", sm: "20px" }, // Adjust logo position for mobile
-            fontSize: { xs: "1.5rem", sm: "2rem" }, // Adjust font size for mobile
+            left: { sm: 0, md: 20 },
+            display: "flex",
+            alignItems: "flex-end",
           }}
         >
-          Josh Keisler
-        </Typography>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: "bold",
+                fontSize: { xs: "1.5rem", sm: "2rem" },
+              }}
+              noWrap
+            >
+              Josh Keisler
+            </Typography>
+          </Link>
+          <Footer />
+        </Box>
 
-        {/* Mobile hamburger menu */}
         <Box sx={{ display: { xs: "block", sm: "none" } }}>
           <IconButton
             color="primary"
@@ -88,14 +98,14 @@ const Navbar: React.FC = () => {
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/" label="Home" />
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
+            {/* <MenuItem onClick={handleMenuClose}>
               <NavButton to="/about" label="About Me" />
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/experience" label="Experience" />
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
-              <NavButton to="/projects" label="Projects" />
+              <NavButton to="/projects" label="Technical Skills" />
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/contact" label="Contact" />
@@ -103,7 +113,6 @@ const Navbar: React.FC = () => {
           </Menu>
         </Box>
 
-        {/* Desktop Menu */}
         <Box
           sx={{
             display: { xs: "none", sm: "flex" },
@@ -112,7 +121,7 @@ const Navbar: React.FC = () => {
           }}
         >
           <NavButton to="/" label="Home" />
-          <NavButton to="/about" label="About Me" />
+          {/* <NavButton to="/about" label="About Me" /> */}
           <NavButton to="/experience" label="Experience" />
           <NavButton to="/projects" label="Projects" />
           <Link to="/contact">

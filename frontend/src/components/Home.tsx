@@ -1,5 +1,5 @@
 import { Typography, Box, Button, useTheme } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import theme from "../theme";
@@ -38,8 +38,56 @@ export const NavButton: React.FC<{
   );
 };
 
-const Home: React.FC = () => {
+const Home: React.FC = (data) => {
   const theme = useTheme();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handlePhotoClick = () => {
+    setIsExpanded((prev) => !prev);
+  };
+  console.log(data);
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        gap: 20,
+        maxWidth: "50vw",
+        margin: "7rem auto",
+      }}
+    >
+      <Box>
+        <Box
+          component="img"
+          src="/cv_photo.jpg"
+          alt="Profile Photo"
+          onClick={handlePhotoClick}
+          sx={{
+            position: "absolute",
+            // top: "55vh",
+            // left: "20vw",
+            width: isExpanded
+              ? { xs: "12rem", sm: "15rem", md: "18rem" }
+              : { xs: "2.3rem", sm: "4rem", md: "8rem" },
+            height: isExpanded
+              ? { xs: "12rem", sm: "15rem", md: "18rem" }
+              : { xs: "2.3rem", sm: "4rem", md: "8rem" },
+            borderRadius: "50%",
+            cursor: "pointer",
+            transition: "all 0.3s ease-in-out",
+            boxShadow: isExpanded
+              ? `0 0 15px ${theme.palette.primary.main}`
+              : "none",
+            zIndex: 20,
+          }}
+        />
+      </Box>
+      <Typography color="secondary">
+        {data.data[0].cards[0].content[0].description}
+      </Typography>
+    </Box>
+  );
 
   return (
     <Box
@@ -61,7 +109,7 @@ const Home: React.FC = () => {
           fontSize: { xs: "1.2rem", sm: "1.5rem" }, // Adjust font size for mobile
         }}
       >
-        Automation | Access | Accountability | Play
+        Functional, Scaleable, Maintainable, Automating, Accessible,
       </Typography>
       <Box
         sx={{

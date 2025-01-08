@@ -20,7 +20,7 @@ def populate_data(apps, schema_editor):
         page=home_page,
         main_heading="Josh Keisler",
         sub_heading="Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions",
-        description="I am passionate about helping people and building scalable, user-friendly applications that solve real-world problems.",
+        description="A Full Stack developer creating access to information, products, services for your target audience.  I am passionate about helping people and building scalable, user-friendly applications that solve real-world problems.",
     )
     PageHeading.objects.create(
         page=about_page,
@@ -153,91 +153,6 @@ def populate_data(apps, schema_editor):
         description="https://keisler-au.github.io/weather-project/",
     )
 
-    infosys_section = PageBody.objects.create(
-        page=experience_page, label="Infosys - Graduate Position"
-    )
-    bootcamp_card = BodyCard.objects.create(
-        body=infosys_section,
-        title="Bootcamp",
-    )
-    CardContent.objects.create(
-        card=bootcamp_card, description="Infosys is a multinational IT company."
-    )
-    CardContent.objects.create(
-        card=bootcamp_card,
-        description="The first three months of my employment was a bootcamp in C#, Java, SQL, and Angular.",
-    )
-    CardContent.objects.create(
-        card=bootcamp_card,
-        description="The camp consisted of learning, with fortnightly exams to assess our proficiency.",
-    )
-    CardContent.objects.create(
-        card=bootcamp_card,
-        description="I was already familiar with SQL, and although I knew Python the strict OOP and static typing of Java and C# was interesting to learn.",
-    )
-    contract_bhp_card = BodyCard.objects.create(
-        body=infosys_section,
-        title="Contract to BHP",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="I was contracted out to the multinational Australian mining and metals company, BHP.",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="I worked on a platform that was used daily by the onsite miners and supervisors.",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="The job was a mixture of Level 3 Operational Support and Software Development.",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="I would work through Service Now incident tickets as well as building and optimising features according to Jira tickets.",
-    )
-
-    operational_support_section = PageBody.objects.create(
-        page=experience_page, label="BHP - Operational Support"
-    )
-    debugging_card = BodyCard.objects.create(
-        body=operational_support_section,
-        title="Debugging",
-    )
-    CardContent.objects.create(
-        card=debugging_card,
-        description="Understanding the product and how our platform worked.",
-    )
-    CardContent.objects.create(
-        card=debugging_card,
-        description="Understanding the container infrastructure in production and investigating CloudWatch logs and metrics.",
-    )
-    CardContent.objects.create(
-        card=debugging_card,
-        description="Understanding the codebase and how AWS insights related to the application.",
-    )
-    CardContent.objects.create(
-        card=debugging_card, description="Analysing data and Django Admin records."
-    )
-    client_roles_card = BodyCard.objects.create(
-        body=operational_support_section,
-        title="Technical and Client-centric Roles",
-    )
-    CardContent.objects.create(
-        card=client_roles_card, description="Scheduling and managing meetings."
-    )
-    CardContent.objects.create(
-        card=client_roles_card,
-        description="Coordinating and practically completing Service Now and Jira tickets.",
-    )
-    CardContent.objects.create(
-        card=client_roles_card,
-        description="Writing bug fixes and liaising with clients.",
-    )
-    CardContent.objects.create(
-        card=client_roles_card,
-        description="Collaborating with clients to understand their issues and the impact it has on their work.",
-    )
-
     software_developer_section = PageBody.objects.create(
         page=experience_page, label="BHP - Software Developer"
     )
@@ -303,6 +218,91 @@ def populate_data(apps, schema_editor):
     )
     CardContent.objects.create(
         card=version_control_card, description="Reviewing and approving pull requests."
+    )
+
+    operational_support_section = PageBody.objects.create(
+        page=experience_page, label="BHP - Operational Support"
+    )
+    debugging_card = BodyCard.objects.create(
+        body=operational_support_section,
+        title="Debugging",
+    )
+    CardContent.objects.create(
+        card=debugging_card,
+        description="Understanding the product and how our platform worked.",
+    )
+    CardContent.objects.create(
+        card=debugging_card,
+        description="Understanding the container infrastructure in production and investigating CloudWatch logs and metrics.",
+    )
+    CardContent.objects.create(
+        card=debugging_card,
+        description="Understanding the codebase and how AWS insights related to the application.",
+    )
+    CardContent.objects.create(
+        card=debugging_card, description="Analysing data and Django Admin records."
+    )
+    client_roles_card = BodyCard.objects.create(
+        body=operational_support_section,
+        title="Technical and Client-centric Roles",
+    )
+    CardContent.objects.create(
+        card=client_roles_card, description="Scheduling and managing meetings."
+    )
+    CardContent.objects.create(
+        card=client_roles_card,
+        description="Coordinating and practically completing Service Now and Jira tickets.",
+    )
+    CardContent.objects.create(
+        card=client_roles_card,
+        description="Writing bug fixes and liaising with clients.",
+    )
+    CardContent.objects.create(
+        card=client_roles_card,
+        description="Collaborating with clients to understand their issues and the impact it has on their work.",
+    )
+
+    infosys_section = PageBody.objects.create(
+        page=experience_page, label="Infosys - Graduate Position"
+    )
+    bootcamp_card = BodyCard.objects.create(
+        body=infosys_section,
+        title="Bootcamp",
+    )
+    CardContent.objects.create(
+        card=bootcamp_card, description="Infosys is a multinational IT company."
+    )
+    CardContent.objects.create(
+        card=bootcamp_card,
+        description="The first three months of my employment was a bootcamp in C#, Java, SQL, and Angular.",
+    )
+    CardContent.objects.create(
+        card=bootcamp_card,
+        description="The camp consisted of learning, with fortnightly exams to assess our proficiency.",
+    )
+    CardContent.objects.create(
+        card=bootcamp_card,
+        description="I was already familiar with SQL, and although I knew Python the strict OOP and static typing of Java and C# was interesting to learn.",
+    )
+    contract_bhp_card = BodyCard.objects.create(
+        body=infosys_section,
+        title="Contract to BHP",
+    )
+    CardContent.objects.create(
+        card=contract_bhp_card,
+        description="I was contracted out to the multinational Australian mining and metals company, BHP.",
+    )
+    CardContent.objects.create(
+        card=contract_bhp_card,
+        description="I worked on a platform that was used daily by the onsite miners and supervisors.",
+    )
+    CardContent.objects.create(
+        card=contract_bhp_card,
+        description="The job was a mixture of Level 3 Operational Support and Software Development.",
+    )
+    CardContent.objects.create(
+        card=contract_bhp_card,
+        description="I would work through Service Now incident tickets as well as building and optimising features according to Jira tickets.",
     )
 
     aws_section = PageBody.objects.create(page=projects_page, label="AWS")
