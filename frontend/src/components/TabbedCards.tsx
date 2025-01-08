@@ -10,6 +10,7 @@ import {
   Link,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
@@ -19,10 +20,28 @@ import "slick-carousel/slick/slick-theme.css";
 import "../slider-styles.css";
 
 const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
-  const [value, setValue] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
+  const location = useLocation();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const tab = searchParams.get("tab"); // Get the tab identifier
+    // const hash = location.hash.replace("#", ""); // Get the heading ID
+
+    if (tab) {
+      setActiveTab(+tab);
+    }
+    // console.log(hash);
+    // if (hash) {
+    //   const element = document.getElementById(hash);
+    //   if (element) {
+    //     element.scrollIntoView({ behavior: "smooth" });
+    //   }
+    // }
+  }, [location]);
+
+  const handleChange = (event: React.SyntheticEvent, newactiveTab: number) => {
+    setActiveTab(newactiveTab);
   };
 
   const sliderSettings = {
@@ -42,7 +61,7 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
   return (
     <>
       <Tabs
-        value={value}
+        value={activeTab}
         onChange={handleChange}
         centered
         textColor="secondary"
@@ -58,7 +77,7 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
       </Tabs>
 
       {data.map((tab, index) =>
-        value === index ? (
+        activeTab === index ? (
           <Box key={index}>
             {/* <Slider {...sliderSettings}> */}
             {tab.cards.map((card, cardIndex) => (
@@ -78,12 +97,6 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
                     boxShadow: "none",
                   }}
                 >
-                  {/* <CardHeader
-                      title={card.title}
-                      sx={{
-                        paddingBottom: 0,
-                      }}
-                    /> */}
                   <CardContent>
                     {card.content.map((content, lineIndex) => {
                       if (content.description.includes("http")) {
@@ -105,6 +118,7 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
                           <Typography
                             key={lineIndex}
                             variant="body2"
+                            id={content.description}
                             // sx={{ padding: "1rem" }}
                           >
                             {content.description}

@@ -29,8 +29,8 @@ const theme = createTheme({
       color: lightGray,
     },
 
-    h5: {
-      color: mediumGray,
+    h3: {
+      color: white,
     },
     body1: {
       color: mediumGray,

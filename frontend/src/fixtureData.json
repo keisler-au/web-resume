@@ -141,7 +141,7 @@
       ]
     }
   ],
-  "projects": [
+  "technical": [
     {
       "heading": [
         {
@@ -223,9 +223,6 @@
                 {
                   "title": "Automating",
                   "content": [
-                    {
-                      "description": "I wanted to showcase particular tools within this project because having a dependency managed, containerised, and version-controlled project is vital in automating development within any team."
-                    },
                     {
                       "description": "Docker:"
                     },

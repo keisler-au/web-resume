@@ -79,7 +79,7 @@ const pageConfigs: PageConfig[] = [
     page: Home,
   },
   { path: "experience", page: TabbedCards },
-  { path: "projects", page: TabbedCards },
+  { path: "technical", page: TabbedCards },
   { path: "contact", page: Contact },
 ];
 

@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
     <Box
       position="fixed"
       width="100%"
-      zIndex={2}
+      zIndex={4}
       sx={{ backgroundColor: theme.palette.background.paper }}
     >
       <Toolbar
@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
               <NavButton to="/experience" label="Experience" />
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
-              <NavButton to="/projects" label="Technical Skills" />
+              <NavButton to="/technical" label="Technical" />
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/contact" label="Contact" />
@@ -123,7 +123,7 @@ const Navbar: React.FC = () => {
           <NavButton to="/" label="Home" />
           {/* <NavButton to="/about" label="About Me" /> */}
           <NavButton to="/experience" label="Experience" />
-          <NavButton to="/projects" label="Projects" />
+          <NavButton to="/technical" label="Technology" />
           <Link to="/contact">
             <Button
               color="primary"

@@ -11,7 +11,7 @@ class ContentData(ListAPIView):
         page_name = self.kwargs.get("page", None)
 
         page_queryset = Page.objects.all()
-        if page_name in ["about", "experience", "projects"]:
+        if page_name in ["about", "experience", "technical"]:
             page_queryset = page_queryset.prefetch_related(
                 "body__cards", "body__cards__content"
             )
