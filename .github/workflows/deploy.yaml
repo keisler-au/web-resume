@@ -1,6 +1,9 @@
 name: CI/CD Pipeline
 
-on: [push]
+on:
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   build-and-test:
@@ -32,10 +35,6 @@ jobs:
           echo "ENV=Production" > backend/.env
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> backend/.env
           echo "HOST_DOMAIN=${{ secrets.HOST_DOMAIN }}" >> backend/.env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> backend/.env
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> backend/.env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> backend/.env
-          echo "DB_PORT=${{ secrets.DB_PORT }}" >> backend/.env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> backend/.env
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> backend/.env
           echo "HOST_USER_EMAIL=${{ secrets.HOST_USER_EMAIL }}" >> backend/.env
