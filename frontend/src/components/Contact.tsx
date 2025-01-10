@@ -121,9 +121,9 @@ const Contact: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         gap: 2,
-        width: { xs: "90%", sm: "70%", md: "40%" }, // Adjust width for responsiveness
+        width: { xs: "90%", sm: "70%", md: "40%" },
         margin: "0 auto",
-        padding: { xs: theme.spacing(2), sm: theme.spacing(4) }, // Responsive padding
+        padding: { xs: theme.spacing(2), sm: theme.spacing(4) },
         border: `1px solid ${theme.palette.secondary.main}`,
         borderRadius: 1,
         marginBottom: "3rem",

@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 ENV = os.getenv("ENV", "Development")
+print(ENV)
 
 SECRET_KEY = "dev-insecure-secret-key"
 DEBUG = True
