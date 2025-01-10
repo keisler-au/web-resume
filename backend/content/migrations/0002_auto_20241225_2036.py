@@ -233,7 +233,7 @@ def populate_data(apps, schema_editor):
         description="For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated.",
     )
 
-    contact_page = Page.objects.create(name="home")
+    contact_page = Page.objects.create(name="contact")
     PageHeading.objects.create(
         page=contact_page,
         main_heading="Get in Touch",
