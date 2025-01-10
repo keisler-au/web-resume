@@ -18,29 +18,19 @@ from dotenv import load_dotenv
 dotenv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
 load_dotenv(dotenv_path)
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+ENV = os.getenv("ENV", "Development")
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-$d4eqjs=ik8#)a6x+3%hu(mk$hkn0@y(j2rdho(!*)1_8w17yq"
-
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = "dev-insecure-secret-key"
 DEBUG = True
+ALLOWED_HOSTS = ["localhost"]
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-    "joshkeisler.com",
-    "www.joshkeisler.com",
-    "backend",
-]
-
-
-# Application definition
+if ENV == "Production":
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    DEBUG = False
+    ALLOWED_HOSTS = [os.getenv("HOST_DOMAIN")]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -67,20 +57,19 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+if ENV == "Production":
+    CORS_ALLOWED_ORIGINS.append(f"https://${os.getenv("HOST_DOMAIN")}")
 
-
-ANYMAIL = {
-    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
-}
-
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587  # SMTP port for TLS
+    EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+    ANYMAIL = {
+        "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY"),
+        "MAILGUN_SENDER_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
+    }
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
 
 ROOT_URLCONF = "app.urls"
 
@@ -102,9 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "app.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     "default": {
