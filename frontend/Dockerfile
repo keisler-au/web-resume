@@ -12,6 +12,6 @@ COPY --from=build /frontend-app/build /usr/share/nginx/html
 CMD ["npm", "start"]
 
 
-FROM nginx:alpine as production
+FROM nginx:alpine AS production
 COPY --from=build /frontend-app/build /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]

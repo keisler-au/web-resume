@@ -98,6 +98,7 @@ const Contact: React.FC = () => {
         method: "POST",
         body: formData,
       });
+
       if (response && !response.ok) {
         throw new Error("Failed to fetch data");
       }

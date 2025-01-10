@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 ENV = os.getenv("ENV", "Development")
-print(ENV)
 
 SECRET_KEY = "dev-insecure-secret-key"
 DEBUG = True
@@ -31,7 +30,7 @@ ALLOWED_HOSTS = ["localhost"]
 if ENV == "Production":
     SECRET_KEY = os.getenv("SECRET_KEY")
     DEBUG = False
-    ALLOWED_HOSTS = [os.getenv("HOST_DOMAIN")]
+    ALLOWED_HOSTS = [os.getenv("HOST_DOMAIN"), "joshkeisler.com", "www.joshkeisler.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
