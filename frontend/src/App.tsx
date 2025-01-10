@@ -8,9 +8,7 @@ import Contact from "./components/Contact";
 import Content from "./components/Content";
 import Home from "./components/Home";
 import PageLayout from "./components/PageLayout";
-import Projects from "./components/Projects";
 import TabbedCards from "./components/TabbedCards";
-import data from "./fixtureData.json";
 import theme from "./theme";
 
 export const ErrorFallback = () => (
@@ -89,41 +87,28 @@ const App = () => (
       <CssBaseline />
       <Router>
         <Routes>
-          {pageConfigs.map((pageConfig) => {
-            const PageComponent = pageConfig.page;
-            const pageData = data[pageConfig.path][0];
-
-            return (
-              <Route
-                key={pageConfig.path}
-                path={pageConfig.path === "home" ? "/" : pageConfig.path}
-                // element={
-                //   <Content
-                //     render={(pageData: PageData[]) => {
-                //       const PageComponent = pageConfig.page;
-                //       return (
-                //         <PageLayout
-                //           data={pageData[0].heading[0]}
-                //           pageType={pageConfig.path}
-                //         >
-                //           <PageComponent data={pageData[0].body} />
-                //         </PageLayout>
-                //       );
-                //     }}
-                //     pageReference={pageConfig.path}
-                //   />
-                // }
-                element={
-                  <PageLayout
-                    data={pageData.heading[0]}
-                    pageType={pageConfig.path}
-                  >
-                    <PageComponent data={pageData.body?.[0].tabs} />
-                  </PageLayout>
-                }
-              />
-            );
-          })}
+          {pageConfigs.map((pageConfig) => (
+            <Route
+              key={pageConfig.path}
+              path={pageConfig.path === "home" ? "/" : pageConfig.path}
+              element={
+                <Content
+                  render={(pageData: PageData) => {
+                    const PageComponent = pageConfig.page;
+                    return (
+                      <PageLayout
+                        data={pageData.heading[0]}
+                        pageType={pageConfig.path}
+                      >
+                        <PageComponent data={pageData.body} />
+                      </PageLayout>
+                    );
+                  }}
+                  pageReference={pageConfig.path}
+                />
+              }
+            />
+          ))}
         </Routes>
       </Router>
     </ThemeProvider>

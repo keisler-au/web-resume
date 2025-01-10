@@ -1,7 +1,8 @@
-import { CircularProgress, Alert } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { BASE_URL } from "../constants";
+import data from "../fixtureData.json";
 
 type ContentProps = {
   render: Function;
@@ -9,41 +10,32 @@ type ContentProps = {
 };
 
 const Content: React.FC<ContentProps> = ({ render, pageReference }) => {
-  const [content, setContent] = useState([]);
+  const [content, setContent] = useState();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`${BASE_URL}/content/${pageReference}/`);
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch data.");
-  //       }
-  //       const data = await response.json();
-  //       setContent(data);
-  //       setError(null);
-  //     } catch (err: any) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/content/${pageReference}/`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch data.");
+        }
+        const data = await response.json();
+        setContent(data);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchData();
-  // }, [pageReference]);
+    // This fetching data implementation is for demonstrative purposes, and works. However practically speaking it makes more sense to being using json for this static data.
+    // fetchData();
+    setContent((data as any)[pageReference][0]);
+    setLoading(false);
+  }, [pageReference]);
 
-  // if (loading) {
-  //   return <CircularProgress data-testid="loading-spinner" />;
-  // }
-
-  // if (error) {
-  //   return (
-  //     <Alert severity="error" data-testid="error-message">
-  //       {error}
-  //     </Alert>
-  //   );
-  // }
+  if (loading) {
+    return <CircularProgress data-testid="loading-spinner" />;
+  }
 
   return render(content);
 };

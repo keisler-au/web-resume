@@ -11,445 +11,233 @@ def populate_data(apps, schema_editor):
     CardContent = apps.get_model("content", "CardContent")
 
     home_page = Page.objects.create(name="home")
-    about_page = Page.objects.create(name="about")
-    experience_page = Page.objects.create(name="experience")
-    projects_page = Page.objects.create(name="projects")
-    contact_page = Page.objects.create(name="contact")
-
     PageHeading.objects.create(
         page=home_page,
-        main_heading="Josh Keisler",
-        sub_heading="Full-Stack Developer | CI/CD Enthusiast | Scalable Web Solutions",
-        description="A Full Stack developer creating access to information, products, services for your target audience.  I am passionate about helping people and building scalable, user-friendly applications that solve real-world problems.",
+        main_heading="Building Apps for You",
+        description="My mission is to build apps that are functionally robust, maintainable, and secure. Our needs evolve, and this should be reflected in the codebase. Software provides freedom through access and automation, and I love the challenge of future-proofing it.",
     )
-    PageHeading.objects.create(
-        page=about_page,
-        main_heading="Learning",
-        sub_heading=None,
-        description="My background in psychology at university and a self-learning style within IT has given me a unique technical and user-centric perspective.",
+    home_body = PageBody.objects.create(page=home_page, label="Problem Interests")
+    body_card = BodyCard.objects.create(body=home_body, title="Problem Interests")
+    CardContent.objects.create(
+        card=body_card,
+        description="I am passionate about helping people and I want this represented in the problems I am solving. I strongly believe in principles of Sustainability and Equality of Opportunity, and it is equally important to me that people are not just surviving but thriving. Whether it is working in Healthcare or Personal Development; from Mental Health to the Entertainment industry, I want to be solving problems that are going to bring real benefit to peoples' lives.",
     )
+
+    experience_page = Page.objects.create(name="experience")
     PageHeading.objects.create(
         page=experience_page,
-        main_heading="Professional Experience",
-        sub_heading=None,
-        description="Experience in software development and operational support, with expertise in various technologies.",
-    )
-    PageHeading.objects.create(
-        page=projects_page,
-        main_heading="Web Resume Tech Stack",
-        sub_heading=None,
-        description="Explore the different technologies I have used in building this website:",
-    )
-    PageHeading.objects.create(
-        page=contact_page,
-        main_heading="Get in Touch",
-        sub_heading=None,
-        description="Feel free to reach out through the email form, LinkedIn, or GitHub, I look forward to hearing from you!",
+        main_heading="Experience",
+        description="Whether it is learning a new tech stack, working in a team, or understanding unique and dynamic problems, it is my commitment to architect and build solutions. My experience to-date has been the result of genuine curiosity and interest, if I choose to work for you it means I am invested.",
     )
 
-    psychology_section = PageBody.objects.create(
-        page=about_page, label="Psychology Degree"
+    software_dev_body = PageBody.objects.create(
+        page=experience_page, label="Software Developer"
     )
-    psychology_degree_card = BodyCard.objects.create(
-        body=psychology_section,
-        title="B.A. (Honours) in Psychology, Curtin University, WA",
-    )
-    CardContent.objects.create(
-        card=psychology_degree_card,
-        description="I started studying Psychology because I want to help people and I found the topic interesting.",
+    software_dev_card = BodyCard.objects.create(
+        body=software_dev_body, title="Software Developer"
     )
     CardContent.objects.create(
-        card=psychology_degree_card,
-        description="But being a professional psychologist is not who I want to be.",
+        card=software_dev_card,
+        description="While contracted to BHP I helped develop a platform that was used by field workers and miners to automate and standardise the daily on-site mining operations. As a Software Developer I:",
     )
     CardContent.objects.create(
-        card=psychology_degree_card,
-        description="I want to help people, and I am passionate about technology as a way to do that.",
-    )
-    psychology_it_card = BodyCard.objects.create(
-        body=psychology_section,
-        title="Psychology Degree within IT",
-    )
-    CardContent.objects.create(card=psychology_it_card, description="Critical thinking")
-    CardContent.objects.create(
-        card=psychology_it_card,
-        description="Learning from documentation and research papers",
+        card=software_dev_card,
+        description="Created new frontend and backend features, such as a page dedicated to logging reports, and a versions-comparisons UI for data points.",
     )
     CardContent.objects.create(
-        card=psychology_it_card, description="Writing documentation and research papers"
+        card=software_dev_card,
+        description="Optimised features to resolve performance issues and improve user experience, this often involved backend Graphene and frontend React Relay GQL query optimisation.",
     )
     CardContent.objects.create(
-        card=psychology_it_card,
-        description="How to prioritise assignments and meet deadlines",
+        card=software_dev_card,
+        description="Refactored code that improved the readability and reusability of particular functions, such as Django admin file uploads and error-message dependent routing.",
     )
     CardContent.objects.create(
-        card=psychology_it_card, description="Organise projects and work with clients"
-    )
-    awards_projects_card = BodyCard.objects.create(
-        body=psychology_section,
-        title="Awards and Key Projects",
+        card=software_dev_card,
+        description="Participated in code reviews and actively welcomed feedback to produce the highest code quality possible.",
     )
     CardContent.objects.create(
-        card=awards_projects_card,
-        description="Letter of Commendation for outstanding academic performance, after achieving a grade average above 80%.",
-    )
-    CardContent.objects.create(
-        card=awards_projects_card,
-        description="Dissertation on a behavioural model for psychological well-being.",
-    )
-    CardContent.objects.create(
-        card=awards_projects_card,
-        description="It involved me recruiting and coordinating over 100 participants, who volunteered for a week-long data analysis.",
+        card=software_dev_card,
+        description="Received an award through Infosys for 'Outstanding Performance'.",
     )
 
-    self_learning_section = PageBody.objects.create(
-        page=about_page, label="Self-Learning"
+    operational_support_body = PageBody.objects.create(
+        page=experience_page, label="Operational Support"
     )
-    self_taught_card = BodyCard.objects.create(
-        body=self_learning_section,
-        title="Becoming a Self-Taught Technologist",
-    )
-    CardContent.objects.create(
-        card=self_taught_card,
-        description="I started learning web development and tech through online resources.",
+    operational_support_card = BodyCard.objects.create(
+        body=operational_support_body, title="Operational Support"
     )
     CardContent.objects.create(
-        card=self_taught_card,
-        description="I quickly became enamoured by Python, and eventually my journey led me to JavaScript, CSS, SQL, and the common web-related technologies.",
+        card=operational_support_card,
+        description="At BHP I was also an active member in the Operational Support team, where we maintained the functionality of the production application and liaised with clients. As an Operational Support member I:",
     )
     CardContent.objects.create(
-        card=self_taught_card,
-        description="Self-learning gave me the opportunity to better understand how I learn, explore my own curiosity, and develop the discipline and direction needed to understand the vast landscape of software development.",
-    )
-    core_tools_card = BodyCard.objects.create(
-        body=self_learning_section,
-        title="Mastering Core Tools",
+        card=operational_support_card,
+        description="Debugged and wrote code fixes for production issues, investigating logs within the AWS infrastructure, reading the codebase, and analysing Django admin records.",
     )
     CardContent.objects.create(
-        card=core_tools_card,
-        description="Studying at university had given me tools for learning and building my own curriculum, but after 12 months I wanted hands-on experience and personally learn from other people.",
+        card=operational_support_card,
+        description="Prioritised the user experience by actively talking to them when they raised production incident tickets, this gave me an appreciation for their issues and the impact it has on their work.",
     )
     CardContent.objects.create(
-        card=core_tools_card,
-        description="I wanted to put into practice my newly acquired skills, so I built a small Weather Report application.",
+        card=operational_support_card,
+        description="Set up meetings and coordinated the collaborative effort between Dev and Operational Support teams when working through production bugs and feature quality tests.",
     )
     CardContent.objects.create(
-        card=core_tools_card, description="It's crude, it's naïve, and it's honest."
+        card=operational_support_card,
+        description="Wrote documentation for the Operational Support team on best practices and debugging techniques for particular features within the platform.",
+    )
+
+    graduate_position_body = PageBody.objects.create(
+        page=experience_page, label="Graduate Position"
+    )
+    graduate_position_card = BodyCard.objects.create(
+        body=graduate_position_body, title="Graduate Position"
     )
     CardContent.objects.create(
-        card=core_tools_card,
-        description="I am glad to say I have learnt a lot since then, and I am still proud of what I was able to demonstrate at that time.",
-    )
-    weather_app_card = BodyCard.objects.create(
-        body=self_learning_section,
-        title="The Weather App",
+        card=graduate_position_card,
+        description="Infosys is a multinational IT company and for the first three months I successfully completed training courses in C#, Java, SQL, and Angular.",
     )
     CardContent.objects.create(
-        card=weather_app_card,
-        description="This was my first project that I created in 2021, the public API has since been decommissioned but it demonstrated my understanding of RESTful APIs and React at that time, and it lead to my employment at Infosys.",
+        card=graduate_position_card,
+        description="I passed fortnightly exams that assessed our proficiency in the required technologies, and despite already knowing Python the strict OOP and static typing of Java and C# was interesting to learn.",
     )
     CardContent.objects.create(
-        card=weather_app_card,
+        card=graduate_position_card,
+        description="Prior to Infosys, I had taught myself web development through online resources and I quickly became enamoured by Python, JavaScript, CSS, SQL and Git.",
+    )
+    CardContent.objects.create(
+        card=graduate_position_card,
+        description="Infosys hired me after seeing a small UI project I built that pulled data from a public API (which has since been decommisioned). It's crude, it's naïve, and it's honest, gratefully I have learnt a lot since then.",
+    )
+    CardContent.objects.create(
+        card=graduate_position_card,
         description="https://keisler-au.github.io/weather-project/",
     )
 
-    software_developer_section = PageBody.objects.create(
-        page=experience_page, label="BHP - Software Developer"
-    )
-    django_card = BodyCard.objects.create(
-        body=software_developer_section,
-        title="Django and Graphene",
+    university_body = PageBody.objects.create(page=experience_page, label="University")
+    university_card = BodyCard.objects.create(body=university_body, title="University")
+    CardContent.objects.create(
+        card=university_card,
+        description="I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others.",
     )
     CardContent.objects.create(
-        card=django_card,
-        description="Writing, refactoring, debugging, and optimising within Django's core features (views, serializers, models, admin, templates, etc).",
+        card=university_card,
+        description="Some of the skills I developed at university involve critical thinking, research, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation.",
     )
     CardContent.objects.create(
-        card=django_card,
-        description="Optimising Graphene queries, mutations, and resolvers.",
-    )
-    CardContent.objects.create(
-        card=django_card,
-        description="Debugging to identify and resolve bugs and expensive queries.",
-    )
-    CardContent.objects.create(
-        card=django_card,
-        description="Using fixture sets in unit tests and testing environments to alleviate the overhead of prod dumps.",
-    )
-    react_card = BodyCard.objects.create(
-        body=software_developer_section,
-        title="React",
-    )
-    CardContent.objects.create(
-        card=react_card,
-        description="Learning new concepts and patterns, like prop rendering and config objects.",
-    )
-    CardContent.objects.create(
-        card=react_card,
-        description="Learning new frontend tools like MUI, React Relay, and Formik.",
-    )
-    CardContent.objects.create(
-        card=react_card,
-        description="Applying TypeScript and unit testing to any new code produced.",
-    )
-    practices_card = BodyCard.objects.create(
-        body=software_developer_section,
-        title="New Practices and Technologies",
-    )
-    CardContent.objects.create(
-        card=practices_card,
-        description="New Practices: Jira tickets, Sprints, Unit tests for every piece of work produced.",
-    )
-    CardContent.objects.create(
-        card=practices_card,
-        description="New Technologies: AWS, Docker, Terraform, Pre-commit.",
-    )
-    version_control_card = BodyCard.objects.create(
-        body=software_developer_section,
-        title="Version Control in a Team",
-    )
-    CardContent.objects.create(
-        card=version_control_card,
-        description="Implementing and learning from code reviews.",
-    )
-    CardContent.objects.create(
-        card=version_control_card,
-        description="Managing feature branches, rebasing, resolving merge conflicts.",
-    )
-    CardContent.objects.create(
-        card=version_control_card, description="Reviewing and approving pull requests."
+        card=university_card,
+        description="I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis.",
     )
 
-    operational_support_section = PageBody.objects.create(
-        page=experience_page, label="BHP - Operational Support"
-    )
-    debugging_card = BodyCard.objects.create(
-        body=operational_support_section,
-        title="Debugging",
-    )
-    CardContent.objects.create(
-        card=debugging_card,
-        description="Understanding the product and how our platform worked.",
-    )
-    CardContent.objects.create(
-        card=debugging_card,
-        description="Understanding the container infrastructure in production and investigating CloudWatch logs and metrics.",
-    )
-    CardContent.objects.create(
-        card=debugging_card,
-        description="Understanding the codebase and how AWS insights related to the application.",
-    )
-    CardContent.objects.create(
-        card=debugging_card, description="Analysing data and Django Admin records."
-    )
-    client_roles_card = BodyCard.objects.create(
-        body=operational_support_section,
-        title="Technical and Client-centric Roles",
-    )
-    CardContent.objects.create(
-        card=client_roles_card, description="Scheduling and managing meetings."
-    )
-    CardContent.objects.create(
-        card=client_roles_card,
-        description="Coordinating and practically completing Service Now and Jira tickets.",
-    )
-    CardContent.objects.create(
-        card=client_roles_card,
-        description="Writing bug fixes and liaising with clients.",
-    )
-    CardContent.objects.create(
-        card=client_roles_card,
-        description="Collaborating with clients to understand their issues and the impact it has on their work.",
+    technical_page = Page.objects.create(name="technical")
+    PageHeading.objects.create(
+        page=technical_page,
+        main_heading="Technical Skills",
+        description="We need technical skills and core principles to turn visions into products. Below I have outlined what I see as the main tenets of an application, along with my experience in the technologies that go into building these foundations.",
     )
 
-    infosys_section = PageBody.objects.create(
-        page=experience_page, label="Infosys - Graduate Position"
-    )
-    bootcamp_card = BodyCard.objects.create(
-        body=infosys_section,
-        title="Bootcamp",
+    reliable_body = PageBody.objects.create(page=technical_page, label="Reliable")
+    reliable_card = BodyCard.objects.create(body=reliable_body, title="Reliable")
+    CardContent.objects.create(card=reliable_card, description="Django:")
+    CardContent.objects.create(
+        card=reliable_card,
+        description="This resume uses Django and a Postgres DB to serve up the text content.",
     )
     CardContent.objects.create(
-        card=bootcamp_card, description="Infosys is a multinational IT company."
+        card=reliable_card,
+        description="For BHP, I optimised key server-side functions, focusing on Django and Graphene queries within views, serializers, mutations and resolvers.",
     )
     CardContent.objects.create(
-        card=bootcamp_card,
-        description="The first three months of my employment was a bootcamp in C#, Java, SQL, and Angular.",
+        card=reliable_card,
+        description="I wrote, refactored, and debugged functionality within Django's core features (views, serializers, models, admin, templates, etc).",
     )
     CardContent.objects.create(
-        card=bootcamp_card,
-        description="The camp consisted of learning, with fortnightly exams to assess our proficiency.",
+        card=reliable_card,
+        description="For every piece of code I produced I wrote accompanying unit tests and also utilised fixture sets to move away from the overhead of prod dumps.",
+    )
+    CardContent.objects.create(card=reliable_card, description="React:")
+    CardContent.objects.create(
+        card=reliable_card,
+        description="For BHP I built new features using tools including MUI, React Relay, and Formik. I also routinely made code improvements such as client-side data validation, which were often inspired by user interactions and incident tickets.",
     )
     CardContent.objects.create(
-        card=bootcamp_card,
-        description="I was already familiar with SQL, and although I knew Python the strict OOP and static typing of Java and C# was interesting to learn.",
-    )
-    contract_bhp_card = BodyCard.objects.create(
-        body=infosys_section,
-        title="Contract to BHP",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="I was contracted out to the multinational Australian mining and metals company, BHP.",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="I worked on a platform that was used daily by the onsite miners and supervisors.",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="The job was a mixture of Level 3 Operational Support and Software Development.",
-    )
-    CardContent.objects.create(
-        card=contract_bhp_card,
-        description="I would work through Service Now incident tickets as well as building and optimising features according to Jira tickets.",
+        card=reliable_card,
+        description="For this resume I used similar tools (React, MUI) and implemented design patterns that I learnt such as prop rendering. I have also used Typescript and written unit tests for key operations.",
     )
 
-    aws_section = PageBody.objects.create(page=projects_page, label="AWS")
-    aws_card = BodyCard.objects.create(
-        body=aws_section,
-        title="AWS",
+    maintainable_body = PageBody.objects.create(
+        page=technical_page, label="Maintainable"
+    )
+    maintainable_card = BodyCard.objects.create(
+        body=maintainable_body, title="Maintainable"
+    )
+    CardContent.objects.create(card=maintainable_card, description="Agile Methodology:")
+    CardContent.objects.create(
+        card=maintainable_card,
+        description="I participated in daily scrums, sprint planning and retrospection, and backlog grooming. Jira tickets, Sprints, Unit tests for every piece of work produced.",
+    )
+    CardContent.objects.create(card=maintainable_card, description="Git:")
+    CardContent.objects.create(
+        card=maintainable_card,
+        description="As a developer I made a regular practice of managing feature branches, rebasing, and resolving merge conflicts.",
     )
     CardContent.objects.create(
-        card=aws_card,
-        description="Due to pricing I moved to a Linux VPS, but I successfully deployed to AWS by:",
+        card=maintainable_card,
+        description="I participated in code reviews and approving pull requests, while actively taking on any feedback and advice in how to improve the quality of my code.",
     )
+    CardContent.objects.create(card=maintainable_card, description="Pre-Commit:")
     CardContent.objects.create(
-        card=aws_card,
-        description="1. Pushing images to ECR and configuring them into Task Definitions to utilise Fargate.",
-    )
-    CardContent.objects.create(
-        card=aws_card, description="2. Creating Services to run Tasks within ECS."
-    )
-    CardContent.objects.create(
-        card=aws_card,
-        description="3. Configuring an ALB with HTTP:80 and HTTPS:443 Listeners and Routing rules to connect to the appropriate Target Groups.",
-    )
-    CardContent.objects.create(
-        card=aws_card,
-        description="4. Creating Security Group Inbound and Outbound rules, and modifying its Roles and defined VPC endpoints to allow the tasks to access Parameter Store Secrets.",
-    )
-    CardContent.objects.create(
-        card=aws_card,
-        description="5. Creating a separate admin account using IAM rather than defaulting to the root user account.",
-    )
-    CardContent.objects.create(
-        card=aws_card, description="6. Connecting to a Postgres database hosted in RDS."
-    )
-    CardContent.objects.create(
-        card=aws_card,
-        description="7. Using CloudWatch Logs for debugging Target Health Check failures.",
+        card=maintainable_card,
+        description="I followed BHP's lead and built Pre-Commit into this resumes workflow to automate and enforce quality styling standards.",
     )
 
-    docker_section = PageBody.objects.create(page=projects_page, label="Docker")
-    docker_card = BodyCard.objects.create(
-        body=docker_section,
-        title="Docker",
+    automating_body = PageBody.objects.create(page=technical_page, label="Automating")
+    automating_card = BodyCard.objects.create(body=automating_body, title="Automating")
+    CardContent.objects.create(card=automating_card, description="Docker:")
+    CardContent.objects.create(
+        card=automating_card,
+        description="I have used multi-stage builds for the docker images, docker-compose for network and volume orchestration, and I am looking to implement Kubernetes for production container management.",
+    )
+    CardContent.objects.create(card=automating_card, description="CI/CD:")
+    CardContent.objects.create(
+        card=automating_card,
+        description="Within this project I automated unit test execution, making use of the docker-compose container configuration.",
     )
     CardContent.objects.create(
-        card=docker_card,
-        description="In containerizing this application with docker I learnt:",
+        card=automating_card,
+        description="Exploring CI/CD options and GitHub Actions showed me the many server, infrastructure and deployment options that are available for differing sized and scalable applications.",
     )
     CardContent.objects.create(
-        card=docker_card, description="1. Dockerfile structures and multi-stage builds."
+        card=automating_card, description="Dependency Management:"
     )
     CardContent.objects.create(
-        card=docker_card,
-        description="2. How networks can be orchestrated between containers and the host, and the role of docker-compose, Kubernetes, and Docker Swarm in development and production. ",
-    )
-    CardContent.objects.create(
-        card=docker_card,
-        description="3. Docker volumes, and its interaction between containers and the host.",
+        card=automating_card,
+        description="Managing dependencies gave me greater exposure to the Linux file structure and its executables, and an understanding that dependencies and package managers are both a miracle and a nightmare.",
     )
 
-    wsl_section = PageBody.objects.create(page=projects_page, label="WSL")
-    wsl_card = BodyCard.objects.create(
-        body=wsl_section,
-        title="WSL",
+    scaleable_body = PageBody.objects.create(page=technical_page, label="Scaleable")
+    scaleable_card = BodyCard.objects.create(body=scaleable_body, title="Scaleable")
+    CardContent.objects.create(card=scaleable_card, description="AWS:")
+    CardContent.objects.create(
+        card=scaleable_card,
+        description="Having learnt the AWS infrastructure that BHP used for their project I decided to replicate it for this web resume. I have since moved to a Linux VPS, but I had successfully deployed to AWS and made use of its scalability features.",
     )
     CardContent.objects.create(
-        card=wsl_card, description="Working with WSL has helped me understand:"
+        card=scaleable_card,
+        description="Successfully deploying to AWS involved using; ECR, Fargate, ECS, ALB, Security Group, VPC endpoints, Parameter Store Secrets, IAM, RDS, CloudWatch.",
     )
+    CardContent.objects.create(card=scaleable_card, description="Redis:")
     CardContent.objects.create(
-        card=wsl_card, description="1. The differences between Windows and Linux."
-    )
-    CardContent.objects.create(
-        card=wsl_card,
-        description="2. The Linux file structure and where things are run and stored.",
-    )
-    CardContent.objects.create(
-        card=wsl_card,
-        description="3. How package managers and dependencies are both a miracle and a nightmare.",
+        card=scaleable_card,
+        description="For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated.",
     )
 
-    backend_section = PageBody.objects.create(
-        page=projects_page, label="Django and Postgres"
-    )
-    backend_card = BodyCard.objects.create(
-        body=backend_section,
-        title="Django and Postgres",
-    )
-    CardContent.objects.create(
-        card=backend_card,
-        description="This resume uses a Django and Postgres backend to serve up the text content, giving me more practice with things like data migrations.",
-    )
-    CardContent.objects.create(
-        card=backend_card,
-        description="A lot of my previous experience with Django comes from working at BHP, where I completed a lot of development tickets concerning Django and Graphene query optimisation",
-    )
-
-    react_section = PageBody.objects.create(page=projects_page, label="React")
-    react_card = BodyCard.objects.create(
-        body=react_section,
-        title="React",
-    )
-    CardContent.objects.create(
-        card=react_card, description="In building the frontend I learnt a lot about:"
-    )
-    CardContent.objects.create(
-        card=react_card,
-        description="1. Implementing code designs like render propping.",
-    )
-    CardContent.objects.create(
-        card=react_card, description="2. CSS styling techniques and interactions."
-    )
-    CardContent.objects.create(
-        card=react_card,
-        description="3. UI design with technologies like MUI components.",
-    )
-
-    github_actions_section = PageBody.objects.create(
-        page=projects_page, label="GitHub Actions"
-    )
-    github_actions_card = BodyCard.objects.create(
-        body=github_actions_section,
-        title="GitHub Actions",
-    )
-    CardContent.objects.create(
-        card=github_actions_card,
-        description="In creating a pipeline I became exposed to:",
-    )
-    CardContent.objects.create(
-        card=github_actions_card,
-        description="1. Automating unit test runs within a docker setup.",
-    )
-    CardContent.objects.create(
-        card=github_actions_card,
-        description="2. Yaml files and the different settings and configurations.",
-    )
-    CardContent.objects.create(
-        card=github_actions_card,
-        description="3. The many servers, infrastructure and deployments options available for the different size and scalability of applications.",
-    )
-
-    pre_commit_section = PageBody.objects.create(page=projects_page, label="Pre-commit")
-    pre_commit_card = BodyCard.objects.create(
-        body=pre_commit_section,
-        title="Pre-commit",
-    )
-    CardContent.objects.create(
-        card=pre_commit_card,
-        description="Building this into the workflow and using it to enforce linting and styling rules.",
+    contact_page = Page.objects.create(name="home")
+    PageHeading.objects.create(
+        page=contact_page,
+        main_heading="Get in Touch",
+        description="If you have a proposal, idea, feedback, or just want to say Hi, I would love to hear from you!",
     )
 
 
@@ -470,7 +258,7 @@ def reverse_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("content", "0001_initial"),  # Adjust this depending on your previous migration
+        ("content", "0001_initial"),
     ]
 
     operations = (
