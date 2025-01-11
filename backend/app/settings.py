@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ["localhost"]
 if ENV == "Production":
     SECRET_KEY = os.getenv("SECRET_KEY")
     DEBUG = False
-    ALLOWED_HOSTS = [os.getenv("HOST_DOMAIN"), "joshkeisler.com", "www.joshkeisler.com"]
+    ALLOWED_HOSTS = ["45.77.142.136", "joshkeisler.com", "www.joshkeisler.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",

@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import { BASE_URL } from "../constants";
-import data from "../fixtureData.json";
+import data from "../fixtures/data.json";
 
 type ContentProps = {
   render: Function;
