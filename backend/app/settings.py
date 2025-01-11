@@ -64,7 +64,6 @@ if ENV == "Production":
     CORS_ALLOWED_ORIGINS = [
         "https://joshkeisler.com",
         "https://www.joshkeisler.com",
-        "https://45.77.142.136",
     ]
     EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
     ANYMAIL = {

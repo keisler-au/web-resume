@@ -32,7 +32,6 @@ jobs:
 
       - name: Build Production Docker images
         run: |
-          echo ${{ secrets.HOST_USER_EMAIL }}
           echo "ENV=Production" > backend/.env
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> backend/.env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> backend/.env

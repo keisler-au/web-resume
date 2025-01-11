@@ -1,3 +1,4 @@
+import { LinkedIn, GitHub } from "@mui/icons-material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import {
   Button,
@@ -7,11 +8,20 @@ import {
   CircularProgress,
   IconButton,
   useTheme,
+  Link,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
-import { BASE_URL } from "../constants";
+import {
+  BASE_URL,
+  EMAIL_ADDRESS,
+  GITHUB_URL,
+  LINKEDIN_URL,
+  PHONE_NUMBER,
+} from "../constants";
 
 interface FormValues {
   name: string;
@@ -116,138 +126,233 @@ const Contact: React.FC = () => {
 
   return (
     <Box
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 2,
-        width: { xs: "90%", sm: "70%", md: "40%" },
-        margin: "0 auto",
-        padding: { xs: theme.spacing(2), sm: theme.spacing(4) },
-        border: `1px solid ${theme.palette.secondary.main}`,
-        borderRadius: 1,
-        marginBottom: "3rem",
+        // alignItems: "center",
+        // justifyContent: "center",
       }}
     >
-      <CustomTextField
-        label="Name"
-        name="name"
-        register={register}
-        errors={errors}
-        theme={theme}
-      />
-      <CustomTextField
-        label="Email"
-        name="email"
-        type="email"
-        register={register}
-        errors={errors}
-        theme={theme}
-      />
-      <CustomTextField
-        label="Message"
-        name="message"
-        rows={4}
-        register={register}
-        errors={errors}
-        theme={theme}
-      />
-
-      <Button
-        variant="outlined"
-        component="label"
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
         sx={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: theme.spacing(1.5),
+          flexDirection: "column",
+          gap: 2,
+          width: { xs: "90%", sm: "70%", md: "40%" },
+          margin: "0 auto",
+          padding: { xs: theme.spacing(2), sm: theme.spacing(4) },
+          border: `1px solid ${theme.palette.secondary.main}`,
           borderRadius: 1,
-          textAlign: "left",
-          minHeight: "56px",
-          borderColor: theme.palette.primary.dark,
-          "&:hover": {
-            borderColor: theme.palette.secondary.main,
-            backgroundColor: theme.palette.action.hover,
-          },
-          textTransform: "none",
+          marginBottom: "3rem",
         }}
       >
-        <Typography
-          variant="body1"
-          sx={{
-            color:
-              fileName === "No Files Uploaded"
-                ? theme.palette.text.primary
-                : theme.palette.secondary.main,
-          }}
-        >
-          {fileName}
-        </Typography>
-        <input
-          type="file"
-          multiple
-          hidden
-          {...register("files")}
-          onChange={(e) => {
-            if (e.target.files) {
-              const fileNames = Array.from(e.target.files).map(
-                (file) => file.name,
-              );
-              setFileName(fileNames.join(", "));
-            }
-            register("files").onChange(e);
-          }}
+        <CustomTextField
+          label="Name"
+          name="name"
+          register={register}
+          errors={errors}
+          theme={theme}
         />
-        <IconButton component="span">
-          <AttachFileIcon />
-        </IconButton>
-      </Button>
+        <CustomTextField
+          label="Email"
+          name="email"
+          type="email"
+          register={register}
+          errors={errors}
+          theme={theme}
+        />
+        <CustomTextField
+          label="Message"
+          name="message"
+          rows={4}
+          register={register}
+          errors={errors}
+          theme={theme}
+        />
 
-      <Button
-        type="submit"
-        variant="contained"
-        disabled={isSubmitting}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1,
-          "&:hover": {
-            backgroundColor: theme.palette.primary.dark,
-          },
-          color: allFieldsFilled
-            ? theme.palette.secondary.main
-            : theme.palette.text.primary,
-        }}
-      >
-        {isSubmitting ? <CircularProgress size={24} color="inherit" /> : "Send"}
-      </Button>
-
-      {statusMessage && (
-        <Box
+        <Button
+          variant="outlined"
+          component="label"
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: theme.palette.background.paper,
-            padding: theme.spacing(2),
+            justifyContent: "space-between",
+            padding: theme.spacing(1.5),
             borderRadius: 1,
+            textAlign: "left",
+            minHeight: "56px",
+            borderColor: theme.palette.primary.dark,
+            "&:hover": {
+              borderColor: theme.palette.secondary.main,
+              backgroundColor: theme.palette.action.hover,
+            },
+            textTransform: "none",
           }}
         >
           <Typography
             variant="body1"
             sx={{
-              marginRight: 1,
               color:
-                statusMessage === "Email sent!"
-                  ? theme.palette.success.main
-                  : theme.palette.error.main,
+                fileName === "No Files Uploaded"
+                  ? theme.palette.text.primary
+                  : theme.palette.secondary.main,
             }}
           >
-            {statusMessage === "Email sent!" ? "✅" : "❌"} {statusMessage}
+            {fileName}
           </Typography>
-        </Box>
-      )}
+          <input
+            type="file"
+            multiple
+            hidden
+            {...register("files")}
+            onChange={(e) => {
+              if (e.target.files) {
+                const fileNames = Array.from(e.target.files).map(
+                  (file) => file.name,
+                );
+                setFileName(fileNames.join(", "));
+              }
+              register("files").onChange(e);
+            }}
+          />
+          <IconButton component="span">
+            <AttachFileIcon />
+          </IconButton>
+        </Button>
+
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={isSubmitting}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            "&:hover": {
+              backgroundColor: theme.palette.primary.dark,
+            },
+            color: allFieldsFilled
+              ? theme.palette.secondary.main
+              : theme.palette.text.primary,
+          }}
+        >
+          {isSubmitting ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Send"
+          )}
+        </Button>
+
+        {statusMessage && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: theme.palette.background.paper,
+              padding: theme.spacing(2),
+              borderRadius: 1,
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                marginRight: 1,
+                color:
+                  statusMessage === "Email sent!"
+                    ? theme.palette.success.main
+                    : theme.palette.error.main,
+              }}
+            >
+              {statusMessage === "Email sent!" ? "✅" : "❌"} {statusMessage}
+            </Typography>
+          </Box>
+        )}
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          flexDirection: "column",
+          margin: "auto",
+          gap: 1,
+          position: {
+            xs: "relative",
+            md: "fixed",
+          },
+          bottom: {
+            xs: "auto",
+            md: "1.5rem",
+          },
+          left: {
+            xs: "auto",
+            md: "1.5rem",
+          },
+          marginTop: ".6rem",
+        }}
+      >
+        <Typography
+          color="secondary"
+          sx={{
+            display: "flex",
+            gap: 2,
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}
+        >
+          <FaPhoneAlt fontSize="1.6rem" />
+          {PHONE_NUMBER}
+        </Typography>
+
+        <Link
+          href={GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          color="secondary"
+          sx={{
+            display: "flex",
+            gap: 1,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            textDecoration: "none",
+          }}
+        >
+          <GitHub fontSize="large" />
+          {GITHUB_URL}
+        </Link>
+        <Typography
+          style={{
+            color: theme.palette.secondary.main,
+            display: "flex",
+            gap: 15,
+            alignItems: "center",
+            textDecoration: "none",
+            cursor: "pointer",
+          }}
+        >
+          <MdEmail fontSize="1.9rem" />
+          {EMAIL_ADDRESS}
+        </Typography>
+        <Link
+          href={LINKEDIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          color="secondary"
+          sx={{
+            display: "flex",
+            gap: 1.5,
+            justifyContent: "flex-start",
+            alignItems: "center",
+            textDecoration: "none",
+          }}
+        >
+          <LinkedIn fontSize="large" />
+          {LINKEDIN_URL}
+        </Link>
+      </Box>
     </Box>
   );
 };

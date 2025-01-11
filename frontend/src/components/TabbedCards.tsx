@@ -25,37 +25,15 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const tab = searchParams.get("tab"); // Get the tab identifier
-    // const hash = location.hash.replace("#", ""); // Get the heading ID
+    const tab = searchParams.get("tab");
 
     if (tab) {
       setActiveTab(+tab);
     }
-    // console.log(hash);
-    // if (hash) {
-    //   const element = document.getElementById(hash);
-    //   if (element) {
-    //     element.scrollIntoView({ behavior: "smooth" });
-    //   }
-    // }
   }, [location]);
 
   const handleChange = (event: React.SyntheticEvent, newactiveTab: number) => {
     setActiveTab(newactiveTab);
-  };
-
-  const sliderSettings = {
-    className: "center",
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    centerMode: true,
-    centerPadding: "0",
-    nextArrow: <ArrowForwardIos />,
-    prevArrow: <ArrowBackIos />,
-    swipe: true,
   };
 
   return (

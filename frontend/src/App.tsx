@@ -73,7 +73,7 @@ interface PageConfig {
 }
 const pageConfigs: PageConfig[] = [
   {
-    path: "home",
+    path: "/",
     page: Home,
   },
   { path: "experience", page: TabbedCards },
@@ -90,21 +90,21 @@ const App = () => (
           {pageConfigs.map((pageConfig) => (
             <Route
               key={pageConfig.path}
-              path={pageConfig.path === "home" ? "/" : pageConfig.path}
+              path={pageConfig.path}
               element={
                 <Content
                   render={(pageData: PageData) => {
                     const PageComponent = pageConfig.page;
+                    console.log(pageConfig.path, pageData.body);
                     return (
-                      <PageLayout
-                        data={pageData.heading[0]}
-                        pageType={pageConfig.path}
-                      >
+                      <PageLayout data={pageData.heading[0]}>
                         <PageComponent data={pageData.body} />
                       </PageLayout>
                     );
                   }}
-                  pageReference={pageConfig.path}
+                  pageReference={
+                    pageConfig.path === "/" ? "home" : pageConfig.path
+                  }
                 />
               }
             />
