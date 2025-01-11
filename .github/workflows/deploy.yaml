@@ -36,7 +36,7 @@ jobs:
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> backend/.env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> backend/.env
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> backend/.env
-          echo "HOST_USER_EMAIL=joshkeisler.au@gmail.com >> backend/.env
+          echo "HOST_USER_EMAIL=joshkeisler.au@gmail.com" >> backend/.env
           echo "MAILGUN_DOMAIN=${{ secrets.MAILGUN_DOMAIN }}" >> backend/.env
           echo "MAILGUN_API_KEY=${{ secrets.MAILGUN_API_KEY }}" >> backend/.env
 
