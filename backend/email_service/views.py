@@ -1,5 +1,4 @@
-# email_service/views.py
-
+import logging
 import os
 from smtplib import SMTPException
 
@@ -9,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from email_service.serializers import EmailSerializer
+
+logger = logging.getLogger("__name__")
 
 
 class SendEmailView(APIView):
@@ -41,11 +42,13 @@ class SendEmailView(APIView):
                     {"message": "Email sent successfully!"}, status=status.HTTP_200_OK
                 )
             except SMTPException as e:
+                logger.error(f"SMTP error occurred when sending email: {str(e)}")
                 return Response(
                     {"error": f"SMTP error: {str(e)}"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             except Exception as e:  # pylint: disable=broad-except
+                logger.error(f"Error occurred when sending email: {str(e)}")
                 return Response(
                     {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )

@@ -9,3 +9,6 @@ disable=C0114,C0115,C0116
 
 [*.serializers.py]
 disable=W0223
+
+[MESSAGES CONTROL]
+disable=C0413, W1203
