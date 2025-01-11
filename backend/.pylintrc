@@ -11,4 +11,4 @@ disable=C0114,C0115,C0116
 disable=W0223
 
 [MESSAGES CONTROL]
-disable=C0413, W1203
+disable=W1203
