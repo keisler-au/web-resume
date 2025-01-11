@@ -75,7 +75,6 @@ const Home: React.FC<{ data: BodyData[] }> = ({ data }) => {
     setIsExpanded((prev) => !prev);
   };
 
-  console.log("what is data ", data);
   return (
     <Box
       sx={{

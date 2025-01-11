@@ -25,13 +25,9 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    const tab = searchParams.get("tab");
+    const tab = Number(searchParams.get("tab")) || 0;
 
-    if (tab) {
-      setActiveTab(+tab);
-    } else {
-      setActiveTab(0);
-    }
+    setActiveTab(+tab);
   }, [location]);
 
   const handleChange = (event: React.SyntheticEvent, newactiveTab: number) => {

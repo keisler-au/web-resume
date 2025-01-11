@@ -95,7 +95,6 @@ const App = () => (
                 <Content
                   render={(pageData: PageData) => {
                     const PageComponent = pageConfig.page;
-                    console.log(pageConfig.path, pageData.body);
                     return (
                       <PageLayout data={pageData.heading[0]}>
                         <PageComponent data={pageData.body} />
