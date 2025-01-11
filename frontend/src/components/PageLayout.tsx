@@ -46,7 +46,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ data, children }) => (
         sx={{
           color: theme.palette.text.primary,
           maxWidth: { xs: "90%", sm: "70%", md: "50%" },
-          paddingTop: "3vh",
+          paddingTop: { xs: "1vh", sm: "3vh" },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
