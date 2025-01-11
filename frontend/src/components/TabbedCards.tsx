@@ -29,6 +29,8 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
 
     if (tab) {
       setActiveTab(+tab);
+    } else {
+      setActiveTab(0);
     }
   }, [location]);
 
