@@ -49,9 +49,9 @@ class SendEmailView(APIView):
                 )
             except Exception as e:  # pylint: disable=broad-except
                 logger.error(f"Error occurred when sending email: {str(e)}")
-                logger.error(f"Email content = \n{vars(email)}")
                 return Response(
                     {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
 
+        logger.error(f"Serialized data is invalid: {str(serializer.errors)}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
