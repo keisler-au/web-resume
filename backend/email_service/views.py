@@ -43,13 +43,13 @@ class SendEmailView(APIView):
                 )
             except SMTPException as e:
                 logger.error(f"SMTP error occurred when sending email: {str(e)}")
-                logger.error(f"Email content = \n{vars(email)}")
                 return Response(
                     {"error": f"SMTP error: {str(e)}"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             except Exception as e:  # pylint: disable=broad-except
                 logger.error(f"Error occurred when sending email: {str(e)}")
+                logger.error(f"Email content = \n{vars(email)}")
                 return Response(
                     {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
                 )
