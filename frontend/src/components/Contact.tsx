@@ -23,14 +23,7 @@ import {
   PHONE_NUMBER,
 } from "../constants";
 
-interface FormValues {
-  name: string;
-  email: string;
-  message: string;
-  files?: FileList;
-}
-
-const CustomTextField: React.FC<{
+interface CustomTextFieldProps {
   label: string;
   name: string;
   type?: string;
@@ -38,7 +31,17 @@ const CustomTextField: React.FC<{
   register: any;
   errors: any;
   theme: any;
-}> = ({ label, name, type = "text", rows = 1, register, errors, theme }) => {
+}
+
+const CustomTextField: React.FC<CustomTextFieldProps> = ({
+  label,
+  name,
+  type = "text",
+  rows = 1,
+  register,
+  errors,
+  theme,
+}) => {
   return (
     <TextField
       label={label}
@@ -71,6 +74,13 @@ const CustomTextField: React.FC<{
     />
   );
 };
+
+interface FormValues {
+  name: string;
+  email: string;
+  message: string;
+  files?: FileList;
+}
 
 const Contact: React.FC = () => {
   const theme = useTheme();
@@ -129,8 +139,6 @@ const Contact: React.FC = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        // alignItems: "center",
-        // justifyContent: "center",
       }}
     >
       <Box
@@ -230,12 +238,12 @@ const Contact: React.FC = () => {
             display: "flex",
             alignItems: "center",
             gap: 1,
-            "&:hover": {
-              backgroundColor: theme.palette.primary.dark,
-            },
             color: allFieldsFilled
               ? theme.palette.secondary.main
               : theme.palette.text.primary,
+            "&:hover": {
+              backgroundColor: theme.palette.primary.dark,
+            },
           }}
         >
           {isSubmitting ? (
@@ -273,12 +281,12 @@ const Contact: React.FC = () => {
       </Box>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          flexDirection: "column",
+          // display: "flex",
+          // justifyContent: "center",
+          // alignItems: "flex-start",
+          // flexDirection: "column",
           margin: "auto",
-          gap: 1,
+          // gap: 1,
           position: {
             xs: "relative",
             md: "fixed",

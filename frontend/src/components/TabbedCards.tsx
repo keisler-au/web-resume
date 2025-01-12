@@ -1,23 +1,17 @@
-import { ArrowForwardIos, ArrowBackIos } from "@mui/icons-material";
 import {
   Box,
   Typography,
   Card,
   CardContent,
-  CardHeader,
   Tabs,
   Tab,
   Link,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Slider from "react-slick";
 
-import "slick-carousel/slick/slick.css";
 import { BodyData } from "../App";
 import theme from "../theme";
-import "slick-carousel/slick/slick-theme.css";
-import "../slider-styles.css";
 
 const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -55,7 +49,6 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
       {data.map((tab, index) =>
         activeTab === index ? (
           <Box key={index}>
-            {/* <Slider {...sliderSettings}> */}
             {tab.cards.map((card, cardIndex) => (
               <Box key={cardIndex}>
                 <Card
@@ -64,12 +57,10 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
                     maxWidth: { xs: "90%", sm: "20%" },
                     minWidth: { xs: "90%", sm: "40%" },
                     minHeight: { xs: "16rem", sm: "70%" },
-                    // maxHeight: "16rem",
                     color: theme.palette.secondary.main,
                     width: "100%",
                     backgroundColor: theme.palette.primary.main,
                     margin: "auto",
-                    // padding: { xs: "0.5rem", sm: "1rem" },
                     boxShadow: "none",
                   }}
                 >
@@ -95,7 +86,6 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
                             key={lineIndex}
                             variant="body2"
                             id={content.description}
-                            // sx={{ padding: "1rem" }}
                           >
                             {content.description}
                           </Typography>
@@ -115,7 +105,6 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
                 </Card>
               </Box>
             ))}
-            {/* </Slider> */}
           </Box>
         ) : null,
       )}
