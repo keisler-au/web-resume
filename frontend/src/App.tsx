@@ -15,32 +15,15 @@ export const ErrorFallback = () => (
   <div style={{ width: "100vw", height: "100vh", backgroundColor: "#1D3557" }}>
     <div
       style={{
-        backgroundColor: "#1D3557",
+        paddingTop: "20vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        color: "#E8E8E8",
       }}
     >
-      <h2
-        style={{
-          color: "#E8E8E8",
-          marginTop: "5rem",
-          fontWeight: "bold",
-          height: "6rem",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        Something's gone wrong...
-      </h2>
-      <div
-        style={{
-          color: "#E8E8E8",
-          height: "4rem",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+      <h2 style={{ fontWeight: "bold" }}>Something's gone wrong...</h2>
+      <div>
         Please reach out to joshkeisler.au@gmail.com and try again later, thank
         you!
       </div>

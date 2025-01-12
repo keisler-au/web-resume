@@ -15,28 +15,31 @@ const PageLayout: React.FC<PageLayoutProps> = ({ data, children }) => (
     <Navbar />
     <Box
       sx={{
-        position: "relative",
-        backgroundColor: theme.palette.background.paper,
+        paddingTop: "14vh",
+        paddingBottom: "6vh",
+        marginBottom: "3vh",
+        // position: "relative",
+        minHeight: "40vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        // justifyContent: "center",
         alignItems: "center",
-        minHeight: { xs: "33vh", sm: "40vh" },
-        textAlign: "center",
-        paddingTop: "2vh",
-        marginBottom: "4vh",
+        gap: 3,
+        backgroundColor: theme.palette.background.paper,
+        // textAlign: "center",
       }}
     >
       <Typography
-        variant="h2"
+        variant="h1"
+        color="primary"
         sx={{
-          color: theme.palette.primary.main,
-          marginTop: { xs: "3rem", sm: "5rem" },
+          // marginTop: { xs: "3rem", sm: "5rem" },
+          // display: "flex",
+          // justifyContent: "space-between",
+          // alignItems: "center",
           fontWeight: "bold",
-          fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          fontSize: { xs: "1.8rem", md: "2.5rem" },
+          // color: theme.palette.primary.main,
         }}
       >
         {data.main_heading}
@@ -44,15 +47,15 @@ const PageLayout: React.FC<PageLayoutProps> = ({ data, children }) => (
       <Typography
         variant="body1"
         sx={{
-          color: theme.palette.text.primary,
+          // paddingTop: { xs: "1vh", sm: "3vh" },
           maxWidth: { xs: "90%", sm: "70%", md: "50%" },
-          paddingTop: { xs: "1vh", sm: "3vh" },
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: { xs: "2.5vh", sm: "1rem" },
+          // display: "flex",
+          // flexDirection: "column",
+          // alignItems: "center",
+          // justifyContent: "center",
           textAlign: "center",
+          fontSize: { xs: "1rem", sm: "1.1rem" },
+          color: theme.palette.text.primary,
         }}
       >
         {data.description}

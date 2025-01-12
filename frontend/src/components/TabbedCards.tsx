@@ -38,11 +38,7 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
         indicatorColor="secondary"
       >
         {data.map((tab, index) => (
-          <Tab
-            key={index}
-            label={tab.label}
-            sx={{ padding: "0.5rem", flexShrink: 1 }}
-          />
+          <Tab key={index} label={tab.label} sx={{ flexShrink: 1 }} />
         ))}
       </Tabs>
 
@@ -53,42 +49,40 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
               <Box key={cardIndex}>
                 <Card
                   sx={{
-                    position: "relative",
+                    // width: "100%",
+                    margin: "auto",
                     maxWidth: { xs: "90%", sm: "20%" },
                     minWidth: { xs: "90%", sm: "40%" },
                     minHeight: { xs: "16rem", sm: "70%" },
-                    color: theme.palette.secondary.main,
-                    width: "100%",
-                    backgroundColor: theme.palette.primary.main,
-                    margin: "auto",
+                    // position: "relative",
                     boxShadow: "none",
+                    backgroundColor: theme.palette.primary.main,
+                    color: theme.palette.secondary.main,
                   }}
                 >
                   <CardContent>
-                    {card.content.map((content, lineIndex) => {
-                      if (content.description.includes("http")) {
-                        return (
-                          <Link
-                            key={lineIndex}
-                            href={content.description}
-                            color="secondary"
-                            sx={{ margin: "2vh 4vh" }}
-                          >
-                            {content.description}
-                          </Link>
-                        );
-                      } else if (
-                        content.description[content.description.length - 1] ===
-                        ":"
-                      ) {
+                    {card.content.map(({ description }, lineIndex) => {
+                      if (description[description.length - 1] === ":") {
                         return (
                           <Typography
                             key={lineIndex}
                             variant="body2"
-                            id={content.description}
+                            id={description}
                           >
-                            {content.description}
+                            {description}
                           </Typography>
+                        );
+                      }
+                      if (description.includes("http")) {
+                        return (
+                          <Link
+                            key={lineIndex}
+                            href={description}
+                            color="secondary"
+                            sx={{ margin: "2vh 4vh" }}
+                          >
+                            {description}
+                          </Link>
                         );
                       }
                       return (
@@ -97,7 +91,7 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
                           variant="body2"
                           sx={{ margin: "2vh 4vh" }}
                         >
-                          {content.description}
+                          {description}
                         </Typography>
                       );
                     })}

@@ -145,15 +145,15 @@ const Contact: React.FC = () => {
         component="form"
         onSubmit={handleSubmit(onSubmit)}
         sx={{
+          width: { xs: "90%", sm: "70%", md: "35%" },
+          margin: "0 auto",
+          padding: { xs: 2, sm: 4 },
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          width: { xs: "90%", sm: "70%", md: "40%" },
-          margin: "0 auto",
-          padding: { xs: theme.spacing(2), sm: theme.spacing(4) },
           border: `1px solid ${theme.palette.secondary.main}`,
-          borderRadius: 1,
-          marginBottom: "3rem",
+          // borderRadius: 1,
+          // marginBottom: "3rem",
         }}
       >
         <CustomTextField
@@ -184,19 +184,19 @@ const Contact: React.FC = () => {
           variant="outlined"
           component="label"
           sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: theme.spacing(1.5),
-            borderRadius: 1,
-            textAlign: "left",
             minHeight: "56px",
+            display: "flex",
+            // alignItems: "center",
+            justifyContent: "space-between",
+            // padding: theme.spacing(1.5),
+            // borderRadius: 1,
+            // textAlign: "left",
+            textTransform: "none",
             borderColor: theme.palette.primary.dark,
             "&:hover": {
               borderColor: theme.palette.secondary.main,
               backgroundColor: theme.palette.action.hover,
             },
-            textTransform: "none",
           }}
         >
           <Typography
@@ -235,9 +235,9 @@ const Contact: React.FC = () => {
           variant="contained"
           disabled={isSubmitting}
           sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
+            // display: "flex",
+            // alignItems: "center",
+            // gap: 1,
             color: allFieldsFilled
               ? theme.palette.secondary.main
               : theme.palette.text.primary,
@@ -256,11 +256,11 @@ const Contact: React.FC = () => {
         {statusMessage && (
           <Box
             sx={{
+              padding: 2,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: theme.palette.background.paper,
-              padding: theme.spacing(2),
               borderRadius: 1,
             }}
           >
@@ -279,14 +279,13 @@ const Contact: React.FC = () => {
           </Box>
         )}
       </Box>
+
       <Box
         sx={{
-          // display: "flex",
-          // justifyContent: "center",
-          // alignItems: "flex-start",
-          // flexDirection: "column",
+          display: "flex",
+          flexDirection: "column",
+          gap: 1,
           margin: "auto",
-          // gap: 1,
           position: {
             xs: "relative",
             md: "fixed",
@@ -299,16 +298,15 @@ const Contact: React.FC = () => {
             xs: "auto",
             md: "1.5rem",
           },
-          marginTop: ".6rem",
         }}
       >
         <Typography
           color="secondary"
           sx={{
             display: "flex",
-            gap: 2,
-            justifyContent: "flex-start",
             alignItems: "center",
+            gap: 2,
+            // justifyContent: "flex-start",
           }}
         >
           <FaPhoneAlt fontSize="1.6rem" />
@@ -322,9 +320,9 @@ const Contact: React.FC = () => {
           color="secondary"
           sx={{
             display: "flex",
-            gap: 1,
-            justifyContent: "flex-start",
             alignItems: "center",
+            gap: 1,
+            // justifyContent: "flex-start",
             textDecoration: "none",
           }}
         >
@@ -335,8 +333,8 @@ const Contact: React.FC = () => {
           style={{
             color: theme.palette.secondary.main,
             display: "flex",
-            gap: 15,
             alignItems: "center",
+            gap: 15,
             textDecoration: "none",
             cursor: "pointer",
           }}
@@ -351,9 +349,9 @@ const Contact: React.FC = () => {
           color="secondary"
           sx={{
             display: "flex",
-            gap: 1.5,
-            justifyContent: "flex-start",
             alignItems: "center",
+            gap: 1.5,
+            // justifyContent: "flex-start",
             textDecoration: "none",
           }}
         >

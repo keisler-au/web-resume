@@ -22,14 +22,11 @@ interface NavButtonProps {
   to: string;
   label: string;
 }
-
-const NavButton: React.FC<NavButtonProps> = ({ to, label }) => {
-  return (
-    <Link to={to}>
-      <Button color="primary">{label}</Button>
-    </Link>
-  );
-};
+const NavButton: React.FC<NavButtonProps> = ({ to, label }) => (
+  <Link to={to}>
+    <Button color="primary">{label}</Button>
+  </Link>
+);
 
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -56,38 +53,43 @@ const Navbar: React.FC = () => {
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          // alignItems: "flex-end",
           gap: 2,
         }}
       >
         <Box
           sx={{
-            position: "relative",
-            left: { sm: 0, md: 20 },
+            // position: "relative",
+            // left: { sm: 0, md: 20 }
+            // textAlign: "end",
             display: "flex",
-            alignItems: "flex-end",
+            alignItems: "center",
+            // justifyContent: "center",
             gap: 1,
           }}
         >
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h4"
+              noWrap
               sx={{
                 fontWeight: "bold",
                 fontSize: { xs: "1.5rem", sm: "2rem" },
               }}
-              noWrap
             >
               Josh Keisler
             </Typography>
           </Link>
           <Box
             sx={{
-              width: "100%",
-              textAlign: "center",
+              // width: "100%",
+              // textAlign: "center",
               display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              height: "45px",
+              // justifyContent: "center",
+              // alignItems: "center",
+              // alignItems: "baseline",
+              // justifyContent: "baseline",
+              // height: "45px",
               gap: 1,
             }}
           >
@@ -96,51 +98,56 @@ const Navbar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               color="inherit"
-              sx={{
-                display: { xs: "flex", sm: "inline-flex" },
-                alignItems: "center",
-              }}
+              // sx={
+              //   {
+              //     display: "flex",
+              //     alignItems: "center",
+              //     alignSelf: "end",
+              //   }
+              // }
             >
-              <LinkedIn fontSize="large" />
+              <LinkedIn fontSize="large" sx={{ marginTop: 0.2 }} />
             </MUILink>
             <MUILink
               href={`https://${GITHUB_URL}`}
               target="_blank"
               rel="noopener noreferrer"
               color="inherit"
-              sx={{
-                display: { xs: "flex", sm: "inline-flex" },
-                alignItems: "center",
-                gap: 2,
-              }}
+              sx={
+                {
+                  // display: "flex",
+                  // alignItems: "center",
+                  // gap: 2,
+                }
+              }
             >
               <GitHub fontSize="large" />
             </MUILink>
             <Link
               to="/contact"
               style={{
+                // display: "flex",
+                // alignItems: "center",
+                // gap: 10,
                 color: theme.palette.text.primary,
-                display: "flex",
-                gap: 10,
-                alignItems: "center",
-                textDecoration: "none",
-                cursor: "pointer",
+                // textDecoration: "none",
+                // cursor: "pointer",
               }}
             >
-              <FaPhoneAlt fontSize="1.6rem" />
+              <FaPhoneAlt fontSize="1.6rem" style={{ marginTop: 7 }} />
             </Link>
             <Link
               to="/contact"
               style={{
+                // display: "flex",
+                // alignItems: "center",
+                // gap: 10,
                 color: theme.palette.text.primary,
-                display: "flex",
-                gap: 10,
-                alignItems: "center",
-                textDecoration: "none",
-                cursor: "pointer",
+                // textDecoration: "none",
+                // cursor: "pointer",
               }}
             >
-              <MdEmail fontSize="2rem" />
+              <MdEmail fontSize="2rem" style={{ marginTop: 5 }} />
             </Link>
           </Box>
         </Box>
@@ -170,7 +177,10 @@ const Navbar: React.FC = () => {
               <NavButton to="/experience" label="Experience" />
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
-              <NavButton to="/technical" label="Technical" />
+              <NavButton to="/technical" label="Technical Skills" />
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+              <NavButton to="/about" label="About Me" />
             </MenuItem>
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/contact" label="Contact" />
@@ -186,9 +196,9 @@ const Navbar: React.FC = () => {
           }}
         >
           <NavButton to="/" label="Home" />
-          {/* <NavButton to="/about" label="About Me" /> */}
           <NavButton to="/experience" label="Experience" />
-          <NavButton to="/technical" label="Technology" />
+          <NavButton to="/technical" label="Technical Skills" />
+          {/* <NavButton to="/about" label="About Me" /> */}
           <Link to="/contact">
             <Button
               color="primary"
