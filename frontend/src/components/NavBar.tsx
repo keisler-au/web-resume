@@ -179,9 +179,9 @@ const Navbar: React.FC = () => {
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/technical" label="Technical Skills" />
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
+            {/* <MenuItem onClick={handleMenuClose}>
               <NavButton to="/about" label="About Me" />
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/contact" label="Contact" />
             </MenuItem>

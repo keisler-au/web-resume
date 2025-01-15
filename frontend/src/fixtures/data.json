@@ -15,7 +15,7 @@
               "title": "Problem Interests",
               "content": [
                 {
-                  "description": "I am passionate about helping people and I want this represented in the problems I am solving. I strongly believe in principles of Sustainability and Equality of Opportunity, and it is equally important to me that people are not just surviving but thriving. Whether it is working in Healthcare or Personal Development; from Mental Health to the Entertainment industry, I want to be solving problems that are going to bring real benefit to peoples' lives."
+                  "description": "I am passionate about helping people and I want this represented in the problems I am solving. I strongly believe in principles of sustainability and equality of opportunity, and it is equally important to me that people are not just surviving but thriving. Whether it is working in healthcare or personal development; from mental health to the entertainment industry, I want to be solving problems that are going to bring real benefit to peoples' lives."
                 }
               ]
             }
@@ -40,7 +40,7 @@
               "title": "Software Developer",
               "content": [
                 {
-                  "description": "While contracted to BHP I helped develop a platform that was used by field workers and miners to automate and standardise the daily on-site mining operations. As a Software Developer I:"
+                  "description": "BHP is a multinational mining company, and I helped develop a platform that was used by the field workers and supervisors to automate and standardise the daily on-site mining operations. As a Software Developer I:"
                 },
                 {
                   "description": "Created new frontend and backend features, such as a page dedicated to logging reports, and a versions-comparisons UI for data points."
@@ -239,10 +239,10 @@
           ]
         },
         {
-          "label": "Scaleable",
+          "label": "Scalable",
           "cards": [
             {
-              "title": "Scaleable",
+              "title": "Scalable",
               "content": [
                 {
                   "description": "AWS:"
@@ -271,10 +271,24 @@
       "heading": [
         {
           "main_heading": "Get in Touch",
-          "description": "If you have a proposal, idea, feedback, or just want to say Hi, I would love to hear from you!"
+          "description": ""
         }
       ],
-      "body": []
+      "body": [
+        {
+          "label": "Send an email",
+          "cards": [
+            {
+              "title": "Send an email",
+              "content": [
+                {
+                  "description": "If you have a proposal, idea, feedback, or just want to say hi, I would love to hear from you!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

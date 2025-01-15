@@ -7,7 +7,6 @@ import {
   Box,
   CircularProgress,
   IconButton,
-  useTheme,
   Link,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -15,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
+import { PageData } from "../App";
 import {
   BASE_URL,
   EMAIL_ADDRESS,
@@ -22,6 +22,8 @@ import {
   LINKEDIN_URL,
   PHONE_NUMBER,
 } from "../constants";
+import theme from "../theme";
+import Header from "./Header";
 
 interface CustomTextFieldProps {
   label: string;
@@ -30,7 +32,6 @@ interface CustomTextFieldProps {
   rows?: number;
   register: any;
   errors: any;
-  theme: any;
 }
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
@@ -40,7 +41,6 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
   rows = 1,
   register,
   errors,
-  theme,
 }) => {
   return (
     <TextField
@@ -82,8 +82,7 @@ interface FormValues {
   files?: FileList;
 }
 
-const Contact: React.FC = () => {
-  const theme = useTheme();
+const Contact: React.FC<{ data: PageData }> = ({ data }) => {
   const {
     register,
     watch,
@@ -135,231 +134,258 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Box
-        component="form"
-        onSubmit={handleSubmit(onSubmit)}
-        sx={{
-          width: { xs: "90%", sm: "70%", md: "35%" },
-          margin: "0 auto",
-          padding: { xs: 2, sm: 4 },
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-          border: `1px solid ${theme.palette.secondary.main}`,
-          // borderRadius: 1,
-          // marginBottom: "3rem",
-        }}
-      >
-        <CustomTextField
-          label="Name"
-          name="name"
-          register={register}
-          errors={errors}
-          theme={theme}
-        />
-        <CustomTextField
-          label="Email"
-          name="email"
-          type="email"
-          register={register}
-          errors={errors}
-          theme={theme}
-        />
-        <CustomTextField
-          label="Message"
-          name="message"
-          rows={4}
-          register={register}
-          errors={errors}
-          theme={theme}
-        />
-
-        <Button
-          variant="outlined"
-          component="label"
+    <>
+      <Header data={data.heading[0]}>
+        <Box
+          // color="black"
           sx={{
-            minHeight: "56px",
             display: "flex",
-            // alignItems: "center",
-            justifyContent: "space-between",
-            // padding: theme.spacing(1.5),
-            // borderRadius: 1,
-            // textAlign: "left",
-            textTransform: "none",
-            borderColor: theme.palette.primary.dark,
-            "&:hover": {
-              borderColor: theme.palette.secondary.main,
-              backgroundColor: theme.palette.action.hover,
-            },
+            flexDirection: "column",
+            // marginRight: "15vw",
+            alignItems: "center",
+            gap: 0.5,
+            // margin: "auto",
+            // position: {
+            //   xs: "relative",
+            //   md: "fixed",
+            // },
+            // bottom: {
+            //   xs: "auto",
+            //   md: "1.5rem",
+            // },
+            // left: {
+            //   xs: "auto",
+            //   md: "1.5rem",
+            // },
           }}
         >
           <Typography
-            variant="body1"
+            // color={theme.palette.text.primary}
             sx={{
-              color:
-                fileName === "No Files Uploaded"
-                  ? theme.palette.text.primary
-                  : theme.palette.secondary.main,
-            }}
-          >
-            {fileName}
-          </Typography>
-          <input
-            type="file"
-            multiple
-            hidden
-            {...register("files")}
-            onChange={(e) => {
-              if (e.target.files) {
-                const fileNames = Array.from(e.target.files).map(
-                  (file) => file.name,
-                );
-                setFileName(fileNames.join(", "));
-              }
-              register("files").onChange(e);
-            }}
-          />
-          <IconButton component="span">
-            <AttachFileIcon />
-          </IconButton>
-        </Button>
-
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={isSubmitting}
-          sx={{
-            // display: "flex",
-            // alignItems: "center",
-            // gap: 1,
-            color: allFieldsFilled
-              ? theme.palette.secondary.main
-              : theme.palette.text.primary,
-            "&:hover": {
-              backgroundColor: theme.palette.primary.dark,
-            },
-          }}
-        >
-          {isSubmitting ? (
-            <CircularProgress size={24} color="inherit" />
-          ) : (
-            "Send"
-          )}
-        </Button>
-
-        {statusMessage && (
-          <Box
-            sx={{
-              padding: 2,
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: theme.palette.background.paper,
-              borderRadius: 1,
+              gap: 2,
+              // margin: "auto",
+              // justifyContent: "flex-start",
+            }}
+          >
+            <FaPhoneAlt />
+            {PHONE_NUMBER}
+          </Typography>
+
+          <Link
+            href={`https://${GITHUB_URL}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            // color="secondary"
+            color={theme.palette.text.primary}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              // justifyContent: "flex-start",
+              textDecoration: "none",
+            }}
+          >
+            <GitHub />
+            {GITHUB_URL}
+          </Link>
+          <Typography
+            style={{
+              // color: theme.palette.secondary.main,
+              display: "flex",
+              alignItems: "center",
+              gap: 15,
+              // textDecoration: "none",
+              // cursor: "pointer",
+            }}
+          >
+            <MdEmail />
+            {EMAIL_ADDRESS}
+          </Typography>
+          <Link
+            href={`https://linkedin.com/${LINKEDIN_URL}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            color={theme.palette.text.primary}
+            // color="secondary"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1.5,
+              // justifyContent: "flex-start",
+              textDecoration: "none",
+            }}
+          >
+            <LinkedIn />
+            {LINKEDIN_URL}
+          </Link>
+        </Box>
+      </Header>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{
+            width: { xs: "90%", sm: "70%", md: "35%" },
+            margin: "0 auto",
+            padding: { xs: 2, sm: 4 },
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            border: `1px solid ${theme.palette.secondary.main}`,
+            // borderRadius: 1,
+            // marginBottom: "3rem",
+          }}
+        >
+          <Typography variant="h5" color="secondary" sx={{ margin: "auto" }}>
+            {data.body[0].cards[0].title}
+          </Typography>
+          <Typography
+            variant="body1"
+            color="secondary"
+            sx={{
+              // paddingTop: { xs: "1vh", sm: "3vh" },
+              // maxWidth: { xs: "90%", sm: "70%", md: "50%" },
+              // display: "flex",
+              // flexDirection: "column",
+              // alignItems: "center",
+              // justifyContent: "center",
+              textAlign: "center",
+              fontSize: { xs: "1rem", sm: "1.1rem" },
+              // color: theme.palette.text.primary,
+            }}
+          >
+            {data.body[0].cards[0].content[0].description}
+          </Typography>
+          <CustomTextField
+            label="Name"
+            name="name"
+            register={register}
+            errors={errors}
+          />
+          <CustomTextField
+            label="Email"
+            name="email"
+            type="email"
+            register={register}
+            errors={errors}
+          />
+          <CustomTextField
+            label="Message"
+            name="message"
+            rows={4}
+            register={register}
+            errors={errors}
+          />
+
+          <Button
+            variant="outlined"
+            component="label"
+            sx={{
+              minHeight: "56px",
+              display: "flex",
+              // alignItems: "center",
+              justifyContent: "space-between",
+              // padding: theme.spacing(1.5),
+              // borderRadius: 1,
+              // textAlign: "left",
+              textTransform: "none",
+              borderColor: theme.palette.primary.dark,
+              "&:hover": {
+                borderColor: theme.palette.secondary.main,
+                backgroundColor: theme.palette.action.hover,
+              },
             }}
           >
             <Typography
               variant="body1"
               sx={{
-                marginRight: 1,
                 color:
-                  statusMessage === "Email sent!"
-                    ? theme.palette.success.main
-                    : theme.palette.error.main,
+                  fileName === "No Files Uploaded"
+                    ? theme.palette.text.primary
+                    : theme.palette.secondary.main,
               }}
             >
-              {statusMessage === "Email sent!" ? "✅" : "❌"} {statusMessage}
+              {fileName}
             </Typography>
-          </Box>
-        )}
-      </Box>
+            <input
+              type="file"
+              multiple
+              hidden
+              {...register("files")}
+              onChange={(e) => {
+                if (e.target.files) {
+                  const fileNames = Array.from(e.target.files).map(
+                    (file) => file.name,
+                  );
+                  setFileName(fileNames.join(", "));
+                }
+                register("files").onChange(e);
+              }}
+            />
+            <IconButton component="span">
+              <AttachFileIcon />
+            </IconButton>
+          </Button>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-          margin: "auto",
-          position: {
-            xs: "relative",
-            md: "fixed",
-          },
-          bottom: {
-            xs: "auto",
-            md: "1.5rem",
-          },
-          left: {
-            xs: "auto",
-            md: "1.5rem",
-          },
-        }}
-      >
-        <Typography
-          color="secondary"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            // justifyContent: "flex-start",
-          }}
-        >
-          <FaPhoneAlt fontSize="1.6rem" />
-          {PHONE_NUMBER}
-        </Typography>
+          <Button
+            type="submit"
+            variant="contained"
+            disabled={isSubmitting}
+            sx={{
+              // display: "flex",
+              // alignItems: "center",
+              // gap: 1,
+              color: allFieldsFilled
+                ? theme.palette.secondary.main
+                : theme.palette.text.primary,
+              "&:hover": {
+                backgroundColor: theme.palette.primary.dark,
+              },
+            }}
+          >
+            {isSubmitting ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              "Send"
+            )}
+          </Button>
 
-        <Link
-          href={GITHUB_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          color="secondary"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            // justifyContent: "flex-start",
-            textDecoration: "none",
-          }}
-        >
-          <GitHub fontSize="large" />
-          {GITHUB_URL}
-        </Link>
-        <Typography
-          style={{
-            color: theme.palette.secondary.main,
-            display: "flex",
-            alignItems: "center",
-            gap: 15,
-            textDecoration: "none",
-            cursor: "pointer",
-          }}
-        >
-          <MdEmail fontSize="1.9rem" />
-          {EMAIL_ADDRESS}
-        </Typography>
-        <Link
-          href={LINKEDIN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          color="secondary"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1.5,
-            // justifyContent: "flex-start",
-            textDecoration: "none",
-          }}
-        >
-          <LinkedIn fontSize="large" />
-          {LINKEDIN_URL}
-        </Link>
+          {statusMessage && (
+            <Box
+              sx={{
+                padding: 2,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: 1,
+              }}
+            >
+              <Typography
+                variant="body1"
+                sx={{
+                  marginRight: 1,
+                  color:
+                    statusMessage === "Email sent!"
+                      ? theme.palette.success.main
+                      : theme.palette.error.main,
+                }}
+              >
+                {statusMessage === "Email sent!" ? "✅" : "❌"} {statusMessage}
+              </Typography>
+            </Box>
+          )}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

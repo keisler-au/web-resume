@@ -28,10 +28,6 @@ const theme = createTheme({
     h4: {
       color: lightGray,
     },
-
-    h3: {
-      color: white,
-    },
     body1: {
       color: mediumGray,
     },

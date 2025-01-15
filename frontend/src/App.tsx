@@ -7,7 +7,7 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import Contact from "./components/Contact";
 import Content from "./components/Content";
 import Home from "./components/Home";
-import PageLayout from "./components/PageLayout";
+import Navbar from "./components/NavBar";
 import TabbedCards from "./components/TabbedCards";
 import theme from "./theme";
 
@@ -45,9 +45,9 @@ export interface BodyData {
     }[];
   }[];
 }
-interface PageData {
+export interface PageData {
   heading: HeadingData[];
-  body?: BodyData[];
+  body: BodyData[];
 }
 
 interface PageConfig {
@@ -69,6 +69,7 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Navbar />
         <Routes>
           {pageConfigs.map((pageConfig) => (
             <Route
@@ -76,13 +77,9 @@ const App = () => (
               path={pageConfig.path}
               element={
                 <Content
-                  render={(pageData: PageData) => {
+                  render={(data: PageData) => {
                     const PageComponent = pageConfig.page;
-                    return (
-                      <PageLayout data={pageData.heading[0]}>
-                        <PageComponent data={pageData.body} />
-                      </PageLayout>
-                    );
+                    return <PageComponent data={data} />;
                   }}
                   pageReference={
                     pageConfig.path === "/" ? "home" : pageConfig.path

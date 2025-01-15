@@ -1,4 +1,4 @@
-import { Typography, Box, Button, useTheme } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import { IconType } from "react-icons";
 import { DiPostgresql } from "react-icons/di";
@@ -6,8 +6,9 @@ import { FaAws, FaDocker, FaReact, FaLinux } from "react-icons/fa";
 import { SiPrecommit, SiGithubactions } from "react-icons/si";
 import { Link } from "react-router-dom";
 
-import { BodyData } from "../App";
-// import theme from "../theme";
+import { PageData } from "../App";
+import Header from "./Header";
+import theme from "../theme";
 
 interface TechIcon {
   [key: string]: {
@@ -68,100 +69,105 @@ const techIcons: TechIcon = {
 //   );
 // };
 
-const Home: React.FC<{ data: BodyData[] }> = ({ data }) => {
-  const theme = useTheme();
+const Home: React.FC<{ data: PageData }> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handlePhotoClick = () => {
     setIsExpanded((prev) => !prev);
   };
-
+  console.log(data);
   return (
-    <Box
-      sx={{
-        paddingTop: "5vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 8,
-      }}
-    >
+    <>
+      <Header data={data.heading[0]} />
       <Box
         sx={{
-          maxWidth: "60vw",
+          paddingTop: "5vh",
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
-          // justifyContent: "space-between",
-          // alignItems: "space-between",
-          gap: { xs: 20, sm: 10 },
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 8,
         }}
       >
-        <Box width="100%" display="flex" justifyContent="center">
-          <Box
-            component="img"
-            src="/cv_photo.jpg"
-            alt="Profile Photo"
-            onClick={handlePhotoClick}
-            sx={{
-              position: "absolute",
-              width: isExpanded
-                ? { xs: "12rem", sm: "15rem", md: "18rem" }
-                : { xs: "8rem", sm: "10rem" },
-              height: isExpanded
-                ? { xs: "12rem", sm: "15rem", md: "18rem" }
-                : { xs: "8rem", sm: "10rem" },
-              transition: "all 0.3s ease-in-out",
-              boxShadow: isExpanded
-                ? `0 0 15px ${theme.palette.primary.main}`
-                : "none",
-              borderRadius: "50%",
-              cursor: "pointer",
-              zIndex: 2,
-            }}
-          />
-        </Box>
-        <Typography
-          color="secondary"
-          sx={{ maxWidth: "45vw", textAlign: { xs: "center", sm: "justify" } }}
+        <Box
+          sx={{
+            maxWidth: "60vw",
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            // justifyContent: "space-between",
+            // alignItems: "space-between",
+            gap: { xs: 20, sm: 10 },
+          }}
         >
-          {data[0]?.cards[0]?.content[0]?.description}
-        </Typography>
-      </Box>
-
-      <Box
-        sx={{
-          maxWidth: "60vw",
-          display: "flex",
-          justifyContent: "center",
-          flexWrap: "wrap",
-          gap: 3,
-          // marginBottom: { xs: 2, sm: 3 },
-        }}
-      >
-        {Object.keys(techIcons).map((label) => (
-          <Link
-            key={label}
-            to={`/technical?tab=${techIcons[label].tabNumber}#${techIcons[label].heading}`}
-            style={{ textDecoration: "none" }}
-          >
-            <Button
-              key={label}
-              variant="outlined"
+          <Box width="100%" display="flex" justifyContent="center">
+            <Box
+              component="img"
+              src="/cv_photo.jpg"
+              alt="Profile Photo"
+              onClick={handlePhotoClick}
               sx={{
-                // padding: { xs: "0.6rem 1.2rem", sm: "0.8rem 1.5rem" },
-                color: theme.palette.secondary.main,
-                fontSize: { xs: "0.9rem", sm: "1rem" },
-                "&:hover": {
-                  border: `1px solid ${theme.palette.secondary.main}`,
-                },
+                position: "absolute",
+                width: isExpanded
+                  ? { xs: "12rem", sm: "15rem", md: "18rem" }
+                  : { xs: "8rem", sm: "10rem" },
+                height: isExpanded
+                  ? { xs: "12rem", sm: "15rem", md: "18rem" }
+                  : { xs: "8rem", sm: "10rem" },
+                transition: "all 0.3s ease-in-out",
+                boxShadow: isExpanded
+                  ? `0 0 15px ${theme.palette.primary.main}`
+                  : "none",
+                borderRadius: "50%",
+                cursor: "pointer",
+                zIndex: 2,
               }}
+            />
+          </Box>
+          <Typography
+            color="secondary"
+            sx={{
+              maxWidth: "45vw",
+              textAlign: { xs: "center", sm: "justify" },
+            }}
+          >
+            {data.body[0].cards[0]?.content[0]?.description}
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            maxWidth: "60vw",
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: 3,
+            // marginBottom: { xs: 2, sm: 3 },
+          }}
+        >
+          {Object.keys(techIcons).map((label) => (
+            <Link
+              key={label}
+              to={`/technical?tab=${techIcons[label].tabNumber}#${techIcons[label].heading}`}
+              style={{ textDecoration: "none" }}
             >
-              {label}
-            </Button>
-          </Link>
-        ))}
+              <Button
+                key={label}
+                variant="outlined"
+                sx={{
+                  // padding: { xs: "0.6rem 1.2rem", sm: "0.8rem 1.5rem" },
+                  color: theme.palette.secondary.main,
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
+                  "&:hover": {
+                    border: `1px solid ${theme.palette.secondary.main}`,
+                  },
+                }}
+              >
+                {label}
+              </Button>
+            </Link>
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

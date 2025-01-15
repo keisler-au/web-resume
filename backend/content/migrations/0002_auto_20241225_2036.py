@@ -216,20 +216,20 @@ def populate_data(apps, schema_editor):
         description="Managing dependencies gave me greater exposure to the Linux file structure and its executables, and an understanding that dependencies and package managers are both a miracle and a nightmare.",
     )
 
-    scaleable_body = PageBody.objects.create(page=technical_page, label="Scaleable")
-    scaleable_card = BodyCard.objects.create(body=scaleable_body, title="Scaleable")
-    CardContent.objects.create(card=scaleable_card, description="AWS:")
+    scalable_body = PageBody.objects.create(page=technical_page, label="Scalable")
+    scalable_card = BodyCard.objects.create(body=scalable_body, title="Scalable")
+    CardContent.objects.create(card=scalable_card, description="AWS:")
     CardContent.objects.create(
-        card=scaleable_card,
+        card=scalable_card,
         description="Having learnt the AWS infrastructure that BHP used for their project I decided to replicate it for this web resume. I have since moved to a Linux VPS, but I had successfully deployed to AWS and made use of its scalability features.",
     )
     CardContent.objects.create(
-        card=scaleable_card,
+        card=scalable_card,
         description="Successfully deploying to AWS involved using; ECR, Fargate, ECS, ALB, Security Group, VPC endpoints, Parameter Store Secrets, IAM, RDS, CloudWatch.",
     )
-    CardContent.objects.create(card=scaleable_card, description="Redis:")
+    CardContent.objects.create(card=scalable_card, description="Redis:")
     CardContent.objects.create(
-        card=scaleable_card,
+        card=scalable_card,
         description="For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated.",
     )
 

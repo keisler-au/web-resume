@@ -10,10 +10,11 @@ import {
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { BodyData } from "../App";
+import { PageData } from "../App";
 import theme from "../theme";
+import Header from "./Header";
 
-const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
+const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
   const [activeTab, setActiveTab] = useState(0);
   const location = useLocation();
 
@@ -30,6 +31,7 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
 
   return (
     <>
+      <Header data={data.heading[0]} />
       <Tabs
         value={activeTab}
         onChange={handleChange}
@@ -37,12 +39,12 @@ const TabbedCards: React.FC<{ data: BodyData[] }> = ({ data }) => {
         textColor="secondary"
         indicatorColor="secondary"
       >
-        {data.map((tab, index) => (
+        {data.body.map((tab, index) => (
           <Tab key={index} label={tab.label} sx={{ flexShrink: 1 }} />
         ))}
       </Tabs>
 
-      {data.map((tab, index) =>
+      {data.body.map((tab, index) =>
         activeTab === index ? (
           <Box key={index}>
             {tab.cards.map((card, cardIndex) => (
