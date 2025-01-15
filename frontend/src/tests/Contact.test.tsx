@@ -7,8 +7,14 @@ import { BASE_URL } from "../constants";
 const fetchMock = fetch as jest.Mock;
 
 describe("Contact Component", () => {
+  const data = {
+    heading: [{ main_heading: "", description: "" }],
+    body: [
+      { label: "", cards: [{ title: "", content: [{ description: "" }] }] },
+    ],
+  };
   it("renders the contact form with all fields", () => {
-    const { getByText, getByLabelText } = render(<Contact />);
+    const { getByText, getByLabelText } = render(<Contact data={data} />);
 
     expect(getByLabelText("Name")).toBeInTheDocument();
     expect(getByLabelText("Email")).toBeInTheDocument();
@@ -18,7 +24,7 @@ describe("Contact Component", () => {
   });
 
   it("shows validation errors when submitting an empty form", async () => {
-    const { getByText } = render(<Contact />);
+    const { getByText } = render(<Contact data={data} />);
 
     act(() => {
       userEvent.click(getByText("Send"));
@@ -32,7 +38,7 @@ describe("Contact Component", () => {
   });
 
   it("submits the form successfully with valid data", async () => {
-    const { getByText, getByLabelText } = render(<Contact />);
+    const { getByText, getByLabelText } = render(<Contact data={data} />);
 
     const name = "Test name";
     const email = "test@addresscom";
@@ -60,7 +66,7 @@ describe("Contact Component", () => {
   });
 
   it("allows file upload", async () => {
-    const { getByText, getByLabelText } = render(<Contact />);
+    const { getByText, getByLabelText } = render(<Contact data={data} />);
     act(() => {
       userEvent.type(getByLabelText("Name"), "Test name");
       userEvent.type(getByLabelText("Email"), "test@addresscom");
