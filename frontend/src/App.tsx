@@ -4,6 +4,7 @@ import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
+import AboutMe from "./components/AboutMe";
 import Contact from "./components/Contact";
 import Content from "./components/Content";
 import Home from "./components/Home";
@@ -62,6 +63,7 @@ const pageConfigs: PageConfig[] = [
   { path: "experience", page: TabbedCards },
   { path: "technical", page: TabbedCards },
   { path: "contact", page: Contact },
+  { path: "about", page: AboutMe },
 ];
 
 const App = () => (

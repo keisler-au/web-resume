@@ -1,5 +1,5 @@
-import { Typography, Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button } from "@mui/material";
+import React from "react";
 import { IconType } from "react-icons";
 import { DiPostgresql } from "react-icons/di";
 import { FaAws, FaDocker, FaReact, FaLinux } from "react-icons/fa";
@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { PageData } from "../App";
 import Header from "./Header";
 import theme from "../theme";
+import DetailedParagraphs from "./DetailedParagraphs";
 
 interface TechIcon {
   [key: string]: {
@@ -36,139 +37,55 @@ const techIcons: TechIcon = {
   WSL: { heading: "Dependency Management:", icon: FaLinux, tabNumber: 2 },
 };
 
-// export const NavButton: React.FC<{
-//   to: string;
-//   label: string;
-// }> = ({ to, label }) => {
-//   return (
-//     <Link
-//       to={to}
-//       style={{
-//         textDecoration: "none",
-//       }}
-//     >
-//       <Button
-//         color="primary"
-//         sx={{
-//           display: "flex",
-//           flexDirection: "column",
-//           gap: 0.5,
-//           fontSize: { xs: "1rem", sm: "1.2rem" },
-//         }}
-//       >
-//         {label}
-//         <div
-//           style={{
-//             backgroundColor: theme.palette.primary.main,
-//             width: "8rem",
-//             height: 1,
-//           }}
-//         ></div>
-//       </Button>
-//     </Link>
-//   );
-// };
-
-const Home: React.FC<{ data: PageData }> = ({ data }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const handlePhotoClick = () => {
-    setIsExpanded((prev) => !prev);
-  };
-  console.log(data);
-  return (
-    <>
-      <Header data={data.heading[0]} />
+const Home: React.FC<{ data: PageData }> = ({ data }) => (
+  <>
+    <Header data={data.heading[0]} />
+    <Box
+      sx={{
+        paddingTop: "5vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 8,
+      }}
+    >
+      <DetailedParagraphs
+        photoPaths={["/cv_photo.jpg"]}
+        cards={data.body[0].cards}
+      />
       <Box
         sx={{
-          paddingTop: "5vh",
+          maxWidth: "60vw",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 8,
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: 3,
         }}
       >
-        <Box
-          sx={{
-            maxWidth: "60vw",
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            // justifyContent: "space-between",
-            // alignItems: "space-between",
-            gap: { xs: 20, sm: 10 },
-          }}
-        >
-          <Box width="100%" display="flex" justifyContent="center">
-            <Box
-              component="img"
-              src="/cv_photo.jpg"
-              alt="Profile Photo"
-              onClick={handlePhotoClick}
-              sx={{
-                position: "absolute",
-                width: isExpanded
-                  ? { xs: "12rem", sm: "15rem", md: "18rem" }
-                  : { xs: "8rem", sm: "10rem" },
-                height: isExpanded
-                  ? { xs: "12rem", sm: "15rem", md: "18rem" }
-                  : { xs: "8rem", sm: "10rem" },
-                transition: "all 0.3s ease-in-out",
-                boxShadow: isExpanded
-                  ? `0 0 15px ${theme.palette.primary.main}`
-                  : "none",
-                borderRadius: "50%",
-                cursor: "pointer",
-                zIndex: 2,
-              }}
-            />
-          </Box>
-          <Typography
-            color="secondary"
-            sx={{
-              maxWidth: "45vw",
-              textAlign: { xs: "center", sm: "justify" },
-            }}
+        {Object.keys(techIcons).map((label) => (
+          <Link
+            key={label}
+            to={`/technical?tab=${techIcons[label].tabNumber}#${techIcons[label].heading}`}
+            style={{ textDecoration: "none" }}
           >
-            {data.body[0].cards[0]?.content[0]?.description}
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            maxWidth: "60vw",
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: 3,
-            // marginBottom: { xs: 2, sm: 3 },
-          }}
-        >
-          {Object.keys(techIcons).map((label) => (
-            <Link
+            <Button
               key={label}
-              to={`/technical?tab=${techIcons[label].tabNumber}#${techIcons[label].heading}`}
-              style={{ textDecoration: "none" }}
+              variant="outlined"
+              sx={{
+                color: theme.palette.secondary.main,
+                fontSize: { xs: "0.9rem", sm: "1rem" },
+                "&:hover": {
+                  border: `1px solid ${theme.palette.secondary.main}`,
+                },
+              }}
             >
-              <Button
-                key={label}
-                variant="outlined"
-                sx={{
-                  // padding: { xs: "0.6rem 1.2rem", sm: "0.8rem 1.5rem" },
-                  color: theme.palette.secondary.main,
-                  fontSize: { xs: "0.9rem", sm: "1rem" },
-                  "&:hover": {
-                    border: `1px solid ${theme.palette.secondary.main}`,
-                  },
-                }}
-              >
-                {label}
-              </Button>
-            </Link>
-          ))}
-        </Box>
+              {label}
+            </Button>
+          </Link>
+        ))}
       </Box>
-    </>
-  );
-};
+    </Box>
+  </>
+);
 
 export default Home;

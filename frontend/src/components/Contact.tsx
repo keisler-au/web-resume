@@ -137,36 +137,18 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
     <>
       <Header data={data.heading[0]}>
         <Box
-          // color="black"
           sx={{
             display: "flex",
             flexDirection: "column",
-            // marginRight: "15vw",
             alignItems: "center",
             gap: 0.5,
-            // margin: "auto",
-            // position: {
-            //   xs: "relative",
-            //   md: "fixed",
-            // },
-            // bottom: {
-            //   xs: "auto",
-            //   md: "1.5rem",
-            // },
-            // left: {
-            //   xs: "auto",
-            //   md: "1.5rem",
-            // },
           }}
         >
           <Typography
-            // color={theme.palette.text.primary}
             sx={{
               display: "flex",
               alignItems: "center",
               gap: 2,
-              // margin: "auto",
-              // justifyContent: "flex-start",
             }}
           >
             <FaPhoneAlt />
@@ -177,13 +159,11 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
             href={`https://${GITHUB_URL}`}
             target="_blank"
             rel="noopener noreferrer"
-            // color="secondary"
             color={theme.palette.text.primary}
             sx={{
               display: "flex",
               alignItems: "center",
               gap: 1,
-              // justifyContent: "flex-start",
               textDecoration: "none",
             }}
           >
@@ -192,12 +172,9 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
           </Link>
           <Typography
             style={{
-              // color: theme.palette.secondary.main,
               display: "flex",
               alignItems: "center",
               gap: 15,
-              // textDecoration: "none",
-              // cursor: "pointer",
             }}
           >
             <MdEmail />
@@ -208,12 +185,10 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
             target="_blank"
             rel="noopener noreferrer"
             color={theme.palette.text.primary}
-            // color="secondary"
             sx={{
               display: "flex",
               alignItems: "center",
               gap: 1.5,
-              // justifyContent: "flex-start",
               textDecoration: "none",
             }}
           >
@@ -240,8 +215,6 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
             flexDirection: "column",
             gap: 2,
             border: `1px solid ${theme.palette.secondary.main}`,
-            // borderRadius: 1,
-            // marginBottom: "3rem",
           }}
         >
           <Typography variant="h5" color="secondary" sx={{ margin: "auto" }}>
@@ -251,15 +224,8 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
             variant="body1"
             color="secondary"
             sx={{
-              // paddingTop: { xs: "1vh", sm: "3vh" },
-              // maxWidth: { xs: "90%", sm: "70%", md: "50%" },
-              // display: "flex",
-              // flexDirection: "column",
-              // alignItems: "center",
-              // justifyContent: "center",
               textAlign: "center",
               fontSize: { xs: "1rem", sm: "1.1rem" },
-              // color: theme.palette.text.primary,
             }}
           >
             {data.body[0].cards[0].content[0].description}
@@ -291,11 +257,7 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
             sx={{
               minHeight: "56px",
               display: "flex",
-              // alignItems: "center",
               justifyContent: "space-between",
-              // padding: theme.spacing(1.5),
-              // borderRadius: 1,
-              // textAlign: "left",
               textTransform: "none",
               borderColor: theme.palette.primary.dark,
               "&:hover": {
@@ -340,9 +302,6 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
             variant="contained"
             disabled={isSubmitting}
             sx={{
-              // display: "flex",
-              // alignItems: "center",
-              // gap: 1,
               color: allFieldsFilled
                 ? theme.palette.secondary.main
                 : theme.palette.text.primary,

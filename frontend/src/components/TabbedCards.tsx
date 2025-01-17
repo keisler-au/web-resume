@@ -51,12 +51,10 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
               <Box key={cardIndex}>
                 <Card
                   sx={{
-                    // width: "100%",
                     margin: "auto",
                     maxWidth: { xs: "90%", sm: "20%" },
                     minWidth: { xs: "90%", sm: "40%" },
                     minHeight: { xs: "16rem", sm: "70%" },
-                    // position: "relative",
                     boxShadow: "none",
                     backgroundColor: theme.palette.primary.main,
                     color: theme.palette.secondary.main,

@@ -290,5 +290,38 @@
         }
       ]
     }
+  ],
+  "about": [
+    {
+      "heading": [
+        {
+          "main_heading": "About Me",
+          "description": "A passionate problem-solver with a background in IT and web development, I enjoy challenges and new experiences both professionally and personally. Whether it is moving to Europe, or training in Brazilian Jiu Jitsu, I love the diversity, learning, and building that comes with new adventures and journeys."
+        }
+      ],
+      "body": [
+        {
+          "label": "About Me",
+          "cards": [
+            {
+              "title": "Moving to Europe",
+              "content": [
+                {
+                  "description": "I was born in Perth, Western Australia, and for the past year I have been living in the Netherlands. At 27 years old I wanted a challenge and to experience life in a different country. I love the excitement and culture of Europe, there is always something new and dynamic to experience, and having met so many unique and amazing people I am now looking to build a life here. Although I prefer catching up with people and working from a company building, the flexibility of a remote position to become immersed in other parts of Europe is something I am particularly open to at the moment."
+                }
+              ]
+            },
+            {
+              "title": "Brazilian Jiu Jitsu",
+              "content": [
+                {
+                  "description": "In my spare time you will find me at a Brazilian Jiu Jitsu gym, which is a grappling based martial art that I have been training in for the past four years. There are so many things I love about this sport, exercise, people, friends, and an infinite number of techniques and positions to learn. It is inspiring seeing myself and the people around me go from utter newbies who have no clue on what is going on to becoming adept and skilled in difficult and stressful situations such as fighting. At my local gym there is a massive quote sitting above a board of competition medals, “Surround yourself with people who make you a better person”, and I take that attitude with me everywhere I go. "
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

@@ -50,28 +50,12 @@ const Navbar: React.FC = () => {
       sx={{ backgroundColor: theme.palette.background.paper }}
     >
       <Toolbar
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          // alignItems: "flex-end",
-          gap: 2,
-        }}
+        sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}
       >
-        <Box
-          sx={{
-            // position: "relative",
-            // left: { sm: 0, md: 20 }
-            // textAlign: "end",
-            display: "flex",
-            alignItems: "center",
-            // justifyContent: "center",
-            gap: 1,
-          }}
-        >
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h4"
-              noWrap
               sx={{
                 fontWeight: "bold",
                 fontSize: { xs: "1.5rem", sm: "2rem" },
@@ -80,31 +64,12 @@ const Navbar: React.FC = () => {
               Josh Keisler
             </Typography>
           </Link>
-          <Box
-            sx={{
-              // width: "100%",
-              // textAlign: "center",
-              display: "flex",
-              // justifyContent: "center",
-              // alignItems: "center",
-              // alignItems: "baseline",
-              // justifyContent: "baseline",
-              // height: "45px",
-              gap: 1,
-            }}
-          >
+          <Box sx={{ display: "flex", gap: 1 }}>
             <MUILink
               href={`https://linkedin.com/${LINKEDIN_URL}`}
               target="_blank"
               rel="noopener noreferrer"
               color="inherit"
-              // sx={
-              //   {
-              //     display: "flex",
-              //     alignItems: "center",
-              //     alignSelf: "end",
-              //   }
-              // }
             >
               <LinkedIn fontSize="large" sx={{ marginTop: 0.2 }} />
             </MUILink>
@@ -113,40 +78,13 @@ const Navbar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               color="inherit"
-              sx={
-                {
-                  // display: "flex",
-                  // alignItems: "center",
-                  // gap: 2,
-                }
-              }
             >
               <GitHub fontSize="large" />
             </MUILink>
-            <Link
-              to="/contact"
-              style={{
-                // display: "flex",
-                // alignItems: "center",
-                // gap: 10,
-                color: theme.palette.text.primary,
-                // textDecoration: "none",
-                // cursor: "pointer",
-              }}
-            >
+            <Link to="/contact" style={{ color: theme.palette.text.primary }}>
               <FaPhoneAlt fontSize="1.6rem" style={{ marginTop: 7 }} />
             </Link>
-            <Link
-              to="/contact"
-              style={{
-                // display: "flex",
-                // alignItems: "center",
-                // gap: 10,
-                color: theme.palette.text.primary,
-                // textDecoration: "none",
-                // cursor: "pointer",
-              }}
-            >
+            <Link to="/contact" style={{ color: theme.palette.text.primary }}>
               <MdEmail fontSize="2rem" style={{ marginTop: 5 }} />
             </Link>
           </Box>
@@ -179,9 +117,9 @@ const Navbar: React.FC = () => {
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/technical" label="Technical Skills" />
             </MenuItem>
-            {/* <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={handleMenuClose}>
               <NavButton to="/about" label="About Me" />
-            </MenuItem> */}
+            </MenuItem>
             <MenuItem onClick={handleMenuClose}>
               <NavButton to="/contact" label="Contact" />
             </MenuItem>
@@ -198,7 +136,7 @@ const Navbar: React.FC = () => {
           <NavButton to="/" label="Home" />
           <NavButton to="/experience" label="Experience" />
           <NavButton to="/technical" label="Technical Skills" />
-          {/* <NavButton to="/about" label="About Me" /> */}
+          <NavButton to="/about" label="About Me" />
           <Link to="/contact">
             <Button
               color="primary"
