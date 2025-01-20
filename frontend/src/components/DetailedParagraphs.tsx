@@ -58,13 +58,7 @@ const Paragraph: React.FC<{ description: string }> = ({ description }) => (
   </Typography>
 );
 
-interface DetailedParagraphProps {
-  photoPaths: string[];
-  cards: BodyData["cards"];
-}
-
-const DetailedParagraphs: React.FC<DetailedParagraphProps> = ({
-  photoPaths,
+const DetailedParagraphs: React.FC<{ cards: BodyData["cards"] }> = ({
   cards,
 }) => {
   const [photoPosition, setPhotoPosition] = useState(window.innerWidth < 600);
@@ -87,13 +81,13 @@ const DetailedParagraphs: React.FC<DetailedParagraphProps> = ({
     >
       {index % 2 === 0 || photoPosition ? (
         <>
-          <Photo path={photoPaths[index]} />
+          <Photo path={card.image} />
           <Paragraph description={card.content[0].description} />
         </>
       ) : (
         <>
           <Paragraph description={card.content[0].description} />
-          <Photo path={photoPaths[index]} />
+          <Photo path={card.image} />
         </>
       )}
     </Box>

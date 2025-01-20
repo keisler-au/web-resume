@@ -13,6 +13,7 @@
           "cards": [
             {
               "title": "Problem Interests",
+              "image": "/cv_photo.jpg",
               "content": [
                 {
                   "description": "I am passionate about helping people and I want this represented in the problems I am solving. I strongly believe in principles of sustainability and equality of opportunity, and it is equally important to me that people are not just surviving but thriving. Whether it is working in healthcare or personal development; from mental health to the entertainment industry, I want to be solving problems that are going to bring real benefit to peoples' lives."
@@ -38,6 +39,7 @@
           "cards": [
             {
               "title": "Software Developer",
+              "image": "/software_developer.jpg",
               "content": [
                 {
                   "description": "BHP is a multinational mining company, and I helped develop a platform that was used by the field workers and supervisors to automate and standardise the daily on-site mining operations. As a Software Developer I:"
@@ -52,10 +54,22 @@
                   "description": "Refactored code that improved the readability and reusability of particular functions, such as Django admin file uploads and error-message dependent routing."
                 },
                 {
-                  "description": "Participated in code reviews and actively welcomed feedback to produce the highest code quality possible."
+                  "description": "Participated in code reviews and actively sought feedback to produce the highest code quality possible."
                 },
                 {
                   "description": "Received an award through Infosys for 'Outstanding Performance'."
+                },
+                {
+                  "description": "References:"
+                },
+                {
+                  "description": "BHP Product Tech Lead, Andrew Ivins, andrew.ivins@bhp.com, +61 488505423"
+                },
+                {
+                  "description": "BHP Principal Developer, Byron Patrick, b.y.ron@hotmail.com, +49 1772423742"
+                },
+                {
+                  "description": "BHP Senior Developer, Harrison Barlow, harrison.barlow@bhp.com"
                 }
               ]
             }
@@ -66,12 +80,13 @@
           "cards": [
             {
               "title": "Operational Support",
+              "image": "/operational_support.jpg",
               "content": [
                 {
                   "description": "At BHP I was also an active member in the Operational Support team, where we maintained the functionality of the production application and liaised with clients. As an Operational Support member I:"
                 },
                 {
-                  "description": "Debugged and wrote code fixes for production issues, investigating logs within the AWS infrastructure, reading the codebase, and analysing Django admin records."
+                  "description": "Debugged and pushed code fixes for production issues, investigating logs within the AWS infrastructure, learning the codebase, and analysing Django admin records."
                 },
                 {
                   "description": "Prioritised the user experience by actively talking to them when they raised production incident tickets, this gave me an appreciation for their issues and the impact it has on their work."
@@ -81,6 +96,15 @@
                 },
                 {
                   "description": "Wrote documentation for the Operational Support team on best practices and debugging techniques for particular features within the platform."
+                },
+                {
+                  "description": "References:"
+                },
+                {
+                  "description": "BHP Principal DevOps, Anamika Sen Srivastava, anamika.s.srivastava@bhp.com,  +61 426373792"
+                },
+                {
+                  "description": "Infosys Project Manager, Jagadish Dalasinghar, jagadish4u@gmail.com, +61 412 723 598"
                 }
               ]
             }
@@ -91,6 +115,7 @@
           "cards": [
             {
               "title": "Graduate Position",
+              "image": "/graduate_position.jpg",
               "content": [
                 {
                   "description": "Infosys is a multinational IT company and for the first three months I successfully completed training courses in C#, Java, SQL, and Angular."
@@ -116,12 +141,13 @@
           "cards": [
             {
               "title": "University",
+              "image": "/university.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
                 },
                 {
-                  "description": "Some of the skills I developed at university involve critical thinking, research, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
+                  "description": "Some of the skills I developed at university involve critical thinking, researching, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
                 },
                 {
                   "description": "I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis."
@@ -143,13 +169,22 @@
       ],
       "body": [
         {
-          "label": "Reliable",
+          "label": "Frontend & Backend",
           "cards": [
             {
-              "title": "Reliable",
+              "title": "Frontend & Backend",
               "content": [
                 {
-                  "description": "Django:"
+                  "description": "React"
+                },
+                {
+                  "description": "For BHP I built new features using tools including MUI, React Relay, and Formik. I also routinely made code improvements such as client-side data validation, which were often inspired by user interactions and incident tickets."
+                },
+                {
+                  "description": "For this resume I used similar tools (React, MUI) and implemented design patterns that I learnt such as prop rendering. I have also used Typescript and written unit tests for key operations."
+                },
+                {
+                  "description": "Django"
                 },
                 {
                   "description": "This resume uses Django and a Postgres DB to serve up the text content."
@@ -164,32 +199,29 @@
                   "description": "For every piece of code I produced I wrote accompanying unit tests and also utilised fixture sets to move away from the overhead of prod dumps."
                 },
                 {
-                  "description": "React:"
+                  "description": "Redis"
                 },
                 {
-                  "description": "For BHP I built new features using tools including MUI, React Relay, and Formik. I also routinely made code improvements such as client-side data validation, which were often inspired by user interactions and incident tickets."
-                },
-                {
-                  "description": "For this resume I used similar tools (React, MUI) and implemented design patterns that I learnt such as prop rendering. I have also used Typescript and written unit tests for key operations."
+                  "description": "For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated."
                 }
               ]
             }
           ]
         },
         {
-          "label": "Maintainable",
+          "label": "Workflow",
           "cards": [
             {
-              "title": "Maintainable",
+              "title": "Workflow",
               "content": [
                 {
-                  "description": "Agile Methodology:"
+                  "description": "Agile"
                 },
                 {
-                  "description": "I participated in daily scrums, sprint planning, sprint retrospection, and backlog grooming on Jira tickets."
+                  "description": "Our team practices agile methodology in which I participated in daily scrums, sprint planning, sprint retrospection, and backlog grooming on Jira tickets."
                 },
                 {
-                  "description": "Git:"
+                  "description": "Git"
                 },
                 {
                   "description": "As a developer I made a regular practice of managing feature branches, rebasing, and resolving merge conflicts."
@@ -198,7 +230,7 @@
                   "description": "I participated in code reviews and approving pull requests, while actively taking on any feedback and advice in how to improve the quality of my code."
                 },
                 {
-                  "description": "Pre-Commit:"
+                  "description": "Pre-Commit"
                 },
                 {
                   "description": "I followed BHP's lead and built Pre-Commit into this resumes workflow to automate and enforce quality styling standards."
@@ -208,44 +240,38 @@
           ]
         },
         {
-          "label": "Automating",
+          "label": "CI/CD",
           "cards": [
             {
-              "title": "Automating",
+              "title": "CI/CD",
               "content": [
                 {
-                  "description": "Docker:"
+                  "description": "GitLab"
                 },
                 {
-                  "description": "I have used multi-stage builds for the docker images, docker-compose for network and volume orchestration, and I am looking to implement Kubernetes for production container management."
+                  "description": "I collaboratively deployed hot fixes for production following feature releases, and so I learnt the full pipeline including build stages, testing, infrastructure configuration, and deployment."
                 },
                 {
-                  "description": "CI/CD:"
+                  "description": "Github Actions"
                 },
                 {
-                  "description": "Within this project I automated unit test execution, making use of the docker-compose container configuration."
+                  "description": "Within this project I automated unit test execution and pushed docker images to a registery, making use of the projects docker-compose container configuration."
                 },
                 {
                   "description": "Exploring CI/CD options and GitHub Actions showed me the many server, infrastructure and deployment options that are available for differing sized and scalable applications."
-                },
-                {
-                  "description": "Dependency Management:"
-                },
-                {
-                  "description": "Managing dependencies gave me greater exposure to the Linux file structure and its executables, and an understanding that dependencies and package managers are both a miracle and a nightmare."
                 }
               ]
             }
           ]
         },
         {
-          "label": "Scalable",
+          "label": "Infrastructure",
           "cards": [
             {
-              "title": "Scalable",
+              "title": "Infrastructure",
               "content": [
                 {
-                  "description": "AWS:"
+                  "description": "AWS"
                 },
                 {
                   "description": "Having learnt the AWS infrastructure that BHP used for their project I decided to replicate it for this web resume. I have since moved to a Linux VPS, but I had successfully deployed to AWS and made use of its scalability features."
@@ -254,10 +280,19 @@
                   "description": "Successfully deploying to AWS involved using; ECR, Fargate, ECS, ALB, Security Group, VPC endpoints, Parameter Store Secrets, IAM, RDS, CloudWatch."
                 },
                 {
-                  "description": "Redis:"
+                  "description": "Docker"
                 },
                 {
-                  "description": "For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated."
+                  "description": "I have used multi-stage builds for the docker images, docker-compose for network and volume orchestration, and I am looking to implement Kubernetes for production container management."
+                },
+                {
+                  "description": "WSL"
+                },
+                {
+                  "description": "Managing dependencies gave me greater exposure to the Linux file structure and its executables."
+                },
+                {
+                  "description": "Leveraging package managers was cool but understanding the security and functional dynamics of dependencies was really interesting."
                 }
               ]
             }
@@ -305,6 +340,7 @@
           "cards": [
             {
               "title": "Moving to Europe",
+              "image": "/europe.jpg",
               "content": [
                 {
                   "description": "I was born in Perth, Western Australia, and for the past year I have been living in the Netherlands. At 27 years old I wanted a challenge and to experience life in a different country. I love the excitement and culture of Europe, there is always something new and dynamic to experience, and having met so many unique and amazing people I am now looking to build a life here. Although I prefer catching up with people and working from a company building, the flexibility of a remote position to become immersed in other parts of Europe is something I am particularly open to at the moment."
@@ -313,6 +349,7 @@
             },
             {
               "title": "Brazilian Jiu Jitsu",
+              "image": "/bjj.jpg",
               "content": [
                 {
                   "description": "In my spare time you will find me at a Brazilian Jiu Jitsu gym, which is a grappling based martial art that I have been training in for the past four years. There are so many things I love about this sport, exercise, people, friends, and an infinite number of techniques and positions to learn. It is inspiring seeing myself and the people around me go from utter newbies who have no clue on what is going on to becoming adept and skilled in difficult and stressful situations such as fighting. At my local gym there is a massive quote sitting above a board of competition medals, “Surround yourself with people who make you a better person”, and I take that attitude with me everywhere I go. "

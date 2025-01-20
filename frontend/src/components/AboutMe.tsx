@@ -17,10 +17,7 @@ const AboutMe: React.FC<{ data: PageData }> = ({ data }) => (
         gap: 8,
       }}
     >
-      <DetailedParagraphs
-        photoPaths={["/europe.jpg", "/bjj.jpg"]}
-        cards={data.body[0].cards}
-      />
+      <DetailedParagraphs cards={data.body[0].cards} />
     </Box>
   </>
 );

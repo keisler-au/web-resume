@@ -1,3 +1,4 @@
+import { Description } from "@mui/icons-material";
 import {
   Box,
   Typography,
@@ -13,6 +14,7 @@ import { useLocation } from "react-router-dom";
 import { PageData } from "../App";
 import theme from "../theme";
 import Header from "./Header";
+import { techIcons } from "./Home";
 
 const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -48,7 +50,13 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
         activeTab === index ? (
           <Box key={index}>
             {tab.cards.map((card, cardIndex) => (
-              <Box key={cardIndex}>
+              <Box
+                key={cardIndex}
+                position="relative"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
                 <Card
                   sx={{
                     margin: "auto",
@@ -60,16 +68,29 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
                     color: theme.palette.secondary.main,
                   }}
                 >
-                  <CardContent>
+                  <CardContent
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 1,
+                    }}
+                  >
                     {card.content.map(({ description }, lineIndex) => {
-                      if (description[description.length - 1] === ":") {
+                      if (techIcons[description]) {
+                        const TechIcon = techIcons[description].icon;
                         return (
                           <Typography
                             key={lineIndex}
-                            variant="body2"
+                            variant="h5"
                             id={description}
+                            paddingTop="2vh"
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            gap={2}
                           >
                             {description}
+                            {TechIcon && <TechIcon />}
                           </Typography>
                         );
                       }
@@ -79,7 +100,6 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
                             key={lineIndex}
                             href={description}
                             color="secondary"
-                            sx={{ margin: "2vh 4vh" }}
                           >
                             {description}
                           </Link>
@@ -89,7 +109,12 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
                         <Typography
                           key={lineIndex}
                           variant="body2"
-                          sx={{ margin: "2vh 4vh" }}
+                          sx={{
+                            marginLeft:
+                              description[description.length - 1] === ":"
+                                ? "0"
+                                : "2vw",
+                          }}
                         >
                           {description}
                         </Typography>
@@ -97,6 +122,21 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
                     })}
                   </CardContent>
                 </Card>
+                {card.image && (
+                  <Box
+                    component="img"
+                    src={card.image}
+                    alt={`${card.image} Photo`}
+                    sx={{
+                      position: { md: "absolute" },
+                      top: "5vh",
+                      left: "10vw",
+                      width: { xs: "8rem", sm: "10rem", lg: "13rem" },
+                      height: { xs: "8rem", sm: "10rem", lg: "13rem" },
+                      borderRadius: "50%",
+                    }}
+                  />
+                )}
               </Box>
             ))}
           </Box>

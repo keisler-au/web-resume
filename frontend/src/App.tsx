@@ -41,6 +41,7 @@ export interface BodyData {
   label: string;
   cards: {
     title: string;
+    image: string;
     content: {
       description: string;
     }[];
