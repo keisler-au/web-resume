@@ -45,6 +45,12 @@ export interface BodyData {
     content: {
       description: string;
     }[];
+    references: {
+      position: string;
+      name: string;
+      email: string;
+      number?: string;
+    }[];
   }[];
 }
 export interface PageData {

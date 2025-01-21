@@ -58,18 +58,26 @@
                 },
                 {
                   "description": "Received an award through Infosys for 'Outstanding Performance'."
+                }
+              ],
+              "references": [
+                {
+                  "position": "BHP Product Tech Lead",
+                  "name": "Andrew Ivins",
+                  "email": "andrew.ivins@bhp.com",
+                  "number": "+61 488505423"
                 },
                 {
-                  "description": "References:"
+                  "position": "BHP Principal Full Stack Developer",
+                  "name": "Byron Patrick",
+                  "email": "b.y.ron@hotmail.com",
+                  "number": "+49 1772423742"
                 },
                 {
-                  "description": "BHP Product Tech Lead, Andrew Ivins, andrew.ivins@bhp.com, +61 488505423"
-                },
-                {
-                  "description": "BHP Principal Developer, Byron Patrick, b.y.ron@hotmail.com, +49 1772423742"
-                },
-                {
-                  "description": "BHP Senior Developer, Harrison Barlow, harrison.barlow@bhp.com"
+                  "position": "BHP Senior Full Stack Developer",
+                  "name": "Harrison Barlow",
+                  "email": "harrison.barlow@bhp.com",
+                  "number": ""
                 }
               ]
             }
@@ -96,15 +104,20 @@
                 },
                 {
                   "description": "Wrote documentation for the Operational Support team on best practices and debugging techniques for particular features within the platform."
+                }
+              ],
+              "references": [
+                {
+                  "position": "BHP Principal DevOps",
+                  "name": "Anamika Sen Srivastava",
+                  "email": "anamika.s.srivastava@bhp.com",
+                  "phone": "+61 426373792"
                 },
                 {
-                  "description": "References:"
-                },
-                {
-                  "description": "BHP Principal DevOps, Anamika Sen Srivastava, anamika.s.srivastava@bhp.com,  +61 426373792"
-                },
-                {
-                  "description": "Infosys Project Manager, Jagadish Dalasinghar, jagadish4u@gmail.com, +61 412 723 598"
+                  "position": "Infosys Project Manager",
+                  "name": "Jagadish Dalasinghar",
+                  "email": "jagadish4u@gmail.com",
+                  "phone": "+61 412 723 598"
                 }
               ]
             }

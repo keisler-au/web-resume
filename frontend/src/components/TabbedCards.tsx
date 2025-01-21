@@ -50,13 +50,7 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
         activeTab === index ? (
           <Box key={index}>
             {tab.cards.map((card, cardIndex) => (
-              <Box
-                key={cardIndex}
-                position="relative"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-              >
+              <Box key={cardIndex} position="relative">
                 <Card
                   sx={{
                     margin: "auto",
@@ -136,6 +130,41 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
                       borderRadius: "50%",
                     }}
                   />
+                )}
+                {card.references && (
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    color={theme.palette.secondary.main}
+                  >
+                    <Typography variant="h5">References</Typography>
+                    {card.references.map((reference) => (
+                      <Box
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                      >
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          marginTop="2vh"
+                          color={theme.palette.secondary.main}
+                        >
+                          {reference.position}
+                        </Typography>
+                        <Typography variant="body2">
+                          {reference.name}
+                        </Typography>
+                        <Typography variant="body2">
+                          {reference.email}
+                        </Typography>
+                        <Typography variant="body2">
+                          {reference.number}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
                 )}
               </Box>
             ))}
