@@ -50,7 +50,13 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
         activeTab === index ? (
           <Box key={index}>
             {tab.cards.map((card, cardIndex) => (
-              <Box key={cardIndex} position="relative">
+              <Box
+                key={cardIndex}
+                position="relative"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+              >
                 <Card
                   sx={{
                     margin: "auto",
