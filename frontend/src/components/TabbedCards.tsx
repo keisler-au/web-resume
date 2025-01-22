@@ -48,7 +48,7 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
             sx={{
               flexShrink: 1,
               fontSize: {
-                xs: activeTab === index ? "" : ".4rem",
+                xs: activeTab === index ? "" : ".6rem",
                 sm: "",
               },
               padding: { xs: 0.5, md: 2.5 },
