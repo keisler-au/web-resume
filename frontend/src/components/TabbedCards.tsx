@@ -42,7 +42,20 @@ const TabbedCards: React.FC<{ data: PageData }> = ({ data }) => {
         indicatorColor="secondary"
       >
         {data.body.map((tab, index) => (
-          <Tab key={index} label={tab.label} sx={{ flexShrink: 1 }} />
+          <Tab
+            key={index}
+            label={tab.label}
+            sx={{
+              flexShrink: 1,
+              fontSize: {
+                xs: activeTab === index ? "" : ".4rem",
+                sm: "",
+              },
+              padding: { xs: 0.5, md: 2.5 },
+              minWidth: "auto",
+              wordBreak: "break-word",
+            }}
+          />
         ))}
       </Tabs>
 
