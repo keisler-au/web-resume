@@ -35,7 +35,71 @@
       ],
       "body": [
         {
-          "label": "Software Developer",
+          "year": "",
+          "label": "What's Next?",
+          "cards": [
+            {
+              "title": "AI Development",
+              "image": "/university.jpg",
+              "content": [
+                {
+                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                },
+                {
+                  "description": "Some of the skills I developed at university involve critical thinking, researching, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
+                },
+                {
+                  "description": "I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "year": "Current",
+          "label": "Calm and Connected",
+          "cards": [
+            {
+              "title": "IT Manager",
+              "image": "/university.jpg",
+              "content": [
+                {
+                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                },
+                {
+                  "description": "Some of the skills I developed at university involve critical thinking, researching, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
+                },
+                {
+                  "description": "I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "year": "2025",
+          "label": "Event Bingo",
+          "cards": [
+            {
+              "title": "Mobile Development",
+              "image": "/university.jpg",
+              "content": [
+                {
+                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                },
+                {
+                  "description": "Some of the skills I developed at university involve critical thinking, researching, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
+                },
+                {
+                  "description": "I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "year": "2023",
+          "label": "BHP",
           "cards": [
             {
               "title": "Software Developer",
@@ -84,7 +148,8 @@
           ]
         },
         {
-          "label": "Operational Support",
+          "year": "2022",
+          "label": "BHP",
           "cards": [
             {
               "title": "Operational Support",
@@ -124,7 +189,8 @@
           ]
         },
         {
-          "label": "Graduate Position",
+          "year": "2022",
+          "label": "Infosys",
           "cards": [
             {
               "title": "Graduate Position",
@@ -150,10 +216,11 @@
           ]
         },
         {
-          "label": "University",
+          "year": "2018",
+          "label": "Curtin University",
           "cards": [
             {
-              "title": "University",
+              "title": "Bachelor of Psychology",
               "image": "/university.jpg",
               "content": [
                 {

@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import React from "react";
 import { IconType } from "react-icons";
 import { DiPostgresql, DiRedis } from "react-icons/di";
@@ -12,6 +12,7 @@ import { PageData } from "../App";
 import Header from "./Header";
 import theme from "../theme";
 import DetailedParagraphs from "./DetailedParagraphs";
+import ExperienceTimeline from "./ExperienceTimeline";
 
 interface TechIcon {
   [key: string]: {
@@ -53,6 +54,15 @@ const Home: React.FC<{ data: PageData }> = ({ data }) => (
       }}
     >
       <DetailedParagraphs cards={data.body[0].cards} />
+      <Divider sx={{ backgroundColor: "white", width: "90%", height: 1 }} />
+      <Typography variant="h4" color="secondary">
+        Experience
+      </Typography>
+      <ExperienceTimeline />
+      <Divider sx={{ backgroundColor: "white", width: "90%", height: 1 }} />
+      <Typography variant="h4" color="secondary">
+        Technical Skills
+      </Typography>
       <Box
         sx={{
           maxWidth: "60vw",
