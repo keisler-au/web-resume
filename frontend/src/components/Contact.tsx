@@ -202,6 +202,7 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
         sx={{
           display: "flex",
           flexDirection: "column",
+          paddingTop: "5%",
         }}
       >
         <Box

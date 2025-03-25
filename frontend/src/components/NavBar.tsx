@@ -47,7 +47,11 @@ const Navbar: React.FC = () => {
       position="fixed"
       width="100%"
       zIndex={4}
-      sx={{ backgroundColor: theme.palette.background.paper }}
+      sx={{
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: 4,
+        top: 0,
+      }}
     >
       <Toolbar
         sx={{ display: "flex", justifyContent: "space-between", gap: 2 }}
@@ -56,6 +60,7 @@ const Navbar: React.FC = () => {
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h4"
+              color="primary"
               sx={{
                 fontWeight: "bold",
                 fontSize: { xs: "1.5rem", sm: "2rem" },

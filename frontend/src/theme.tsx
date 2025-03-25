@@ -26,7 +26,10 @@ const theme = createTheme({
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
     h4: {
-      color: lightGray,
+      color: white,
+    },
+    h5: {
+      color: white,
     },
     body1: {
       color: mediumGray,

@@ -10,9 +10,8 @@ const Header: React.FC<{ data: HeadingData; children?: any }> = ({
 }) => (
   <Box
     sx={{
-      paddingTop: "14vh",
-      paddingBottom: "5vh",
-      marginBottom: "3vh",
+      paddingTop: { xs: "12vh", sm: "19vh" },
+      paddingBottom: { xs: "6vh", sm: "15vh" },
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
@@ -33,11 +32,11 @@ const Header: React.FC<{ data: HeadingData; children?: any }> = ({
     {data.description && (
       <Typography
         variant="body1"
+        color="primary"
         sx={{
           maxWidth: { xs: "90%", sm: "70%", md: "50%" },
           textAlign: "center",
           fontSize: { xs: "1rem", sm: "1.1rem" },
-          color: theme.palette.text.primary,
         }}
       >
         {data.description}

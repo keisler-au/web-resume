@@ -1,15 +1,15 @@
+import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 
-import AboutMe from "./components/AboutMe";
 import Contact from "./components/Contact";
 import Content from "./components/Content";
+import GenericPage from "./components/GenericPage";
 import Home from "./components/Home";
 import Navbar from "./components/NavBar";
-import TabbedCards from "./components/TabbedCards";
 import theme from "./theme";
 
 export const ErrorFallback = () => (
@@ -67,10 +67,10 @@ const pageConfigs: PageConfig[] = [
     path: "/",
     page: Home,
   },
-  { path: "experience", page: TabbedCards },
-  { path: "technical", page: TabbedCards },
+  { path: "experience", page: GenericPage },
+  { path: "technical", page: GenericPage },
+  { path: "about", page: GenericPage },
   { path: "contact", page: Contact },
-  { path: "about", page: AboutMe },
 ];
 
 const App = () => (
@@ -88,7 +88,17 @@ const App = () => (
                 <Content
                   render={(data: PageData) => {
                     const PageComponent = pageConfig.page;
-                    return <PageComponent data={data} />;
+                    return (
+                      <Box
+                        sx={{
+                          // marginTop: { xs: "35vh", sm: "23%" },
+                          boxShadow: "0px -2px 4px rgba(0, 0, 0, .3)",
+                          // backgroundColor: theme.palette.primary.main,
+                        }}
+                      >
+                        <PageComponent data={data} />
+                      </Box>
+                    );
                   }}
                   pageReference={
                     pageConfig.path === "/" ? "home" : pageConfig.path

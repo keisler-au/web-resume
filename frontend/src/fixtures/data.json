@@ -12,7 +12,7 @@
           "label": "Problem Interests",
           "cards": [
             {
-              "title": "Problem Interests",
+              "title": "",
               "image": "/cv_photo.jpg",
               "content": [
                 {
@@ -35,11 +35,11 @@
       ],
       "body": [
         {
-          "year": "",
-          "label": "What's Next?",
+          "year": "What's Next?",
+          "label": "Machine Learning",
           "cards": [
             {
-              "title": "AI Development",
+              "title": "",
               "image": "/university.jpg",
               "content": [
                 {
@@ -57,10 +57,10 @@
         },
         {
           "year": "Current",
-          "label": "Calm and Connected",
+          "label": "IT Manager",
           "cards": [
             {
-              "title": "IT Manager",
+              "title": "Calm and Connected",
               "image": "/university.jpg",
               "content": [
                 {
@@ -78,20 +78,32 @@
         },
         {
           "year": "2025",
-          "label": "Event Bingo",
+          "label": "Mobile Development",
           "cards": [
+            {
+              "title": "Bingo",
+              "image": "/university.jpg",
+              "content": [
+                {
+                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                }
+              ]
+            },
             {
               "title": "Mobile Development",
               "image": "/university.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
-                },
+                }
+              ]
+            },
+            {
+              "title": "Mobile Development",
+              "image": "/university.jpg",
+              "content": [
                 {
-                  "description": "Some of the skills I developed at university involve critical thinking, researching, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
-                },
-                {
-                  "description": "I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis."
+                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
                 }
               ]
             }
@@ -99,11 +111,11 @@
         },
         {
           "year": "2023",
-          "label": "BHP",
+          "label": "Software Developer",
           "cards": [
             {
-              "title": "Software Developer",
-              "image": "/software_developer.jpg",
+              "title": "BHP",
+              "image": "/bhp_software_developer.jpg",
               "content": [
                 {
                   "description": "BHP is a multinational mining company, and I helped develop a platform that was used by the field workers and supervisors to automate and standardise the daily on-site mining operations. As a Software Developer I:"
@@ -149,11 +161,11 @@
         },
         {
           "year": "2022",
-          "label": "BHP",
+          "label": "Operational Support",
           "cards": [
             {
-              "title": "Operational Support",
-              "image": "/operational_support.jpg",
+              "title": "BHP",
+              "image": "bhp_operational_support.jpg",
               "content": [
                 {
                   "description": "At BHP I was also an active member in the Operational Support team, where we maintained the functionality of the production application and liaised with clients. As an Operational Support member I:"
@@ -190,11 +202,11 @@
         },
         {
           "year": "2022",
-          "label": "Infosys",
+          "label": "Associate Developer",
           "cards": [
             {
-              "title": "Graduate Position",
-              "image": "/graduate_position.jpg",
+              "title": "Infosys",
+              "image": "/infosys_graduate_position.jpg",
               "content": [
                 {
                   "description": "Infosys is a multinational IT company and for the first three months I successfully completed training courses in C#, Java, SQL, and Angular."
@@ -207,21 +219,18 @@
                 },
                 {
                   "description": "Infosys hired me after seeing a small UI project I built that pulled data from a public API (which has since been decommisioned). It's crude, it's naïve, and it's honest, gratefully I have learnt a lot since then."
-                },
-                {
-                  "description": "https://keisler-au.github.io/weather-project/"
                 }
               ]
             }
           ]
         },
         {
-          "year": "2018",
-          "label": "Curtin University",
+          "year": "2019",
+          "label": "Bachelor of Psychology",
           "cards": [
             {
-              "title": "Bachelor of Psychology",
-              "image": "/university.jpg",
+              "title": "Curtin University",
+              "image": "/curtin_university.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
@@ -252,20 +261,19 @@
           "label": "Frontend & Backend",
           "cards": [
             {
-              "title": "Frontend & Backend",
+              "title": "React",
               "content": [
-                {
-                  "description": "React"
-                },
                 {
                   "description": "For BHP I built new features using tools including MUI, React Relay, and Formik. I also routinely made code improvements such as client-side data validation, which were often inspired by user interactions and incident tickets."
                 },
                 {
                   "description": "For this resume I used similar tools (React, MUI) and implemented design patterns that I learnt such as prop rendering. I have also used Typescript and written unit tests for key operations."
-                },
-                {
-                  "description": "Django"
-                },
+                }
+              ]
+            },
+            {
+              "title": "Django",
+              "content": [
                 {
                   "description": "This resume uses Django and a Postgres DB to serve up the text content."
                 },
@@ -277,10 +285,12 @@
                 },
                 {
                   "description": "For every piece of code I produced I wrote accompanying unit tests and also utilised fixture sets to move away from the overhead of prod dumps."
-                },
-                {
-                  "description": "Redis"
-                },
+                }
+              ]
+            },
+            {
+              "title": "Redis",
+              "content": [
                 {
                   "description": "For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated."
                 }
@@ -292,26 +302,27 @@
           "label": "Workflow",
           "cards": [
             {
-              "title": "Workflow",
+              "title": "Agile",
               "content": [
                 {
-                  "description": "Agile"
-                },
-                {
-                  "description": "Our team practices agile methodology in which I participated in daily scrums, sprint planning, sprint retrospection, and backlog grooming on Jira tickets."
-                },
-                {
-                  "description": "Git"
-                },
+                  "description": "Our team practiced agile methodology in which I participated in daily scrums, sprint planning, sprint retrospection, and backlog grooming on Jira tickets."
+                }
+              ]
+            },
+            {
+              "title": "Git",
+              "content": [
                 {
                   "description": "As a developer I made a regular practice of managing feature branches, rebasing, and resolving merge conflicts."
                 },
                 {
                   "description": "I participated in code reviews and approving pull requests, while actively taking on any feedback and advice in how to improve the quality of my code."
-                },
-                {
-                  "description": "Pre-Commit"
-                },
+                }
+              ]
+            },
+            {
+              "title": "Pre-Commit",
+              "content": [
                 {
                   "description": "I followed BHP's lead and built Pre-Commit into this resumes workflow to automate and enforce quality styling standards."
                 }
@@ -323,17 +334,16 @@
           "label": "CI/CD",
           "cards": [
             {
-              "title": "CI/CD",
+              "title": "GitLab",
               "content": [
                 {
-                  "description": "GitLab"
-                },
-                {
                   "description": "I collaboratively deployed hot fixes for production following feature releases, and so I learnt the full pipeline including build stages, testing, infrastructure configuration, and deployment."
-                },
-                {
-                  "description": "Github Actions"
-                },
+                }
+              ]
+            },
+            {
+              "title": "Github Actions",
+              "content": [
                 {
                   "description": "Within this project I automated unit test execution and pushed docker images to a registery, making use of the projects docker-compose container configuration."
                 },
@@ -348,26 +358,27 @@
           "label": "Infrastructure",
           "cards": [
             {
-              "title": "Infrastructure",
+              "title": "AWS",
               "content": [
-                {
-                  "description": "AWS"
-                },
                 {
                   "description": "Having learnt the AWS infrastructure that BHP used for their project I decided to replicate it for this web resume. I have since moved to a Linux VPS, but I had successfully deployed to AWS and made use of its scalability features."
                 },
                 {
                   "description": "Successfully deploying to AWS involved using; ECR, Fargate, ECS, ALB, Security Group, VPC endpoints, Parameter Store Secrets, IAM, RDS, CloudWatch."
-                },
-                {
-                  "description": "Docker"
-                },
+                }
+              ]
+            },
+            {
+              "title": "Docker",
+              "content": [
                 {
                   "description": "I have used multi-stage builds for the docker images, docker-compose for network and volume orchestration, and I am looking to implement Kubernetes for production container management."
-                },
-                {
-                  "description": "WSL"
-                },
+                }
+              ]
+            },
+            {
+              "title": "WSL",
+              "content": [
                 {
                   "description": "Managing dependencies gave me greater exposure to the Linux file structure and its executables."
                 },
@@ -416,19 +427,24 @@
       ],
       "body": [
         {
-          "label": "About Me",
+          "label": "Moving to Europe",
           "cards": [
             {
-              "title": "Moving to Europe",
+              "title": "",
               "image": "/europe.jpg",
               "content": [
                 {
                   "description": "I was born in Perth, Western Australia, and for the past year I have been living in the Netherlands. At 27 years old I wanted a challenge and to experience life in a different country. I love the excitement and culture of Europe, there is always something new and dynamic to experience, and having met so many unique and amazing people I am now looking to build a life here. Although I prefer catching up with people and working from a company building, the flexibility of a remote position to become immersed in other parts of Europe is something I am particularly open to at the moment."
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "label": "Brazilian Jiu Jitsu",
+          "cards": [
             {
-              "title": "Brazilian Jiu Jitsu",
+              "title": "",
               "image": "/bjj.jpg",
               "content": [
                 {
