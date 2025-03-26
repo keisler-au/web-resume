@@ -40,7 +40,7 @@
           "cards": [
             {
               "title": "",
-              "image": "/university.jpg",
+              "image": "/pytorch.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
@@ -61,7 +61,7 @@
           "cards": [
             {
               "title": "Calm and Connected",
-              "image": "/university.jpg",
+              "image": "/calm_and_connected.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
@@ -82,7 +82,7 @@
           "cards": [
             {
               "title": "Bingo",
-              "image": "/university.jpg",
+              "image": "/bingo_home.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
@@ -91,7 +91,7 @@
             },
             {
               "title": "Mobile Development",
-              "image": "/university.jpg",
+              "image": "/bingo_publish.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
@@ -100,7 +100,7 @@
             },
             {
               "title": "Mobile Development",
-              "image": "/university.jpg",
+              "image": "/bingo_play.jpg",
               "content": [
                 {
                   "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."

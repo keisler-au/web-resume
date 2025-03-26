@@ -5,8 +5,16 @@ import { BodyData } from "../App";
 import theme from "../theme";
 import { techIcons } from "./TechnicalSkillButtons";
 
+const rectanglePhotos = [
+  "/calm_and_connected.jpg",
+  "/bingo_home.jpg",
+  "/bingo_publish.jpg",
+  "/bingo_play.jpg",
+];
+
 const Photo: React.FC<{ path: string }> = ({ path }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const sized = rectanglePhotos.includes(path);
 
   const handlePhotoClick = () => {
     setIsExpanded((prev) => !prev);
@@ -17,8 +25,9 @@ const Photo: React.FC<{ path: string }> = ({ path }) => {
       display="flex"
       position="relative"
       sx={{
-        marginBottom: { xs: "18vh", sm: 0 },
-        marginTop: { xs: "3vh", sm: 0 },
+        // marginBottom: { xs: "18vh", sm: 0 },
+        // marginTop: { xs: "3vh", sm: 0 },
+        margin: { xs: "2vh 0", sm: 0 },
       }}
     >
       <Box
@@ -32,21 +41,28 @@ const Photo: React.FC<{ path: string }> = ({ path }) => {
         <Box
           component="img"
           src={path}
+          sx={{
+            width: { xs: "8rem", sm: sized ? "10rem" : "15rem" },
+            height: "auto",
+            visibility: "hidden",
+          }}
+        ></Box>
+        <Box
+          component="img"
+          src={path}
           alt={`${path} Photo`}
           onClick={handlePhotoClick}
           sx={{
             position: "absolute",
             width: isExpanded
-              ? { xs: "12rem", sm: "15rem", md: "18rem" }
-              : { xs: "8rem", sm: "10rem" },
-            height: isExpanded
-              ? { xs: "12rem", sm: "15rem", md: "18rem" }
-              : { xs: "8rem", sm: "10rem" },
+              ? { xs: "12rem", sm: "15rem", md: "20rem" }
+              : { xs: "8rem", sm: sized ? "10rem" : "15rem" },
+            height: "auto",
             transition: "all 0.3s ease-in-out",
             boxShadow: isExpanded
               ? `0 0 15px ${theme.palette.primary.main}`
               : "none",
-            borderRadius: "50%",
+            borderRadius: sized ? "0" : "50%",
             cursor: "pointer",
             zIndex: 2,
           }}
