@@ -1,79 +1,19 @@
-import { LinkedIn, GitHub } from "@mui/icons-material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import {
   Button,
-  TextField,
   Typography,
   Box,
   CircularProgress,
   IconButton,
-  Link,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaPhoneAlt } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 
 import { PageData } from "../App";
-import {
-  BASE_URL,
-  EMAIL_ADDRESS,
-  GITHUB_URL,
-  LINKEDIN_URL,
-  PHONE_NUMBER,
-} from "../constants";
+import { BASE_URL } from "../constants";
 import theme from "../theme";
+import ContactChildren, { CustomTextField } from "./ContactChildren";
 import Header from "./Header";
-
-interface CustomTextFieldProps {
-  label: string;
-  name: string;
-  type?: string;
-  rows?: number;
-  register: any;
-  errors: any;
-}
-
-const CustomTextField: React.FC<CustomTextFieldProps> = ({
-  label,
-  name,
-  type = "text",
-  rows = 1,
-  register,
-  errors,
-}) => {
-  return (
-    <TextField
-      label={label}
-      variant="outlined"
-      type={type}
-      multiline={rows > 1}
-      rows={rows}
-      {...register(name, { required: true })}
-      error={!!errors[name]}
-      helperText={errors[name] ? `${label} is required` : ""}
-      sx={{
-        "& .MuiOutlinedInput-root": {
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.secondary.main,
-            backgroundColor: theme.palette.action.hover,
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.secondary.main,
-          },
-        },
-        "& .MuiInputLabel-root.Mui-focused": {
-          color: theme.palette.secondary.main,
-        },
-      }}
-      InputProps={{
-        style: {
-          color: theme.palette.secondary.main,
-        },
-      }}
-    />
-  );
-};
 
 interface FormValues {
   name: string;
@@ -135,67 +75,11 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
 
   return (
     <>
+      <Header data={data.heading[0]} placeholder={true}>
+        <ContactChildren />
+      </Header>
       <Header data={data.heading[0]}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 0.5,
-          }}
-        >
-          <Typography
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <FaPhoneAlt />
-            {PHONE_NUMBER}
-          </Typography>
-
-          <Link
-            href={`https://${GITHUB_URL}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            color={theme.palette.text.primary}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1,
-              textDecoration: "none",
-            }}
-          >
-            <GitHub />
-            {GITHUB_URL}
-          </Link>
-          <Typography
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 15,
-            }}
-          >
-            <MdEmail />
-            {EMAIL_ADDRESS}
-          </Typography>
-          <Link
-            href={`https://linkedin.com/${LINKEDIN_URL}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            color={theme.palette.text.primary}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1.5,
-              textDecoration: "none",
-            }}
-          >
-            <LinkedIn />
-            {LINKEDIN_URL}
-          </Link>
-        </Box>
+        <ContactChildren />
       </Header>
 
       <Box
@@ -203,6 +87,8 @@ const Contact: React.FC<{ data: PageData }> = ({ data }) => {
           display: "flex",
           flexDirection: "column",
           paddingTop: "5%",
+          marginBottom: "5%",
+          backgroundColor: theme.palette.primary.main,
         }}
       >
         <Box

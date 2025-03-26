@@ -24,11 +24,7 @@ const Photo: React.FC<{ path: string }> = ({ path }) => {
       width="100%"
       display="flex"
       position="relative"
-      sx={{
-        // marginBottom: { xs: "18vh", sm: 0 },
-        // marginTop: { xs: "3vh", sm: 0 },
-        margin: { xs: "2vh 0", sm: 0 },
-      }}
+      sx={{ margin: { xs: "2vh 0", sm: 0 } }}
     >
       <Box
         width="100%"

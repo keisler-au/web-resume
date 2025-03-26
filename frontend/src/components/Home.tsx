@@ -5,6 +5,7 @@ import { PageData } from "../App";
 import ExperienceTimeline from "./ExperienceTimeline";
 import GenericPage from "./GenericPage";
 import TechnicalSkillButtons from "./TechnicalSkillButtons";
+import theme from "../theme";
 
 const Home: React.FC<{ data: PageData }> = ({ data }) => (
   <Box
@@ -17,10 +18,12 @@ const Home: React.FC<{ data: PageData }> = ({ data }) => (
     <GenericPage data={data} />
     <Box
       sx={{
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         gap: 8,
+        backgroundColor: theme.palette.primary.main,
       }}
     >
       <ExperienceTimeline />

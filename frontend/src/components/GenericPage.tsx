@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { BodyData, PageData } from "../App";
 import CardStack, { References } from "./GenericCard";
 import Header from "./Header";
+import theme from "../theme";
 
 interface CardStacksProps {
   data: BodyData[];
@@ -16,7 +17,13 @@ const CardStacks = ({
   displayCardTitle,
 }: CardStacksProps) => {
   return (
-    <Box sx={{ paddingTop: "5%" }}>
+    <Box
+      sx={{
+        paddingTop: "5%",
+        backgroundColor: theme.palette.primary.main,
+        boxShadow: "0px -4px 4px rgba(0, 0, 0, 0.5)",
+      }}
+    >
       {data.map((item, itemInd) => {
         const references = item.cards[0].references;
         return (
@@ -34,14 +41,15 @@ const CardStacks = ({
               displayCardTitle={displayCardTitle}
             />
             {references && <References references={references} />}
-            <Divider
-              sx={{
-                backgroundColor: "white",
-                width: "100%",
-                height: 1,
-                margin: "4% 0",
-              }}
-            />
+            <Box sx={{ padding: "4% 0" }}>
+              <Divider
+                sx={{
+                  backgroundColor: "white",
+                  width: "100%",
+                  height: 1,
+                }}
+              />
+            </Box>
           </Box>
         );
       })}
@@ -61,6 +69,7 @@ const GenericPage: React.FC<{ data: PageData }> = ({ data }) => {
 
   return (
     <>
+      <Header data={data.heading[0]} placeholder={true} />
       <Header data={data.heading[0]} />
       <CardStacks
         data={data.body}
