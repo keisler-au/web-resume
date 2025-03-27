@@ -1,21 +1,31 @@
 import { Divider, Typography, Box } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import { BodyData, PageData } from "../App";
 import CardStack, { References } from "./GenericCard";
 import Header from "./Header";
 import theme from "../theme";
 
-interface CardStacksProps {
+interface BodyProps {
   data: BodyData[];
   photoPosition: boolean;
   displayCardTitle: boolean;
 }
-const CardStacks = ({
-  data,
-  photoPosition,
-  displayCardTitle,
-}: CardStacksProps) => {
+const Body = ({ data, photoPosition, displayCardTitle }: BodyProps) => {
+  const location = useLocation();
+  const [hashRender, setHashRender] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: location.hash
+        ? document?.querySelector(location.hash)?.offsetTop - 80
+        : 0,
+      behavior: "smooth",
+    });
+    setHashRender(location.hash);
+  }, [hashRender, location]);
+
   return (
     <Box
       sx={{
@@ -26,9 +36,11 @@ const CardStacks = ({
     >
       {data.map((item, itemInd) => {
         const references = item.cards[0].references;
+
         return (
           <Box sx={{ margin: "0 15%" }}>
             <Typography
+              id={item.label.replace(/[\s.]/g, "-")}
               variant="h5"
               sx={{ textAlign: "center", marginBottom: "2%" }}
             >
@@ -71,7 +83,7 @@ const GenericPage: React.FC<{ data: PageData }> = ({ data }) => {
     <>
       <Header data={data.heading[0]} placeholder={true} />
       <Header data={data.heading[0]} />
-      <CardStacks
+      <Body
         data={data.body}
         photoPosition={photoPosition}
         displayCardTitle={displayCardTitle}

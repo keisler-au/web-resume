@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import data from "../fixtures/data.json";
 import theme from "../theme";
@@ -39,58 +40,64 @@ const ExperienceTimeline = () => {
           return (
             <>
               <Box sx={{ ...sVertical, top: 0 }}></Box>
-              <Button
-                variant="outlined"
-                sx={{
-                  flexDirection: "column",
-                  position: "absolute",
-                  bottom: `${(experiences.length - (index - 1)) * 6}rem`,
-                  ...itemSide,
-                  color: theme.palette.secondary.main,
-                  fontSize: { xs: "0.9rem", sm: "1rem" },
-                  "&:hover": {
-                    border: `1px solid ${theme.palette.secondary.main}`,
-                  },
-                  padding: "0 5%",
-                  alignItems: index % 2 ? "flex-start" : "flex-end",
-                }}
+              <Link
+                key={item.label}
+                to={`/experience#${item.label.replace(/[\s.]/g, "-")}`}
+                style={{ textDecoration: "none" }}
               >
-                <Typography
-                  variant="body1"
-                  color="white"
+                <Button
+                  variant="outlined"
                   sx={{
-                    textAlign: index % 2 ? "left" : "right",
-                    minWidth: "7rem",
-                    fontSize: "small",
+                    flexDirection: "column",
+                    position: "absolute",
+                    bottom: `${(experiences.length - (index - 1)) * 6}rem`,
+                    ...itemSide,
+                    color: theme.palette.secondary.main,
+                    fontSize: { xs: "0.9rem", sm: "1rem" },
+                    "&:hover": {
+                      border: `1px solid ${theme.palette.secondary.main}`,
+                    },
+                    padding: "0 5%",
+                    alignItems: index % 2 ? "flex-start" : "flex-end",
                   }}
                 >
-                  {item.year}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color="white"
-                  sx={{
-                    textAlign: index % 2 ? "left" : "right",
-                    minWidth: "7rem",
-                    fontSize: "medium",
-                  }}
-                >
-                  {item.label}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color="white"
-                  sx={{
-                    textAlign: index % 2 ? "left" : "right",
-                    top: "100%",
-                    left: 0,
-                    right: 0,
-                    fontSize: ".7rem",
-                  }}
-                >
-                  {item.cards[0].title}
-                </Typography>
-              </Button>
+                  <Typography
+                    variant="body1"
+                    color="white"
+                    sx={{
+                      textAlign: index % 2 ? "left" : "right",
+                      minWidth: "7rem",
+                      fontSize: "small",
+                    }}
+                  >
+                    {item.year}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="white"
+                    sx={{
+                      textAlign: index % 2 ? "left" : "right",
+                      minWidth: "7rem",
+                      fontSize: "medium",
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="white"
+                    sx={{
+                      textAlign: index % 2 ? "left" : "right",
+                      top: "100%",
+                      left: 0,
+                      right: 0,
+                      fontSize: ".7rem",
+                    }}
+                  >
+                    {item.cards[0].title}
+                  </Typography>
+                </Button>
+              </Link>
               <Box
                 sx={{ ...sHorizontal, ...side, top: `${index * 6 - 0.15}rem` }}
               ></Box>

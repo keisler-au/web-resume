@@ -15,7 +15,9 @@ const Home: React.FC<{ data: PageData }> = ({ data }) => (
       alignItems: "center",
     }}
   >
-    <GenericPage data={data} />
+    <Box sx={{ width: "100%" }}>
+      <GenericPage data={data} />
+    </Box>
     <Box
       sx={{
         width: "100%",

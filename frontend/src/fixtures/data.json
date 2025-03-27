@@ -35,7 +35,7 @@
       ],
       "body": [
         {
-          "year": "What's Next?",
+          "year": "Current",
           "label": "Machine Learning",
           "cards": [
             {
@@ -64,13 +64,25 @@
               "image": "/calm_and_connected.jpg",
               "content": [
                 {
-                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                  "description": "Cleaned up navigation flow\n- bringing buttons into context\n- signing in only when necessary\n- removing buttons\n- making main service catalogue the home page and removing\n- removing extraneous logos with no visual appeal or navigation utility\n- conditionally rendered navigation bars, sign in and notification icons depending on login and authentication status\n- changed routing\n- adding useful error prompts to guide users on validator"
                 },
                 {
-                  "description": "Some of the skills I developed at university involve critical thinking, researching, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles for human motivation."
+                  "description": "Redesigned welcome page\n- removed unhelpful buttons\n- resized images\n- add autoplay carousels"
                 },
                 {
-                  "description": "I was awarded a Letter of Commendation for outstanding academic performance after achieving a grade average above 80%, and wrote a dissertation on psychological well-being, which involved me recruiting and coordinating over 100 participants who volunteered for a week-long data analysis."
+                  "description": "Turned sign in into modal view"
+                },
+                {
+                  "description": "Added in browser functionality"
+                },
+                {
+                  "description": "Optimised stored procedure queries"
+                },
+                {
+                  "description": "Added new feature\n- all managers to apply on clients behalf\n- creating new query to populate an ionic-* dropdown\n- understanding the business logic and query paramaters to modify the authentication and data update flow"
+                },
+                {
+                  "description": "Enhanced security\n- implemented access and refresh token best practices\n- implemented auth service utility for backend connected authentication checks\n- implemented secure storage best practices"
                 }
               ]
             }
@@ -85,7 +97,7 @@
               "image": "/bingo_home.jpg",
               "content": [
                 {
-                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                  "description": "React Native, Expo, TypeScript:\n- Designed and implemented an interactive home screen featuring a smooth carousel animation for seamless content browsing.\n- Developed a vertical reel feature, enhancing user engagement with dynamic, scrollable content.\n- Built a join game functionality that allows users to quickly enter active sessions with real-time updates.\n- Integrated pop-up modals for intuitive user input, improving navigation and usability."
                 }
               ]
             },
@@ -94,7 +106,7 @@
               "image": "/bingo_publish.jpg",
               "content": [
                 {
-                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                  "description": "PostgreSQL, HTTPS, UI:\n- Designed and implemented a PostgreSQL database to efficiently store and retrieve user and game data.\n- Integrated HTTP communication to enable seamless data exchange between the mobile app and backend services.\n- Developed an interactive and dynamic grid display, allowing users to engage with real-time content updates.\n- Engineered smooth user input handling, including pop-up modals and form validation, for an intuitive user experience."
                 }
               ]
             },
@@ -103,7 +115,7 @@
               "image": "/bingo_play.jpg",
               "content": [
                 {
-                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                  "description": "Websockets, Redis:\n- Designed the play screen to support real-time gameplay using WebSockets, enabling instant communication between players and the game server.\n- Integrated Redis as a channel layer for efficient message delivery and real-time updates.\n- Utilized Redis queues to store and deliver messages to users when offline, ensuring seamless gameplay experiences upon reconnection."
                 }
               ]
             }
@@ -118,22 +130,10 @@
               "image": "/bhp_software_developer.jpg",
               "content": [
                 {
-                  "description": "BHP is a multinational mining company, and I helped develop a platform that was used by the field workers and supervisors to automate and standardise the daily on-site mining operations. As a Software Developer I:"
+                  "description": "BHP is a multinational mining company, and I helped develop a platform that was used by the field workers and supervisors to automate and standardise the daily on-site mining operations."
                 },
                 {
-                  "description": "Created new frontend and backend features, such as a page dedicated to logging reports, and a versions-comparisons UI for data points."
-                },
-                {
-                  "description": "Optimised features to resolve performance issues and improve user experience, this often involved backend Graphene and frontend React Relay GQL query optimisation."
-                },
-                {
-                  "description": "Refactored code that improved the readability and reusability of particular functions, such as Django admin file uploads and error-message dependent routing."
-                },
-                {
-                  "description": "Participated in code reviews and actively sought feedback to produce the highest code quality possible."
-                },
-                {
-                  "description": "Received an award through Infosys for 'Outstanding Performance'."
+                  "description": "As a Software Developer I:\n- Created new frontend and backend features, such as a page dedicated to logging reports, and a versions- comparisons UI for data points.\n- Optimised features to resolve performance issues and improve user experience, this often involved backend Graphene and frontend React Relay GQL query optimisation.\n- Refactored code that improved the readability and reusability of particular functions, such as Django admin file uploads and error- message dependent routing.\n- Participated in code reviews and actively sought feedback to produce the highest code quality possible.\n- Received an award through Infosys for 'Outstanding Performance'."
                 }
               ],
               "references": [
@@ -168,19 +168,10 @@
               "image": "bhp_operational_support.jpg",
               "content": [
                 {
-                  "description": "At BHP I was also an active member in the Operational Support team, where we maintained the functionality of the production application and liaised with clients. As an Operational Support member I:"
+                  "description": "At BHP I was also an active member in the Operational Support team, where we maintained the functionality of the production application and liaised with clients."
                 },
                 {
-                  "description": "Debugged and pushed code fixes for production issues, investigating logs within the AWS infrastructure, learning the codebase, and analysing Django admin records."
-                },
-                {
-                  "description": "Prioritised the user experience by actively talking to them when they raised production incident tickets, this gave me an appreciation for their issues and the impact it has on their work."
-                },
-                {
-                  "description": "Set up meetings and coordinated the collaborative effort between Dev and Operational Support teams when working through production bugs and feature quality tests."
-                },
-                {
-                  "description": "Wrote documentation for the Operational Support team on best practices and debugging techniques for particular features within the platform."
+                  "description": "As an Operational Support member I:\n- Debugged and pushed code fixes for production issues, investigating logs within the AWS infrastructure, learning the codebase, and analysing Django admin records.\n- Prioritised the user experience by actively talking to them when they raised production incident tickets, this gave me an appreciation for their issues and the impact it has on their work.\n- Set up meetings and coordinated the collaborative effort between Dev and Operational Support teams when working through production bugs and feature quality tests.\n- Wrote documentation for the Operational Support team on best practices and debugging techniques for particular features within the platform."
                 }
               ],
               "references": [
@@ -285,6 +276,33 @@
                 },
                 {
                   "description": "For every piece of code I produced I wrote accompanying unit tests and also utilised fixture sets to move away from the overhead of prod dumps."
+                },
+                {
+                  "description": "Django channels"
+                }
+              ]
+            },
+            {
+              "title": "Express.js",
+              "content": [
+                {
+                  "description": "Calm and Connected."
+                }
+              ]
+            },
+            {
+              "title": "Postgres",
+              "content": [
+                {
+                  "description": "This resume uses Django and a Postgres DB to serve up the text content."
+                }
+              ]
+            },
+            {
+              "title": "Mysql",
+              "content": [
+                {
+                  "description": "This resume uses Django and a Postgres DB to serve up the text content."
                 }
               ]
             },
@@ -293,6 +311,30 @@
               "content": [
                 {
                   "description": "For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Mobile Development",
+          "cards": [
+            {
+              "title": "React Native",
+              "content": [
+                {
+                  "description": "Bingo"
+                },
+                {
+                  "description": "Expo"
+                }
+              ]
+            },
+            {
+              "title": "Angular",
+              "content": [
+                {
+                  "description": "Calm and Connected"
                 }
               ]
             }

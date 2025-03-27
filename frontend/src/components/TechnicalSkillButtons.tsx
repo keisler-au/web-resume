@@ -1,39 +1,43 @@
 import { Box, Button, Typography } from "@mui/material";
 import { IconType } from "react-icons";
 import { DiPostgresql, DiRedis } from "react-icons/di";
-import { FaAws, FaDocker, FaReact, FaLinux, FaGithub } from "react-icons/fa";
+import {
+  FaAngular,
+  FaAws,
+  FaDocker,
+  FaReact,
+  FaLinux,
+  FaGithub,
+  FaNodeJs,
+} from "react-icons/fa";
 import { FaGitlab } from "react-icons/fa6";
 import { GoWorkflow } from "react-icons/go";
+import { GrMysql } from "react-icons/gr";
 import { SiDjango, SiPrecommit, SiGithubactions } from "react-icons/si";
+import { TbBrandReactNative } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 import theme from "../theme";
 
-interface TechIcon {
-  [key: string]: {
-    heading: string;
-    icon: IconType;
-    tabNumber: number;
-  };
-}
-
-export const techIcons: TechIcon = {
-  React: { heading: "React", icon: FaReact, tabNumber: 0 },
-  Django: { heading: "Django", icon: SiDjango, tabNumber: 0 },
-  Postgres: { heading: "Django", icon: DiPostgresql, tabNumber: 0 },
-  Redis: { heading: "Redis", icon: DiRedis, tabNumber: 0 },
-  Agile: { heading: "Agile Methodology", icon: GoWorkflow, tabNumber: 1 },
-  Git: { heading: "Git", icon: FaGithub, tabNumber: 1 },
-  "Pre-Commit": { heading: "Pre-Commit", icon: SiPrecommit, tabNumber: 1 },
-  GitLab: { heading: "GitLab", icon: FaGitlab, tabNumber: 2 },
-  "Github Actions": {
-    heading: "Github Actions",
-    icon: SiGithubactions,
-    tabNumber: 2,
-  },
-  AWS: { heading: "AWS", icon: FaAws, tabNumber: 3 },
-  Docker: { heading: "Docker", icon: FaDocker, tabNumber: 3 },
-  WSL: { heading: "WSL", icon: FaLinux, tabNumber: 3 },
+export const techIcons: {
+  [key: string]: IconType;
+} = {
+  React: FaReact,
+  Django: SiDjango,
+  "Express.js": FaNodeJs,
+  Postgres: DiPostgresql,
+  Mysql: GrMysql,
+  Redis: DiRedis,
+  "React Native": TbBrandReactNative,
+  Angular: FaAngular,
+  Agile: GoWorkflow,
+  Git: FaGithub,
+  "Pre-Commit": SiPrecommit,
+  GitLab: FaGitlab,
+  "Github Actions": SiGithubactions,
+  AWS: FaAws,
+  Docker: FaDocker,
+  WSL: FaLinux,
 };
 
 const TechnicalSkillButtons = () => {
@@ -44,7 +48,7 @@ const TechnicalSkillButtons = () => {
       </Typography>
       <Box
         sx={{
-          maxWidth: "60vw",
+          maxWidth: "50vw",
           display: "flex",
           justifyContent: "center",
           flexWrap: "wrap",
@@ -53,11 +57,11 @@ const TechnicalSkillButtons = () => {
         }}
       >
         {Object.keys(techIcons).map((label) => {
-          const TechIcon = techIcons[label].icon;
+          const TechIcon = techIcons[label];
           return (
             <Link
               key={label}
-              to={`/technical?tab=${techIcons[label].tabNumber}#${techIcons[label].heading}`}
+              to={`/technical#${label.replace(/[\s.]/g, "-")}`}
               style={{ textDecoration: "none" }}
             >
               <Button

@@ -78,12 +78,20 @@ const Paragraph: React.FC<{ card: BodyData["cards"][0]; justify: boolean }> = ({
           <Typography
             color="secondary"
             sx={{
-              maxWidth: "85vw",
+              maxWidth: justify ? "85vw" : "45vw",
               textAlign: { xs: "center", sm: justify ? "justify" : "center" },
               margin: "5%",
             }}
           >
-            {description}
+            {description.split("\n").map((line, index) => (
+              <span
+                key={index}
+                style={{ marginLeft: line[0] === "-" ? "1rem" : 0 }}
+              >
+                {line}
+                <br />
+              </span>
+            ))}
           </Typography>
         );
       })}
@@ -146,16 +154,18 @@ const CardStack = ({
       sx={{
         display: "flex",
         flexDirection: "column",
+        width: "100%",
         gap: { xs: 4, sm: 0 },
       }}
     >
       {item.cards.map((card, cardInd) => {
-        const TechIcon = techIcons[card.title] && techIcons[card.title].icon;
+        const TechIcon = techIcons[card.title] && techIcons[card.title];
         const photoOnLeft = (itemInd + cardInd) % 2 === 0 || photoPosition;
         return (
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {displayCardTitle && (
               <Typography
+                id={card.title.replace(/[\s.]/g, "-")}
                 variant="h5"
                 sx={{
                   display: "flex",
@@ -172,6 +182,7 @@ const CardStack = ({
             <Box
               sx={{
                 display: "flex",
+                justifyContent: "center",
                 flexDirection: { xs: "column", sm: "row" },
               }}
             >
