@@ -43,6 +43,7 @@ export interface BodyData {
     title: string;
     image: string;
     content: {
+      listheader?: string;
       description: string;
     }[];
     references: {

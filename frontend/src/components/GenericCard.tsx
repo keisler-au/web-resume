@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, List, ListSubheader, ListItem } from "@mui/material";
 import React, { useState } from "react";
 
 import { BodyData } from "../App";
@@ -71,9 +71,11 @@ const Paragraph: React.FC<{ card: BodyData["cards"][0]; justify: boolean }> = ({
   card,
   justify,
 }) => {
+  console.log(card.content[0].description.split("-"));
+
   return (
     <Box sx={{ flexDirection: "column" }}>
-      {card.content.map(({ description }) => {
+      {card.content.map((item) => {
         return (
           <Typography
             color="secondary"
@@ -83,15 +85,48 @@ const Paragraph: React.FC<{ card: BodyData["cards"][0]; justify: boolean }> = ({
               margin: "5%",
             }}
           >
-            {description.split("\n").map((line, index) => (
-              <span
-                key={index}
-                style={{ marginLeft: line[0] === "-" ? "1rem" : 0 }}
+            {item.listheader ? (
+              <List
+                sx={{
+                  color: theme.palette.secondary.main,
+                  listStyleType: "disc",
+                }}
+                subheader={
+                  item.listheader ? (
+                    <ListSubheader
+                      sx={{
+                        color: theme.palette.secondary.main,
+                        backgroundColor: "transparent",
+                        fontSize: "1.3rem",
+                        padding: 0,
+                        marginBottom: "0.5rem",
+                        lineHeight: "2rem",
+                      }}
+                    >
+                      {item.listheader}
+                    </ListSubheader>
+                  ) : null
+                }
               >
-                {line}
+                {item.description.split("**").map((line, index) => (
+                  <ListItem
+                    key={index}
+                    sx={{
+                      display: "list-item",
+                      padding: 0,
+                      margin: "0 2rem",
+                    }}
+                  >
+                    <Typography color="secondary">{line}</Typography>
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <Box>
+                {item.description}
                 <br />
-              </span>
-            ))}
+              </Box>
+            )}
           </Typography>
         );
       })}
