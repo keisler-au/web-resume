@@ -261,10 +261,12 @@
               "title": "React",
               "content": [
                 {
-                  "description": "For BHP I built new features using tools including MUI, React Relay, and Formik. I also routinely made code improvements such as client-side data validation, which were often inspired by user interactions and incident tickets."
+                  "listheader": "BHP",
+                  "description": "Built new features**Used tools including MUI, React Relay, and Formik**Improved client-side data validation inspired by user interactions and incident tickets."
                 },
                 {
-                  "description": "For this resume I used similar tools (React, MUI) and implemented design patterns that I learnt such as prop rendering. I have also used Typescript and written unit tests for key operations."
+                  "listheader": "Web Resume Project",
+                  "description": "Used React, TypeScript, MUI, CSS**Implemented SoC design patterns such as prop rendering**Built unit tests for key operations."
                 }
               ]
             },
@@ -272,19 +274,12 @@
               "title": "Django",
               "content": [
                 {
-                  "description": "This resume uses Django and a Postgres DB to serve up the text content."
+                  "listheader": "BHP",
+                  "description": "Optimised key server-side functions**Optimised Django and Graphene queries within views, serializers, mutations and resolvers**Built views and RESTful APIs**Wrote, refactored, and debugged throughout the Django ecosystem**Wrote unit tests and fixturesets "
                 },
                 {
-                  "description": "For BHP, I optimised key server-side functions, focusing on Django and Graphene queries within views, serializers, mutations and resolvers."
-                },
-                {
-                  "description": "I wrote, refactored, and debugged functionality within Django's core features (views, serializers, models, admin, templates, etc)."
-                },
-                {
-                  "description": "For every piece of code I produced I wrote accompanying unit tests and also utilised fixture sets to move away from the overhead of prod dumps."
-                },
-                {
-                  "description": "Django channels"
+                  "listheader": "Mobile and Web Projects",
+                  "description": "Started a Django project from scratch**Ran data and model migrations**Implemented Django Channels with consumers for live client-side updates"
                 }
               ]
             },
@@ -292,23 +287,8 @@
               "title": "Express.js",
               "content": [
                 {
-                  "description": "Calm and Connected."
-                }
-              ]
-            },
-            {
-              "title": "Postgres",
-              "content": [
-                {
-                  "description": "This resume uses Django and a Postgres DB to serve up the text content."
-                }
-              ]
-            },
-            {
-              "title": "Mysql",
-              "content": [
-                {
-                  "description": "This resume uses Django and a Postgres DB to serve up the text content."
+                  "listheader": "Calm and Connected",
+                  "description": "Created controller for new feature with business logic**Added in token authentication**Updated routing paths"
                 }
               ]
             },
@@ -316,7 +296,30 @@
               "title": "Redis",
               "content": [
                 {
-                  "description": "For BHP I optimised server-side functionality and cached tables that were read often and infrequently updated."
+                  "listheader": "BHP",
+                  "description": "Optimised server-side functionality and cached tables that were read often and infrequently updated."
+                },
+                {
+                  "listheader": "TB Mobile App",
+                  "description": "Configured production hosting**Implemented async queues for offline play functionality in conjunction with Websocket updates**Implemented channel layers with Django"
+                }
+              ]
+            },
+            {
+              "title": "Mysql",
+              "content": [
+                {
+                  "listheader": "Calm and Connected",
+                  "description": "Optimised stored procedures**Migrated a database dump**Updated virtual tables/ views"
+                }
+              ]
+            },
+            {
+              "title": "Postgres",
+              "content": [
+                {
+                  "listheader": "Mobile and Web Projects",
+                  "description": "Created new databases**Created new database users with assigned roles**Debugged using CLI"
                 }
               ]
             }
@@ -329,10 +332,7 @@
               "title": "React Native",
               "content": [
                 {
-                  "description": "Bingo"
-                },
-                {
-                  "description": "Expo"
+                  "description": "I have built a React Native mobile app with Expo, using libraries like reanimated for an infinite carousel slider"
                 }
               ]
             },
@@ -340,7 +340,7 @@
               "title": "Angular",
               "content": [
                 {
-                  "description": "Calm and Connected"
+                  "description": "On the Calm and Connected Camp App I have created new features and implemented uplifts. This involved adding in new components, updating templates, and changing navigation logic for improved UX."
                 }
               ]
             }
@@ -372,7 +372,15 @@
               "title": "Pre-Commit",
               "content": [
                 {
-                  "description": "I followed BHP's lead and built Pre-Commit into this resumes workflow to automate and enforce quality styling standards."
+                  "description": "I followed BHP's lead and build Pre-Commit into my projects workflow to automate and enforce quality styling standards."
+                }
+              ]
+            },
+            {
+              "title": "Sentry",
+              "content": [
+                {
+                  "description": "I have added Sentry logs into the TB mobile app for real-time error reporting and debugging."
                 }
               ]
             }
@@ -385,7 +393,7 @@
               "title": "GitLab",
               "content": [
                 {
-                  "description": "I collaboratively deployed hot fixes for production following feature releases, and so I learnt the full pipeline including build stages, testing, infrastructure configuration, and deployment."
+                  "description": "I collaboratively deployed hot fixes for production following feature releases, learning the full pipeline including build stages, testing, infrastructure configuration, and deployment."
                 }
               ]
             },
@@ -396,7 +404,7 @@
                   "description": "Within this project I automated unit test execution and pushed docker images to a registery, making use of the projects docker-compose container configuration."
                 },
                 {
-                  "description": "Exploring CI/CD options and GitHub Actions showed me the many server, infrastructure and deployment options that are available for differing sized and scalable applications."
+                  "description": "Exploring CI/CD options and GitHub Actions exposed me to the many server, infrastructure and deployment configurations for different applications and scaling requirements."
                 }
               ]
             }

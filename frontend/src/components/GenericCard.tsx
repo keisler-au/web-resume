@@ -76,12 +76,15 @@ const Paragraph: React.FC<{ card: BodyData["cards"][0]; justify: boolean }> = ({
   return (
     <Box sx={{ flexDirection: "column" }}>
       {card.content.map((item) => {
+        const justifiedStyle = justify
+          ? { maxWidth: "85vw" }
+          : { width: "35vw" };
         return (
           <Typography
             color="secondary"
             sx={{
-              maxWidth: justify ? "85vw" : "45vw",
-              textAlign: { xs: "center", sm: justify ? "justify" : "center" },
+              ...justifiedStyle,
+              textAlign: { xs: "center", sm: "justify" },
               margin: "5%",
             }}
           >
