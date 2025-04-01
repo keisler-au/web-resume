@@ -3,8 +3,8 @@
     {
       "heading": [
         {
-          "main_heading": "Building Apps for You",
-          "description": "My mission is to build apps that are functionally robust, maintainable, and secure. Our needs evolve, and this should be reflected in the codebase. Software provides freedom through access and automation, and I love the challenge of future-proofing it."
+          "main_heading": "Full Stack Development",
+          "description": "I love the creativity and challenge that goes into building resilient,  maintainable, and secure applications. As our needs and aspirations evolve, I want to be creating software that is capable of evolving with it. I believe this to be true for both UI and for automation."
         }
       ],
       "body": [
@@ -16,7 +16,7 @@
               "image": "/cv_photo.jpg",
               "content": [
                 {
-                  "description": "I am passionate about helping people and I want this represented in the problems I am solving. I strongly believe in principles of sustainability and equality of opportunity, and it is equally important to me that people are not just surviving but thriving. Whether it is working in healthcare or personal development; from mental health to the entertainment industry, I want to be solving problems that are going to bring real benefit to peoples' lives."
+                  "description": "I am passionate about helping people and I am working towards this being represented in the problems I am solving. I strongly believe in principles of sustainability and equality of opportunity, and it is equally important to me that people are not just surviving but thriving. Whether it is working in healthcare or personal development; from mental health to the entertainment industry, I am committed to solving problems that are going to bring a benefit to peoples' lives."
                 }
               ]
             }
@@ -30,7 +30,7 @@
       "heading": [
         {
           "main_heading": "Experience",
-          "description": "Whether it is learning a new tech stack, working in a team, or understanding unique and dynamic problems, it is my commitment to architect and build solutions. My experience to-date has been the result of genuine curiosity and interest, if I choose to work for you it means I am invested."
+          "description": "Whether it is learning a new tech stack, working in a team, or understanding unique and dynamic problems, it is my commitment to architect and build solutions. My experience to-date has been the result of genuine curiosity, interest, and a willingess to learn."
         }
       ],
       "body": [
@@ -43,7 +43,7 @@
               "image": "/pytorch.jpg",
               "content": [
                 {
-                  "description": "Currently learning PyTorch to enhance my skills in deep learning and artificial intelligence. My goal is to build a strong foundation in model training and optimization techniques, allowing me to develop and deploy machine learning models efficiently. This aligns with my broader software development expertise and enables me to build and integrate AI solutions."
+                  "description": "Currently learning PyTorch to enhance my skills in deep learning and artificial intelligence. My goal is to build a strong foundation in model training and optimization techniques, allowing me to develop and deploy machine learning models efficiently. This aligns with my broader web development experience and my goal of building meaningful applications."
                 }
               ]
             }
@@ -58,16 +58,19 @@
               "image": "/calm_and_connected.jpg",
               "content": [
                 {
+                  "description": "Calm and Connected is an Occupational Therapy provider located in Perth, WA. In this remote work role I have helped uplift the Calm and Connected Camp mobile app and coordinate IT systems used within the company."
+                },
+                {
                   "listheader": "Frontend mobile app development",
-                  "description": "Cleaned up UI navigation flow and implemented modals for better UX.**Implemented conditional rendering depending on role and login status.**Added useful error prompts to guide users on validation errors.**Redesigned welcome page by removing unhelpful buttons, resizing images, and adding autoplay to the carousel.**Added in-app browser functionality."
+                  "description": "Cleaned up UI navigation flow and implemented modals for better UX.**Implemented conditional rendering depending on role and login status.**Added useful error prompts to guide users on validation errors.**Redesigned welcome page by removing ambiguous buttons, resizing images, and adding autoplay to the carousel.**Added in-app browser functionality."
                 },
                 {
                   "listheader": "Backend mobile app development",
-                  "description": "Added new feature that required understanding business logic, authentication, data flow, and creating new UI and data query.**Enhanced security by implementing access, refresh token, and secure storage best practices.**Optimised stored procedure queries."
+                  "description": "Added new feature that required understanding business logic, authentication, data flow, and creating new UI and a data query.**Enhanced security by implementing access, refresh token, and secure storage best practices.**Optimised stored procedure queries."
                 },
                 {
                   "listheader": "IT Management",
-                  "description": "Restructuring Google worksuit data management, access and security.**Device management and internal systems security including firewall and VPN implementation.**Data management for HR."
+                  "description": "Restructuring Google worksuit data management, access and security.**Device management and internal systems security.**Data management for HR."
                 }
               ],
               "references": [
@@ -91,7 +94,7 @@
               "content": [
                 {
                   "listheader": "React Native, Expo, TypeScript",
-                  "description": "Designed and implemented an interactive home screen featuring a smooth carousel animation for seamless content browsing.**Developed a vertical reel feature, enhancing user engagement with scrollable content.**Built a join game functionality that allows users to quickly enter active sessions with real-time updates.**Engineered smooth user input handling, including pop-up modals and form validation for an intuitive user experience."
+                  "description": "Designed and implemented an interactive home screen featuring a smooth carousel animation for seamless content browsing.**Developed a vertical reel feature with scrollable content.**Built a join game functionality that allows users to quickly enter active sessions with real-time updates.**Engineered smooth user input handling, including pop-up modals and form validation for an intuitive UX."
                 }
               ]
             },
@@ -100,7 +103,7 @@
               "image": "/bingo_publish.jpg",
               "content": [
                 {
-                  "listheader": "PostgreSQL, HTTPS, UI",
+                  "listheader": "Django, PostgreSQL",
                   "description": "Designed and implemented a PostgreSQL database to efficiently store and retrieve user and game data.**Integrated HTTP communication to enable seamless data exchange between the mobile app and backend services.**Developed an interactive and dynamic grid display, allowing users to engage with real-time content updates."
                 }
               ]
@@ -130,7 +133,7 @@
                 },
                 {
                   "listheader": "Frontend software development",
-                  "description": "Created UI features including a report logging page and a versions comparison.**Created and optimised React Relay queries.**Updated React Relay mutations.**Participated in code reviews and actively sought feedback.**Received an award through Infosys for 'Outstanding Performance'."
+                  "description": "Created UI features including a report logging page and a versions comparison feature.**Created and optimised React Relay queries.**Updated React Relay mutations.**Participated in code reviews and actively sought feedback.**Received an award through Infosys for 'Outstanding Performance'."
                 },
                 {
                   "listheader": "Backend software development",
@@ -215,7 +218,7 @@
                   "description": "Prior to Infosys, I had taught myself web development through online resources and I quickly became enamoured by Python, JavaScript, CSS, SQL and Git."
                 },
                 {
-                  "description": "Infosys hired me after seeing a small UI project I built that pulled data from a public API (which has since been decommisioned). It's crude,naïve, and honest, and gratefully I have learnt a lot since then."
+                  "description": "Infosys hired me after seeing a small UI project I built that pulled data from a public API (which has since been decommisioned). It's crude, naïve, and honest, and gratefully I have learnt a lot since then."
                 }
               ]
             }
@@ -230,7 +233,7 @@
               "image": "/curtin_university.jpg",
               "content": [
                 {
-                  "description": "I have a Bachelor (Honours) degree in Psychology, I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
+                  "description": "I have a Bachelor (Honours) degree in Psychology. I want to help people and I find Psychology interesting, though it is not a profession I have decided to pursue. I am now passionate about technology as a way to help others."
                 },
                 {
                   "description": "At university I developed skills of critical thinking, researching, academic writing and literature review, prioritising assignments, meeting deadlines, and understanding evidence-based principles."
@@ -250,7 +253,7 @@
       "heading": [
         {
           "main_heading": "Technical Skills",
-          "description": "My expertise lies in leveraging proven technologies to solve complex problems and deliver reliable, maintainable, and scalable solutions. Below, I highlight the key areas where I've driven impact, demonstrating how I've applied these platforms and tools to achieve meaningful results in real-world projects."
+          "description": "My expertise lies in leveraging proven technologies to deliver reliable, maintainable, and scalable solutions. Below, I highlight key areas where I've driven impact, using these platforms and tools to achieve meaningful results in real-world projects."
         }
       ],
       "body": [
@@ -401,7 +404,7 @@
               "title": "Github Actions",
               "content": [
                 {
-                  "description": "Within this project I automated unit test execution and pushed docker images to a registery, making use of the projects docker-compose container configuration."
+                  "description": "Within this Web Resume project I automated unit test execution and pushed docker images to a registery, making use of the projects docker-compose container configuration."
                 },
                 {
                   "description": "Exploring CI/CD options and GitHub Actions exposed me to the many server, infrastructure and deployment configurations for different applications and scaling requirements."
@@ -478,7 +481,7 @@
       "heading": [
         {
           "main_heading": "About Me",
-          "description": "A passionate problem-solver with a background in IT and web development, I enjoy challenges and new experiences both professionally and personally. Whether it is moving to Europe, or training in Brazilian Jiu Jitsu, I love the diversity, learning, and building that comes with new adventures and journeys."
+          "description": "As a passionate problem-solver with a background in IT and web development, I enjoy challenges and new experiences. Whether it is moving to Europe or training in Brazilian Jiu Jitsu, I love the diversity, learning, and building that comes with the journey."
         }
       ],
       "body": [
@@ -490,7 +493,7 @@
               "image": "/europe.jpg",
               "content": [
                 {
-                  "description": "I was born in Perth, Western Australia, and for the past year I have been living in the Netherlands. At 27 years old I wanted a challenge and to experience life in a different country. I love the excitement and culture of Europe, there is always something new and dynamic to experience, and having met so many unique and amazing people I am now looking to build a life here. Although I prefer catching up with people and working from a company building, the flexibility of a remote position to become immersed in other parts of Europe is something I am particularly open to at the moment."
+                  "description": "I was born in Perth, Western Australia, and for the past year I have been living in the Netherlands. At 27 years old I wanted a challenge and to experience life in a different country. I love the excitement and culture of Europe, there is always something new and dynamic to experience, and having met so many unique and amazing people I am now looking to build a life here. Although I prefer catching up with people and working from a company building, the flexibility of a remote position to become immersed in other parts of Europe is something I am interested in."
                 }
               ]
             }
@@ -504,7 +507,7 @@
               "image": "/bjj.jpg",
               "content": [
                 {
-                  "description": "In my spare time you will find me at a Brazilian Jiu Jitsu gym, which is a grappling based martial art that I have been training in for the past four years. There are so many things I love about this sport, exercise, people, friends, and an infinite number of techniques and positions to learn. It is inspiring seeing myself and the people around me go from utter newbies who have no clue on what is going on to becoming adept and skilled in difficult and stressful situations such as fighting. At my local gym there is a massive quote sitting above a board of competition medals, “Surround yourself with people who make you a better person”, and I take that attitude with me everywhere I go. "
+                  "description": "In my spare time you will find me at a Brazilian Jiu Jitsu gym, which is a grappling based martial art that I have been training in for the past four years. There are so many things I love about this sport, exercise, people, friends, and an infinite number of techniques and positions to learn. It is inspiring seeing myself and the people around me go from utter newbies who have no clue on what is going on to becoming adept and skilled in a difficult and stressful situation like fighting. At my local gym there is a massive quote sitting above a board of competition medals, “Surround yourself with people who make you a better person”, and I take that attitude with me everywhere I go. "
                 }
               ]
             }
