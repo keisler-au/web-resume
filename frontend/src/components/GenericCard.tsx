@@ -78,7 +78,7 @@ const Paragraph: React.FC<{ card: BodyData["cards"][0]; justify: boolean }> = ({
       {card.content.map((item) => {
         const justifiedStyle = justify
           ? { maxWidth: "85vw" }
-          : { width: "35vw" };
+          : { width: { sx: "55vw", sm: "35vw" } };
         return (
           <Typography
             color="secondary"
@@ -221,6 +221,7 @@ const CardStack = ({
               sx={{
                 display: "flex",
                 justifyContent: "center",
+                alignItems: "center",
                 flexDirection: { xs: "column", sm: "row" },
               }}
             >
